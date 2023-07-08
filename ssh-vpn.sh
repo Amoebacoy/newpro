@@ -63,112 +63,112 @@ export Auther=".geovpn"
 if [ "${EUID}" -ne 0 ]; then
 		echo -e "${EROR} Please Run This Script As Root User !"
 		exit 1
-fi
+#fi
 
 # // Exporting IP Address
-export IP=$( curl -s https://ipinfo.io/ip/ )
+#export IP=$( curl -s https://ipinfo.io/ip/ )
 
 # // Exporting Network Interface
-export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
+#export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
 
 # // Validate Result ( 1 )
-touch /etc/${Auther}/license.key
-export Your_License_Key="$( cat /etc/${Auther}/license.key | awk '{print $1}' )"
-export Validated_Your_License_Key_With_Server="$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $Your_License_Key | head -n1 | cut -d ' ' -f 1 )"
-if [[ "$Validated_Your_License_Key_With_Server" == "$Your_License_Key" ]]; then
-    validated='true'
-else
-    echo -e "${EROR} License Key Not Valid"
-    exit 1
-fi
+#touch /etc/${Auther}/license.key
+#export Your_License_Key="$( cat /etc/${Auther}/license.key | awk '{print $1}' )"
+#export Validated_Your_License_Key_With_Server="$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $Your_License_Key | head -n1 | cut -d ' ' -f 1 )"
+#if [[ "$Validated_Your_License_Key_With_Server" == "$Your_License_Key" ]]; then
+#    validated='true'
+#else
+#    echo -e "${EROR} License Key Not Valid"
+#    exit 1
+#fi
 
 # // Checking VPS Status > Got Banned / No
-if [[ $IP == "$( curl -s https://${Server_URL}/blacklist.txt | cut -d ' ' -f 1 | grep -w $IP | head -n1 )" ]]; then
-    echo -e "${EROR} 403 Forbidden ( Your VPS Has Been Banned )"
-    exit  1
-fi
+#if [[ $IP == "$( curl -s https://${Server_URL}/blacklist.txt | cut -d ' ' -f 1 | grep -w $IP | head -n1 )" ]]; then
+#    echo -e "${EROR} 403 Forbidden ( Your VPS Has Been Banned )"
+#    exit  1
+#fi
 
 # // Checking VPS Status > Got Banned / No
-if [[ $Your_License_Key == "$( curl -s https://${Server_URL} | cut -d ' ' -f 1 | grep -w $Your_License_Key | head -n1)" ]]; then
-    echo -e "${EROR} 403 Forbidden ( Your License Has Been Limited )"
-    exit  1
-fi
+#if [[ $Your_License_Key == "$( curl -s https://${Server_URL} | cut -d ' ' -f 1 | grep -w $Your_License_Key | head -n1)" ]]; then
+#    echo -e "${EROR} 403 Forbidden ( Your License Has Been Limited )"
+#    exit  1
+#fi
 
 # // Checking VPS Status > Got Banned / No
-if [[ 'Standart' == "$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $Your_License_Key | head -n1 | cut -d ' ' -f 6 )" ]]; then 
-    License_Mode='Standart'
-elif [[ Pro == "$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $Your_License_Key | head -n1 | cut -d ' ' -f 6 )" ]]; then 
-    License_Mode='Pro'
-else
-    echo -e "${EROR} Please Using Genuine License !"
-    exit 1
-fi
+#if [[ 'Standart' == "$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $Your_License_Key | head -n1 | cut -d ' ' -f 6 )" ]]; then 
+#    License_Mode='Standart'
+#elif [[ Pro == "$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $Your_License_Key | head -n1 | cut -d ' ' -f 6 )" ]]; then 
+#    License_Mode='Pro'
+#else
+#    echo -e "${EROR} Please Using Genuine License !"
+#    exit 1
+#fi
 
 # // Checking Script Expired
-exp=$( curl -s https://${Server1_URL}/limit.txt | grep -w $IP | cut -d ' ' -f 3 )
-now=`date -d "0 days" +"%Y-%m-%d"`
-expired_date=$(date -d "$exp" +%s)
-now_date=$(date -d "$now" +%s)
-sisa_hari=$(( ($expired_date - $now_date) / 86400 ))
-if [[ $sisa_hari -lt 0 ]]; then
-    echo $sisa_hari > /etc/${Auther}/license-remaining-active-days.db
-    echo -e "${EROR} Your License Key Expired ( $sisa_hari Days )"
-    exit 1
-else
-    echo $sisa_hari > /etc/${Auther}/license-remaining-active-days.db
-fi
+#exp=$( curl -s https://${Server1_URL}/limit.txt | grep -w $IP | cut -d ' ' -f 3 )
+#now=`date -d "0 days" +"%Y-%m-%d"`
+#expired_date=$(date -d "$exp" +%s)
+#now_date=$(date -d "$now" +%s)
+#sisa_hari=$(( ($expired_date - $now_date) / 86400 ))
+#if [[ $sisa_hari -lt 0 ]]; then
+#    echo $sisa_hari > /etc/${Auther}/license-remaining-active-days.db
+#    echo -e "${EROR} Your License Key Expired ( $sisa_hari Days )"
+#    exit 1
+#else
+#    echo $sisa_hari > /etc/${Auther}/license-remaining-active-days.db
+#fi
 
-export DEBIAN_FRONTEND=noninteractive
-MYIP=$(curl -sS ifconfig.me);
-MYIP2="s/xxxxxxxxx/$MYIP/g";
-NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
-source /etc/os-release
-ver=$VERSION_ID
+#export DEBIAN_FRONTEND=noninteractive
+#MYIP=$(curl -sS ifconfig.me);
+#MYIP2="s/xxxxxxxxx/$MYIP/g";
+#NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
+#source /etc/os-release
+#ver=$VERSION_ID
 
 #detail nama perusahaan
-country=ID
-state=Indonesia
-locality=Indonesia
-organization=geovpn
-organizationalunit=geovpn
-commonname=geovpn
-email=admin@geostore.net
+#country=ID
+#state=Indonesia
+#locality=Indonesia
+#organization=geovpn
+#organizationalunit=geovpn
+#commonname=geovpn
+#email=admin@geostore.net
 
 # simple password minimal
-wget -q -O /etc/pam.d/common-password "https://raw.githubusercontent.com/wunuit/1/main/password"
-chmod +x /etc/pam.d/common-password
+#wget -q -O /etc/pam.d/common-password "https://raw.githubusercontent.com/wunuit/1/main/password"
+#chmod +x /etc/pam.d/common-password
 
 # go to root
 cd
 
 # Getting websocket dropbear
-#wget -q -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/wunuit/0/main/ws-dropbear"
-#chmod +x /usr/local/bin/ws-dropbear
+wget -q -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/wunuit/0/main/ws-dropbear"
+chmod +x /usr/local/bin/ws-dropbear
 
 # Installing Service
-#cat > /etc/systemd/system/ws-dropbear.service << END
-#[Unit]
-#Description=Ssh Websocket By Akhir Zaman
+cat > /etc/systemd/system/ws-dropbear.service << END
+[Unit]
+Description=Ssh Websocket By Akhir Zaman
 #Documentation=https://xnxx.com
-#After=network.target nss-lookup.target
+After=network.target nss-lookup.target
 
-#[Service]
-#Type=simple
-#User=root
-#CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-#AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-#NoNewPrivileges=true
-#ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-dropbear 8880
-#Restart=on-failure
+[Service]
+Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/python2 -O /usr/local/bin/ws-dropbear 8880
+Restart=on-failure
 
-#[Install]
-#WantedBy=multi-user.target
-#END
+[Install]
+WantedBy=multi-user.target
+END
 
-#systemctl daemon-reload >/dev/null 2>&1
-#systemctl enable ws-dropbear >/dev/null 2>&1
-#systemctl start ws-dropbear >/dev/null 2>&1
-#systemctl restart ws-dropbear >/dev/null 2>&1
+systemctl daemon-reload >/dev/null 2>&1
+systemctl enable ws-dropbear >/dev/null 2>&1
+systemctl start ws-dropbear >/dev/null 2>&1
+systemctl restart ws-dropbear >/dev/null 2>&1
 
 clear 
 
