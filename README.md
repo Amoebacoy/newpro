@@ -8,7 +8,7 @@
 <p align="center">WEBSOCKET / SSH / SSL / XRAY</p>
     
 ♦️ Installation Link
-<pre><code>apt --fix-missing update && apt update && apt upgrade -y && apt install -y bzip2 gzip coreutils screen dpkg wget vim curl nano zip unzip && wget -q https://raw.githubusercontent.com/Amoebacoy/newpro/main/setup.sh && chmod +x setup.sh && screen -S setup ./setup.sh</code></pre>
+<pre><code>sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sysctl -w net.ipv6.conf.default.disable_ipv6=1 && apt --fix-missing update && apt update && apt upgrade -y && apt install -y bzip2 gzip coreutils screen dpkg wget vim curl nano zip unzip && wget -q https://raw.githubusercontent.com/Amoebacoy/newpro/main/setup.sh && chmod +x setup.sh && screen -S setup ./setup.sh</code></pre>
 
 ### SCRIPT HANYA SUPPORT OS
 - Debian 9,Debian 10,Debian 11
