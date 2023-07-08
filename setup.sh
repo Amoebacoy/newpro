@@ -59,10 +59,10 @@ export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
 #export VERSION="1.1"
  
 # // Exporint IP AddressInformation
-export IP=$( curl -s https://ipinfo.io/ip/ )
-export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
-if [[ -r /etc/xray/domain ]]; then
-clear
+#export IP=$( curl -s https://ipinfo.io/ip/ )
+#export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
+#if [[ -r /etc/xray/domain ]]; then
+#clear
 
 # // License Validating
 #echo ""
