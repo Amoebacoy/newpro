@@ -1,19 +1,7 @@
-#!/bin/bash
-# // Root Checking
-if [ "${EUID}" -ne 0 ]; then
-		echo "You need to run this script as root"
-		exit 1
-fi
-if [ "$(systemd-detect-virt)" == "openvz" ]; then
-		echo "OpenVZ is not supported"
-		exit 1
-fi
 clear
-# // Exporting Language to UTF-8
+#Minacantik
 export LANG='en_US.UTF-8'
 export LANGUAGE='en_US.UTF-8'
-
-# // Export Color & Information
 export RED='\033[0;31m'
 export GREEN='\033[0;32m'
 export YELLOW='\033[0;33m'
@@ -34,147 +22,37 @@ tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
 yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
 green() { echo -e "\\033[32;1m${*}\\033[0m"; }
 red() { echo -e "\\033[31;1m${*}\\033[0m"; }
-# // Export Banner Status Information
 export EROR="[${RED} ERROR ${NC}]"
 export INFO="[${YELLOW} INFO ${NC}]"
 export OKEY="[${GREEN} OKEY ${NC}]"
 export PENDING="[${YELLOW} PENDING ${NC}]"
 export SEND="[${YELLOW} SEND ${NC}]"
 export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
-
-# // Export Align
-#export BOLD="\e[1m"
-#export WARNING="${RED}\e[5m"
-#export UNDERLINE="\e[4m"
-
-# // Exporting URL Host
-#export Server_URL="raw.githubusercontent.com/kenDevXD/test/main"
-#export Server1_URL="raw.githubusercontent.com/kenDevXD/limit/main"
-#export Server_Port="443"
-#export Server_IP="underfined"
-#export Script_Mode="Stable"
-#export Auther=".geovpn"
-
-# // Exporting Script Version
-#export VERSION="1.1"
- 
-# // Exporint IP AddressInformation
-#export IP=$( curl -s https://ipinfo.io/ip/ )
-#export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
-#if [[ -r /etc/xray/domain ]]; then
-#clear
-
-# // License Validating
-#echo ""
-#read -p "Input Your License Key : " Input_License_Key
-
-# // Checking Input Blank
-#if [[ $Input_License_Key ==  "" ]]; then
-    #echo -e "${EROR} Please Input License Key !${NC}"
-    #exit 1
-#fi
-
-# // Checking License Validate
-#Key="$Input_License_Key"
-
-# // Set Time To Jakarta / GMT +7
-#ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
-
-# // Algoritma Key
-#algoritmakeys="1920192019209129403940293013912" 
-#hashsuccess="$(echo -n "$Key" | sha256sum | cut -d ' ' -f 1)" 
-#Sha256Successs="$(echo -n "$hashsuccess$algoritmakeys" | sha256sum | cut -d ' ' -f 1)" 
-#License_Key=$Sha256Successs
-#echo ""
-#echo -e "${OKEY} Successfull Connected To Server"
-#sleep 1
-
-# // Validate Result
-#Getting_Data_On_Server=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep $License_Key | cut -d ' ' -f 1 )
-#if [[ "$Getting_Data_On_Server" == "$License_Key" ]]; then
-    #mkdir -p /etc/${Auther}/
-    #echo "$License_Key" > /etc/${Auther}/license.key
-    #echo -e "${OKEY} License Validated !"
-    #sleep 1
-#else
-#    echo -e "${EROR} Your License Key Not Valid !"
-#    exit 1
-#fi
-# // Checking Your VPS Blocked Or No
-#if [[ $IP == "" ]]; then
- #   echo -e "${EROR} Your IP Address Not Detected !"
-#    exit 1
-#else
-    # // Checking Data
-#    export Check_Blacklist_Atau_Tidak=$( curl -s https://${Server_URL}/blacklist.txt | grep -w $License_Key | awk '{print $1}' | tr -d '\r' | tr -d '\r\n' | head -n1 )
-#    if [[ $Check_Blacklist_Atau_Tidak == $IP ]]; then
-#        echo -e "${EROR} 403 Forbidden ( Your VPS Has Been Blocked ) !"
-#        exit 1
-#    else
-#        Skip='true'
- #   fi
-#fi
-# // cek limit
-#export limit=$( curl -s https://${Server1_URL}/limit.txt | grep $License_Key | wc -l )
-#export Install_Limited=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $License_Key | cut -d ' ' -f 2)
-#if [[ $limit == $Install_Limited ]]; then
-#        echo -e "${EROR} 403 Forbidden ( Your License Max Limit Install ) !"
-#        exit 1
-#    else
-#        Skip='true'
-#fi
-# // License Key Detail
-#export Tanggal_Pembelian_License=`date +"%Y-%m-%d" -d "$dateFromServer"`
-#export Nama_Issued_License=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $License_Key | cut -d ' ' -f 7| tr -d '\r' | tr -d '\r\n')
-#export mekmek=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $License_Key | cut -d ' ' -f 3 | tr -d '\r' | tr -d '\r\n')
-#export Masa_Laku_License_Berlaku_Sampai=`date -d "$mekmek days" +"%Y-%m-%d"`
-#export Install_Limit=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $License_Key | cut -d ' ' -f 2 | tr -d '\r' | tr -d '\r\n')
-#export Tipe_License=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $License_Key | cut -d ' ' -f 8 | tr -d '\r' | tr -d '\r\n')
-
-# // Ouputing Information
-#echo -e "${OKEY} License Type / Edition ( ${GREEN}$Tipe_License Edition${NC} )" # > // Output Tipe License Dari Exporting
-#echo -e "${OKEY} This License Issued to (${GREEN} $Nama_Issued_License ${NC})"
-#echo -e "${OKEY} Subscription Started On (${GREEN} $Tanggal_Pembelian_License${NC} )"
-#echo -e "${OKEY} Subscription Ended On ( ${GREEN}${Masa_Laku_License_Berlaku_Sampai}${NC} )"
-#echo -e "${OKEY} Installation Limit ( ${GREEN}$Install_Limit VPS${NC} )"
-#echo -e "${OKEY} Installation Usage ( ${GREEN}$limit VPS${NC} )"
-
-# // Exporting Expired Date
-#export Tanggal_Sekarang=`date -d "0 days" +"%Y-%m-%d"`
-#export Masa_Aktif_Dalam_Satuan_Detik=$(date -d "$Masa_Laku_License_Berlaku_Sampai" +%s)
-#export Tanggal_Sekarang_Dalam_Satuan_Detik=$(date -d "$Tanggal_Sekarang" +%s)
-#export Hasil_Pengurangan_Dari_Masa_Aktif_Dan_Hari_Ini_Dalam_Satuan_Detik=$(( (Masa_Aktif_Dalam_Satuan_Detik - Tanggal_Sekarang_Dalam_Satuan_Detik) / 86400 ))
-#if [[ $Hasil_Pengurangan_Dari_Masa_Aktif_Dan_Hari_Ini_Dalam_Satuan_Detik -lt 0 ]]; then
-#    echo -e "${EROR} Your License Expired On ( ${RED}$Masa_Laku_License_Berlaku_Sampai${NC} )"
-#    exit 1
-#else
-#    echo -e "${OKEY} Your License Key = $(if [[ ${Hasil_Pengurangan_Dari_Masa_Aktif_Dan_Hari_Ini_Dalam_Satuan_Detik} -lt 5 ]]; then
-#    echo -e "${RED}${Hasil_Pengurangan_Dari_Masa_Aktif_Dan_Hari_Ini_Dalam_Satuan_Detik}${NC} Days Left"; else
-#    echo -e "${GREEN}${Hasil_Pengurangan_Dari_Masa_Aktif_Dan_Hari_Ini_Dalam_Satuan_Detik}${NC} Days Left"; fi )"
-#fi
-
-# // Validate Successfull
-#echo ""
-#read -p "$( echo -e "Press ${CYAN}[ ${NC}${GREEN}Enter${NC} ${CYAN}]${NC} For Starting Installation") "
-#echo ""
-
-# // cek old script
+export BOLD="\e[1m"
+export WARNING="${RED}\e[5m"
+export UNDERLINE="\e[4m"
+if [ "${EUID}" -ne 0 ]; then
+echo -e "${EROR} Please Run This Script As Root User !"
+exit 1
+fi
+export IP=$( curl -s https://ipinfo.io/ip/ )
+export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
 if [[ -r /etc/xray/domain ]]; then
 clear
 echo -e "${INFO} Having Script Detected !"
 echo -e "${INFO} If You Replacing Script, All Client Data On This VPS Will Be Cleanup !"
-read -p "Are You Sure Wanna Replace Script ? (Y/N) " josdong
-if [[ $josdong == "Y" ]]; then
+read -p "Are You Sure Wanna Replace Script ? (Y/N) " lanjutkan
+if [[ $lanjutkan == "Y" ]]; then
 clear
 echo -e "${INFO} Starting Replacing Script !"
-elif [[ $josdong == "y" ]]; then
+elif [[ $lanjutkan == "y" ]]; then
 clear
 echo -e "${INFO} Starting Replacing Script !"
-rm -rf /var/lib/scrz-prem 
-elif [[ $josdong == "N" ]]; then
+rm -rf /var/lib/scrz-prem
+elif [[ $lanjutkan == "N" ]]; then
 echo -e "${INFO} Action Canceled !"
 exit 1
-elif [[ $josdong == "n" ]]; then
+elif [[ $lanjutkan == "n" ]]; then
 echo -e "${INFO} Action Canceled !"
 exit 1
 else
@@ -184,176 +62,29 @@ fi
 clear
 fi
 echo -e "${GREEN}Starting Installation............${NC}"
-# // Go To Root Directory
 cd /root/
-# // Remove
-apt-get remove --purge nginx* -y
-apt-get remove --purge nginx-common* -y
-apt-get remove --purge nginx-full* -y
-apt-get remove --purge dropbear* -y
-apt-get remove --purge stunnel4* -y
-apt-get remove --purge apache2* -y
-apt-get remove --purge ufw* -y
-apt-get remove --purge firewalld* -y
-apt-get remove --purge exim4* -y
-apt autoremove -y
-
-# // Update
 apt update -y
-
-# // Install Requirement Tools
 apt-get --reinstall --fix-missing install -y sudo dpkg psmisc socat jq ruby wondershaper python2 tmux nmap bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget vim net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential gcc g++ automake make autoconf perl m4 dos2unix dropbear libreadline-dev zlib1g-dev libssl-dev dirmngr libxml-parser-perl neofetch git lsof iptables iptables-persistent
 apt-get --reinstall --fix-missing install -y libreadline-dev zlib1g-dev libssl-dev python2 screen curl jq bzip2 gzip coreutils rsyslog iftop htop zip unzip net-tools sed gnupg gnupg1 bc sudo apt-transport-https build-essential dirmngr libxml-parser-perl neofetch screenfetch git lsof openssl easy-rsa fail2ban tmux vnstat dropbear libsqlite3-dev socat cron bash-completion ntpdate xz-utils sudo apt-transport-https gnupg2 gnupg1 dnsutils lsb-release chrony
 gem install lolcat
-
-# // Update & Upgrade
+sleep 1
+echo -e "[ ${green}INFO$NC ] Disable ipv6"
+echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6 >/dev/null 2>&1
+sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local >/dev/null 2>&1
 apt update -y
 apt upgrade -y
 apt dist-upgrade -y
-
-# // Clear
 clear
 clear && clear && clear
 clear;clear;clear
-
-# // Starting Setup Domain
-echo -e "${GREEN}Indonesian Language${NC}"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
-echo -e "Anda Ingin Menggunakan Domain Pribadi ?"
-echo -e "Atau Ingin Menggunakan Domain Otomatis ?"
-echo -e "Jika Ingin Menggunakan Domain Pribadi, Ketik ${GREEN}1${NC}"
-echo -e "dan Jika Ingin menggunakan Domain Otomatis, Ketik ${GREEN}2${NC}"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
-echo ""
-echo -e "${GREEN}English Language${NC}"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
-echo -e "You Want to Use a Private Domain ?"
-echo -e "Or Want to Use Auto Domain ?"
-echo -e "If You Want Using Private Domain, Type ${GREEN}1${NC}"
-echo -e "else You Want using Automatic Domain, Type ${GREEN}2${NC}"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
-echo ""
-
-read -p "$( echo -e "${GREEN}Input Your Choose ? ${NC}(${YELLOW}1/2${NC})${NC} " )" choose_domain
-
-# // Validating Automatic / Private
-if [[ $choose_domain == "2" ]]; then # // Using Automatic Domain
-
-# // Folder Sistem Yang Tidak Boleh Di Hapus
-mkdir -p /usr/bin
-# // Remove File & Directory
-rm -fr /usr/local/bin/xray
-rm -fr /usr/local/bin/stunnel
-rm -fr /usr/local/bin/stunnel5
-rm -fr /etc/nginx
-rm -fr /var/lib/scrz-prem/
-rm -fr /usr/bin/xray
-rm -fr /etc/xray
-rm -fr /usr/local/etc/xray
-# // Making Directory 
-mkdir -p /etc/nginx
-mkdir -p /var/lib/scrz-prem/
-mkdir -p /usr/bin/xray
-mkdir -p /etc/xray
-mkdir -p /usr/local/etc/xray
-
-# // String / Request Data
-sub=$(</dev/urandom tr -dc a-z0-9 | head -c4)
-DOMAIN=vpnmurah.me
-SUB_DOMAIN=${sub}.vpnmurah.me
-CF_ID=paoandest@gmail.com
-CF_KEY=1d158d0efc4eef787222cefff0b6d20981462
-set -euo pipefail
-IP=$(curl -sS ifconfig.me);
-echo "Updating DNS for ${SUB_DOMAIN}..."
-ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
-     -H "X-Auth-Email: ${CF_ID}" \
-     -H "X-Auth-Key: ${CF_KEY}" \
-     -H "Content-Type: application/json" | jq -r .result[0].id)
-
-RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=${SUB_DOMAIN}" \
-     -H "X-Auth-Email: ${CF_ID}" \
-     -H "X-Auth-Key: ${CF_KEY}" \
-     -H "Content-Type: application/json" | jq -r .result[0].id)
-
-if [[ "${#RECORD}" -le 10 ]]; then
-     RECORD=$(curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records" \
-     -H "X-Auth-Email: ${CF_ID}" \
-     -H "X-Auth-Key: ${CF_KEY}" \
-     -H "Content-Type: application/json" \
-     --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}' | jq -r .result.id)
-fi
-
-RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
-     -H "X-Auth-Email: ${CF_ID}" \
-     -H "X-Auth-Key: ${CF_KEY}" \
-     -H "Content-Type: application/json" \
-     --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
-     
-echo "Host : $SUB_DOMAIN"
-echo $SUB_DOMAIN > /root/domain
-echo "IP=$SUB_DOMAIN" > /var/lib/scrz-prem/ipvps.conf
-sleep 1
-yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
-yellow "Domain added.."
-sleep 3
-domain=$(cat /root/domain)
-cp -r /root/domain /etc/xray/domain
-
-# // Making Certificate
-clear
-echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... " 
-sleep 2
-echo -e "${OKEY} Starting Generating Certificate"
-rm -fr /root/.acme.sh
-mkdir -p /root/.acme.sh
-curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
-chmod +x /root/.acme.sh/acme.sh
-/root/.acme.sh/acme.sh --upgrade
-/root/.acme.sh/acme.sh --upgrade --auto-upgrade
-/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-/root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
-# // Success
-echo -e "${OKEY} Your Domain : $domain"
-sleep 2
-
-# // ELif For Selection 1
-elif [[ $choose_domain == "1" ]]; then
-
-# // Clear
-clear
-clear && clear && clear
-clear;clear;clear
-
-echo -e "${GREEN}Indonesian Language${NC}"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
-echo -e "Silakan Pointing Domain Anda Ke IP VPS"
-echo -e "Untuk Caranya Arahkan NS Domain Ke Cloudflare"
-echo -e "Kemudian Tambahkan A Record Dengan IP VPS"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
-echo ""
-echo -e "${GREEN}Indonesian Language${NC}"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
-echo -e "Please Point Your Domain To IP VPS"
-echo -e "For Point NS Domain To Cloudflare"
-echo -e "Change NameServer On Domain To Cloudflare"
-echo -e "Then Add A Record With IP VPS"
-echo -e "${YELLOW}-----------------------------------------------------${NC}"
-echo ""
-echo ""
-
-# // Reading Your Input
 read -p "Input Your Domain : " domain
 if [[ $domain == "" ]]; then
-    clear
-    echo -e "${EROR} No Input Detected !"
-    exit 1
+clear
+echo -e "${EROR} No Input Detected !"
+exit 1
 fi
-
-# // Folder Sistem Yang Tidak Boleh Di Hapus
+apt purge nginx nginx-common nginx-core -y
 mkdir -p /usr/bin
-# // Remove File & Directory
 rm -fr /usr/local/bin/xray
 rm -fr /usr/local/bin/stunnel
 rm -fr /usr/local/bin/stunnel5
@@ -362,23 +93,18 @@ rm -fr /var/lib/scrz-prem/
 rm -fr /usr/bin/xray
 rm -fr /etc/xray
 rm -fr /usr/local/etc/xray
-# // Making Directory 
 mkdir -p /etc/nginx
 mkdir -p /var/lib/scrz-prem/
 mkdir -p /usr/bin/xray
 mkdir -p /etc/xray
 mkdir -p /usr/local/etc/xray
-
-# // Input Domain TO VPS
-echo "$domain" > /etc/${Auther}/domain.txt
+echo "$domain" > /etc/domain.txt
 echo "IP=$domain" > /var/lib/scrz-prem/ipvps.conf
 echo "$domain" > /root/domain
 domain=$(cat /root/domain)
 cp -r /root/domain /etc/xray/domain
-
-# // Making Certificate
 clear
-echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... " 
+echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... "
 sleep 2
 echo -e "${OKEY} Starting Generating Certificate"
 rm -fr /root/.acme.sh
@@ -390,15 +116,8 @@ chmod +x /root/.acme.sh/acme.sh
 /root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
 /root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
-# // Success
 echo -e "${OKEY} Your Domain : $domain"
 sleep 2
-
-# // Else Do
-else
-    echo -e "${EROR} Please Choose 1 & 2 Only !"
-    exit 1
-fi
 
 #install jembot
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
