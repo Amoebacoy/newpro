@@ -94,13 +94,13 @@ export IP=$( curl -s https://ipinfo.io/ip/ )
 #else
 #    echo $sisa_hari > /etc/${Auther}/license-remaining-active-days.db
 #fi
-clear
-source /var/lib/scrz-prem/ipvps.conf
-if [[ "$IP" = "" ]]; then
-domain=$(cat /etc/xray/domain)
-else
-domain=$IP
-fi
+#clear
+#source /var/lib/scrz-prem/ipvps.conf
+#if [[ "$IP" = "" ]]; then
+#domain=$(cat /etc/xray/domain)
+#else
+#domain=$IP
+#fi
 
 echo -e "[ ${GREEN}INFO${NC} ] Checking... "
 sleep 1
