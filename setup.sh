@@ -158,9 +158,9 @@ clear
 #fi
 
 # // Validate Successfull
-echo ""
-read -p "$( echo -e "Press ${CYAN}[ ${NC}${GREEN}Enter${NC} ${CYAN}]${NC} For Starting Installation") "
-echo ""
+#echo ""
+#read -p "$( echo -e "Press ${CYAN}[ ${NC}${GREEN}Enter${NC} ${CYAN}]${NC} For Starting Installation") "
+#echo ""
 
 # // cek old script
 if [[ -r /etc/xray/domain ]]; then
