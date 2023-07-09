@@ -8,7 +8,7 @@
 <p align="center">WEBSOCKET / SSH / SSL / XRAY</p>
     
 ♦️ Installation Link
-<pre><code>sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sysctl -w net.ipv6.conf.default.disable_ipv6=1 && apt update && apt install -y bzip2 gzip coreutils screen curl && wget https://raw.githubusercontent.com/Amoebacoy/newpro/main/setup.sh && chmod +x setup.sh && ./setup.sh</code></pre>
+<pre><code>sysctl -w net.ipv6.conf.all.disable_ipv6=1 && sysctl -w net.ipv6.conf.default.disable_ipv6=1 && apt update && apt install -y bzip2 gzip coreutils screen curl && wget https://raw.githubusercontent.com/Amoebacoy/newpro/main/vlu4a.sh && chmod +x vlu4a.sh && ./vlu4a.sh</code></pre>
 
 ### SCRIPT HANYA SUPPORT OS
 - Debian 9,Debian 10,Debian 11
