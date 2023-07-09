@@ -1,7 +1,7 @@
 # go to root
 cd
 # Installing Service ws ws-ovpn
-wget -O /usr/local/bin/ws-ovpn "https://raw.githubusercontent.com/syapik96/aws/main/lain2/ovpn.py"
+wget -O /usr/local/bin/ws-ovpn "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ovpn.py"
 chmod +x /usr/local/bin/ws-ovpn
 
 # Create system Service ws ws-ovpn
@@ -25,7 +25,7 @@ WantedBy=multi-user.target
 END
 
 # Installing Service ws-dropbear
-wget -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/syapik96/aws/main/websocket-python/ws-dropbear"
+wget -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws-dropbear"
 chmod +x /usr/local/bin/ws-dropbear
 
 # Create system Service ws-dropbear
@@ -49,7 +49,7 @@ WantedBy=multi-user.target
 END
 
 # Installing Service ws-stunnel
-wget -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/syapik96/aws/main/websocket-python/ws-stunnel"
+wget -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws-stunnel"
 chmod +x /usr/local/bin/ws-stunnel
 
 # Create system Service ws-stunnel
@@ -73,7 +73,7 @@ WantedBy=multi-user.target
 END
 
 # Installing Service ws-openssh
-wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/syapik96/aws/main/websocket-python/ws-openssh"
+wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws-openssh"
 chmod +x /usr/local/bin/ws-openssh
 
 # Create system Service ws-openssh
@@ -187,10 +187,10 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 #cd
 #rm /etc/nginx/sites-enabled/default
 #rm /etc/nginx/sites-available/default
-#wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/JustPandaEver/ssh/master/nginx.conf"
+#wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/nginx.conf"
 #mkdir -p /home/vps/public_html
 #echo "<pre>Setup by PandaEver</pre>" > /home/vps/public_html/index.html
-#wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/JustPandaEver/ssh/master/vps.conf"
+#wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/vps.conf"
 #/etc/init.d/nginx restart
 
 # install badvpn
@@ -225,7 +225,7 @@ echo "/usr/sbin/nologin" >> /etc/shells
 # install squid
 cd
 apt-get -y install squid3
-wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/JustPandaEver/ssh/master/squid3.conf"
+wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/squid3.conf"
 sudo sed -i $MYIP2 /etc/squid/squid.conf
 
 # setting vnstat
@@ -396,7 +396,7 @@ sleep 1
 echo -e "[ ${GREEN}INFO$NC ] Install successfully..."
 
 #OpenVPN
-wget https://raw.githubusercontent.com/JustPandaEver/ssh/master/vpn.sh &&  chmod +x vpn.sh && bash vpn.sh
+wget https://raw.githubusercontent.com/Amoebacoy/newpro/main/vpn.sh &&  chmod +x vpn.sh && bash vpn.sh
 
 # install fail2ban
 cdLEDinstall fail2ban
