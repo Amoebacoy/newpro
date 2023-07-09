@@ -256,9 +256,12 @@ service vnstat restart
 
 
 # install stunnel
-cd /root/
-wget -q "https://raw.githubusercontent.com/wunuit/1/main/stunnel5.zip"
-unzip stunnel5.zip
+apt update -y
+apt upgarde -y
+apt-get install certbot -y
+apt-get install gcc g++ build-essential libreadline-dev zlib1g-dev linux-headers-generic libssl-dev unzip
+wget -q -O stunnel5.zip "https://github.com/hidessh22/tunnel/raw/main/stunnnel5/stunnel5.zip"
+unzip -o stunnel5.zip
 cd /root/stunnel
 chmod +x configure
 ./configure
@@ -267,32 +270,24 @@ make install
 cd /root
 rm -r -f stunnel
 rm -f stunnel5.zip
-rm -fr /etc/stunnel5
-mkdir -p /etc/stunnel5
+mkdir -p /etc/stunnel5 
 chmod 644 /etc/stunnel5
-# Download Config Stunnel5
-cat > /etc/stunnel5/stunnel5.conf <<-END
-cert = /etc/xray/xray.crt
-key = /etc/xray/xray.key
+nano /etc/stunnel5/stunnel5.conf
+cert = /etc/sslku/ssl.crt
+key = /etc/sslku/ssl.key
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
-
-[dropbear]
-accept = 447
-connect = 127.0.0.1:109
-
-[openssh]
-accept = 777
+[sslopenssh]
+accept = 222
 connect = 127.0.0.1:22
-
-[openvpn]
-accept = 442
-connect = 127.0.0.1:1194
-
-END
-
+[ssldropbear]
+accept = 443
+connect = 127.0.0.1:44
+[ssldropbear]
+accept = 777
+connect = 127.0.0.1:77
 # make a certificate
 #openssl genrsa -out key.pem 2048
 #openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
@@ -313,7 +308,8 @@ Documentation=https://nekopoi.care
 After=syslog.target network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/stunnel5 /etc/stunnel5/stunnel5.conf
+ExecStart=/usr/local/bin/stunnel5 
+/etc/stunnel5/stunnel5.conf
 Type=forking
 
 [Install]
