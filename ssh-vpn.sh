@@ -46,14 +46,14 @@ cd
 #END
 
 # Installing Service ws-dropbear
-wget -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/syapik96/aws/main/websocket-python/ws-dropbear"
+wget -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/vinstechmy/SSH-XRAY-Websocket-Multiport/main/SSHWS/dropbear-ws"
 chmod +x /usr/local/bin/ws-dropbear
 
 # Create system Service ws-dropbear
 cat > /etc/systemd/system/ws-dropbear.service <<END
 [Unit]
-Description=Dropbear Over Websocket Python
-Documentation=https://github.com/syapik96/aws
+Description=Websocket-OpenSSH By Vinstechmy
+Documentation=https://Vinstechmy-Project.net
 After=network.target nss-lookup.target
 
 [Service]
@@ -62,7 +62,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-dropbear
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-dropbear 2095
 Restart=on-failure
 
 [Install]
@@ -70,14 +70,14 @@ WantedBy=multi-user.target
 END
 
 # Installing Service ws-stunnel
-wget -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/syapik96/aws/main/websocket-python/ws-stunnel"
+wget -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/vinstechmy/SSH-XRAY-Websocket-Multiport/main/SSHWS/ws-stunnel"
 chmod +x /usr/local/bin/ws-stunnel
 
 # Create system Service ws-stunnel
 cat > /etc/systemd/system/ws-stunnel.service <<END
 [Unit]
-Description=Ssl/tls Proxy Over Websocket Python
-Documentation=https://github.com/syapik96/aws
+Description=SSH Over Websocket Python Vinstechmy
+Documentation=https://Vinstechmy-Project.net
 After=network.target nss-lookup.target
 
 [Service]
@@ -86,22 +86,21 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-stunnel
 Restart=on-failure
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-stunnel
+END
 
 [Install]
 WantedBy=multi-user.target
-END
-
 # Installing Service ws-openssh
-wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/syapik96/aws/main/lain2/ws-openssh"
+wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/vinstechmy/SSH-XRAY-Websocket-Multiport/main/SSHWS/openssh-socket"
 chmod +x /usr/local/bin/ws-openssh
 
 # Create system Service ws-openssh
 cat > /etc/systemd/system/ws-openssh.service <<END
 [Unit]
-Description=OpenSSH Over Websocket Python
-Documentation=https://github.com/syapik96/aws
+Description=Websocket-OpenSSH By Vinstechmy
+Documentation=https://Vinstechmy-Project.net
 After=network.target nss-lookup.target
 
 [Service]
@@ -110,7 +109,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-openssh
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-openssh 2095
 Restart=on-failure
 
 [Install]
@@ -260,8 +259,9 @@ apt update -y
 apt upgarde -y
 apt-get install certbot -y
 apt-get install gcc g++ build-essential libreadline-dev zlib1g-dev linux-headers-generic libssl-dev unzip
-wget -q -O stunnel5.zip "https://github.com/hidessh22/tunnel/raw/main/stunnnel5/stunnel5.zip"
-unzip -o stunnel5.zip
+cd /root/
+wget -q "https://raw.githubusercontent.com/wunuit/1/main/stunnel5.zip"
+unzip stunnel5.zip
 cd /root/stunnel
 chmod +x configure
 ./configure
@@ -270,8 +270,10 @@ make install
 cd /root
 rm -r -f stunnel
 rm -f stunnel5.zip
-mkdir -p /etc/stunnel5 
+rm -fr /etc/stunnel5
+mkdir -p /etc/stunnel5
 chmod 644 /etc/stunnel5
+# Download Config Stunnel5
 cat > /etc/stunnel5/stunnel5.conf <<-END
 cert = /etc/xray/xray.crt
 key = /etc/xray/xray.key
@@ -279,15 +281,19 @@ client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
+
 [dropbear]
 accept = 447
 connect = 127.0.0.1:109
+
 [openssh]
 accept = 777
 connect = 127.0.0.1:22
+
 [openvpn]
 accept = 442
 connect = 127.0.0.1:1194
+
 END
 # make a certificate
 #openssl genrsa -out key.pem 2048
