@@ -272,22 +272,23 @@ rm -r -f stunnel
 rm -f stunnel5.zip
 mkdir -p /etc/stunnel5 
 chmod 644 /etc/stunnel5
-nano /etc/stunnel5/stunnel5.conf
-cert = /etc/sslku/ssl.crt
-key = /etc/sslku/ssl.key
+cat > /etc/stunnel5/stunnel5.conf <<-END
+cert = /etc/xray/xray.crt
+key = /etc/xray/xray.key
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
-[sslopenssh]
-accept = 222
-connect = 127.0.0.1:22
-[ssldropbear]
-accept = 443
-connect = 127.0.0.1:44
-[ssldropbear]
+[dropbear]
+accept = 447
+connect = 127.0.0.1:109
+[openssh]
 accept = 777
-connect = 127.0.0.1:77
+connect = 127.0.0.1:22
+[openvpn]
+accept = 442
+connect = 127.0.0.1:1194
+END
 # make a certificate
 #openssl genrsa -out key.pem 2048
 #openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
