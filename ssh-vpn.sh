@@ -419,7 +419,7 @@ systemctl restart stunnel5
 /etc/init.d/stunnel5 restart
 
 #OpenVPN
-wget https:raw.githubusercontent.com/owl64/vpsssh_Free/main/ssh/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
+wget https://raw.githubusercontent.com/Amoebacoy/newpro/main/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
 
 # install fail2ban
 apt -y install fail2ban
@@ -456,7 +456,7 @@ echo "Banner /etc/issue.net" >>/etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
 
 # Install BBR
-wget https://raw.githubusercontent.com/owl64/vpsssh_Free/main/ssh/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+wget https://raw.githubusercontent.com/Amoebacoy/newpro/main/bbr.sh && chmod +x bbr.sh && ./bbr.sh
 
 # Ganti Banner
 wget -O /etc/issue.net "https://raw.githubusercontent.com/owl64/vpsssh_Free/main/ssh/issue.net"
