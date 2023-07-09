@@ -1,38 +1,14 @@
 # go to root
 cd
 # Installing Service ws ws-ovpn
-#wget -O /usr/local/bin/ws-ovpn "https://raw.githubusercontent.com/syapik96/aws/main/lain2/ovpn.py"
-#chmod +x /usr/local/bin/ws-ovpn
+wget -O /usr/local/bin/ws-ovpn "https://raw.githubusercontent.com/syapik96/aws/main/lain2/ovpn.py"
+chmod +x /usr/local/bin/ws-ovpn
 
 # Create system Service ws ws-ovpn
-#cat > /etc/systemd/system/ws-ovpn.service <<END
-#[Unit]
-#Description=OpenVpn Over Websocket Python
-#Documentation=https://github.com/syapik96/aws
-#After=network.target nss-lookup.target
-
-#[Service]
-#Type=simple
-#User=root
-#CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-#AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-#NoNewPrivileges=true
-#ExecStart=/usr/bin/python -O /usr/local/bin/ws-ovpn 2099
-#Restart=on-failure
-
-#[Install]
-#WantedBy=multi-user.target
-#END
-
-# Installing Service ws-dropbear
-wget -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/syapik96/aws/main/websocket-python/ws-dropbear"
-chmod +x /usr/local/bin/ws-dropbear
-
-# Create system Service ws-dropbear
-cat > /etc/systemd/system/ws-dropbear.service <<END
+cat > /etc/systemd/system/ws-ovpn.service <<END
 [Unit]
-Description=Websocket-OpenSSH By Vinstechmy
-Documentation=https://Vinstechmy-Project.net
+Description=OpenVpn Over Websocket Python
+Documentation=https://github.com/syapik96/aws
 After=network.target nss-lookup.target
 
 [Service]
@@ -41,7 +17,31 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-dropbear 2095
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-ovpn 2099
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+END
+
+# Installing Service ws-dropbear
+wget -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/syapik96/aws/main/websocket-python/ws-dropbear"
+chmod +x /usr/local/bin/ws-dropbear
+
+# Create system Service ws-dropbear
+cat > /etc/systemd/system/ws-dropbear.service <<END
+[Unit]
+Description=Dropbear Over WebSocket Python
+Documentation=https://google.com
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-dropbear 80 
 Restart=on-failure
 
 [Install]
@@ -55,8 +55,8 @@ chmod +x /usr/local/bin/ws-stunnel
 # Create system Service ws-stunnel
 cat > /etc/systemd/system/ws-stunnel.service <<END
 [Unit]
-Description=SSH Over Websocket Python Vinstechmy
-Documentation=https://Vinstechmy-Project.net
+Description=SSH Ssl/Tls Over WebSocket Python
+Documentation=https://google.com
 After=network.target nss-lookup.target
 
 [Service]
@@ -65,12 +65,13 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-stunnel 443
 Restart=on-failure
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-stunnel
-END
 
 [Install]
 WantedBy=multi-user.target
+END
+
 # Installing Service ws-openssh
 wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/syapik96/aws/main/websocket-python/ws-openssh"
 chmod +x /usr/local/bin/ws-openssh
@@ -78,8 +79,8 @@ chmod +x /usr/local/bin/ws-openssh
 # Create system Service ws-openssh
 cat > /etc/systemd/system/ws-openssh.service <<END
 [Unit]
-Description=Websocket-OpenSSH By Vinstechmy
-Documentation=https://Vinstechmy-Project.net
+Description=SSH Over Websocket Python Prince
+Documentation=https://google.com
 After=network.target nss-lookup.target
 
 [Service]
@@ -88,8 +89,8 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-openssh 2095
 Restart=on-failure
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-openssh 100
 
 [Install]
 WantedBy=multi-user.target
@@ -97,8 +98,8 @@ END
 
 # ENABLE & START/RESTART SERVICE
 systemctl daemon-reload
-#systemctl enable ws-ovpn
-#systemctl restart ws-ovpn
+systemctl enable ws-ovpn
+systemctl restart ws-ovpn
 systemctl enable ws-dropbear
 systemctl restart ws-dropbear
 systemctl enable ws-stunnel
@@ -260,20 +261,17 @@ client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
-
 [dropbear]
 accept = 447
 connect = 127.0.0.1:109
-
 [openssh]
 accept = 777
 connect = 127.0.0.1:22
-
 [openvpn]
 accept = 442
 connect = 127.0.0.1:1194
-
 END
+
 # make a certificate
 #openssl genrsa -out key.pem 2048
 #openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
