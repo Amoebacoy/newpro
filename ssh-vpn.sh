@@ -182,37 +182,37 @@ ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 
 # install webserver
-apt-get -y install nginx
+#apt-get -y install nginx
 
 # install neofetch
-apt-get update -y
-apt-get -y install gcc
-apt-get -y install make
-apt-get -y install cmake
-apt-get -y install git
-apt-get -y install screen
-apt-get -y install unzip
-apt-get -y install curl
-git clone https://github.com/dylanaraps/neofetch
-cd neofetch
-make install
-make PREFIX=/usr/local install
-make PREFIX=/boot/home/config/non-packaged install
-make -i install
-apt-get -y install neofetch
-cd
-echo "clear" >> .profile
-echo "neofetch" >> .profile
+#apt-get update -y
+#apt-get -y install gcc
+#apt-get -y install make
+#apt-get -y install cmake
+#apt-get -y install git
+#apt-get -y install screen
+#apt-get -y install unzip
+#apt-get -y install curl
+#git clone https://github.com/dylanaraps/neofetch
+#cd neofetch
+#make install
+#make PREFIX=/usr/local install
+#make PREFIX=/boot/home/config/non-packaged install
+#make -i install
+#apt-get -y install neofetch
+#cd
+#echo "clear" >> .profile
+#echo "neofetch" >> .profile
 
 # install webserver
-cd
-rm /etc/nginx/sites-enabled/default
-rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/JustPandaEver/ssh/master/nginx.conf"
-mkdir -p /home/vps/public_html
-echo "<pre>Setup by PandaEver</pre>" > /home/vps/public_html/index.html
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/JustPandaEver/ssh/master/vps.conf"
-/etc/init.d/nginx restart
+#cd
+#rm /etc/nginx/sites-enabled/default
+#rm /etc/nginx/sites-available/default
+#wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/JustPandaEver/ssh/master/nginx.conf"
+#mkdir -p /home/vps/public_html
+#echo "<pre>Setup by PandaEver</pre>" > /home/vps/public_html/index.html
+#wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/JustPandaEver/ssh/master/vps.conf"
+#/etc/init.d/nginx restart
 
 # install badvpn
 cd
