@@ -46,7 +46,7 @@ cd
 #END
 
 # Installing Service ws-dropbear
-wget -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/syapik96/aws/main/websocket-python/ws-dropbear.py"
+wget -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/syapik96/aws/main/websocket-python/ws-dropbear"
 chmod +x /usr/local/bin/ws-dropbear
 
 # Create system Service ws-dropbear
@@ -70,7 +70,7 @@ WantedBy=multi-user.target
 END
 
 # Installing Service ws-stunnel
-wget -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/syapik96/aws/main/websocket-python/ws-stunnel.py"
+wget -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/syapik96/aws/main/websocket-python/ws-stunnel"
 chmod +x /usr/local/bin/ws-stunnel
 
 # Create system Service ws-stunnel
@@ -94,7 +94,7 @@ WantedBy=multi-user.target
 END
 
 # Installing Service ws-openssh
-wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/syapik96/aws/main/lain2/edu-openssh.py"
+wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/syapik96/aws/main/lain2/edu-openssh"
 chmod +x /usr/local/bin/ws-openssh
 
 # Create system Service ws-openssh
