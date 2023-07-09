@@ -118,9 +118,9 @@ chmod +x /root/.acme.sh/acme.sh
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
 echo -e "${OKEY} Your Domain : $domain"
 sleep 2
-#install jembot
+#install janggut
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
-echo -e " \E[41;1;39m           ? Install Jembot ?            \E[0m$NC"
+echo -e " \E[41;1;39m           ? Install janggut ?            \E[0m$NC"
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
 sleep 1 
 wget -q https://raw.githubusercontent.com/Amoebacoy/private/main/janggut.sh && chmod +x janggut.sh && ./janggut.sh
