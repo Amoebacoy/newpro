@@ -203,8 +203,8 @@ echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}12${BIGREEN}] ${NC}RENEW SSL CERT
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "\033[0;34m│ $NC Version      ${NC} : $sem Last Update"
-echo -e "\033[0;34m│ $NC User          :\033[1;36m $Nama_Issued_License \e[0m"
-echo -e "\033[0;34m│ $NC Expiry script${NC} : ${BIYellow}$(cat /etc/${Auther}/license-remaining-active-days.db)${NC} Days"
+echo -e "\033[0;34m│ $NC User         ${NC} : FABUMI${NC}"
+echo -e "\033[0;34m│ $NC Expiry script${NC} : UNLIMITED${NC} Days"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo
 read -p " Select menu : " opt
