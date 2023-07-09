@@ -94,7 +94,7 @@ WantedBy=multi-user.target
 END
 
 # Installing Service ws-openssh
-wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/syapik96/aws/main/lain2/edu-openssh"
+wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/syapik96/aws/main/lain2/ws-openssh"
 chmod +x /usr/local/bin/ws-openssh
 
 # Create system Service ws-openssh
