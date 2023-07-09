@@ -1,24 +1,3 @@
-#!/bin/bash
-# initializing var
-#export DEBIAN_FRONTEND=noninteractive
-#OS=`uname -m`;
-#MYIP=$(wget -qO- ipv4.icanhazip.com);
-#MYIP2="s/xxxxxxxxx/$MYIP/g";
-#ANU=$(ip -o $ANU -4 route show to default | awk '{print $5}');
-
-#detail nama perusahaan
-#country=ID
-#state=Indonesia
-#locality=Indonesia
-#organization=PandaEver
-#organizationalunit=PandaEver
-#commonname=PandaEver
-#email=JustPandaEvers@gmail.com
-
-# simple password minimal
-#wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/JustPandaEver/ssh/master/common-password-deb9"
-#chmod +x /etc/pam.d/common-password
-
 # go to root
 cd
 # Installing Service ws ws-ovpn
