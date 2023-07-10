@@ -135,7 +135,7 @@ echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
 echo -e " \E[41;1;39m            ? Install Xray ?             \E[0m$NC"
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
 sleep 1 
-wget -q https://raw.githubusercontent.com/Amoebacoy/newpro/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+wget -q https://raw.githubusercontent.com/Amoebacoy/private/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
 IP=$(echo $SSH_CLIENT | awk '{print $1}')
 TMPFILE='/tmp/ipinfo-$DATE_EXEC.txt'
 curl http://ipinfo.io/$IP -s -o $TMPFILE
