@@ -1,63 +1,32 @@
+#!/bin/bash
+# ==========================================
+# Color
+RED='\033[0;31m'
+NC='\033[0m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+LIGHT='\033[0;37m'
+# ==========================================
+# Getting
+MYIP=$(wget -qO- ipinfo.io/ip);
+# ==================================================
+# Link Hosting Kalian
+akbarvpn="raw.githubusercontent.com/fisabiliyusri/Mantap/main/ssh"
+
+# Link Hosting Kalian Untuk Xray
+akbarvpnn="raw.githubusercontent.com/fisabiliyusri/Mantap/main/xray"
+
+# Link Hosting Kalian Untuk Trojan Go
+akbarvpnnn="raw.githubusercontent.com/fisabiliyusri/Mantap/main/trojango"
+
+# Link Hosting Kalian Untuk Stunnel5
+akbarvpnnnn="raw.githubusercontent.com/fisabiliyusri/Mantap/main/stunnel5"
+
 # go to root
 cd
-# Installing Service ws ws-ovpn
-wget -O /usr/local/bin/ws-ovpn "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ovpn.py"
-chmod +x /usr/local/bin/ws-ovpn
-
-# Create system Service ws ws-ovpn
-rm -fr /etc/systemd/system/ws-ovpn.service.d
-rm -fr /etc/systemd/system/ws-ovpn.service
-cat > /etc/systemd/system/ws-ovpn.service <<END
-[Unit]
-Description=OpenVpn Over Websocket Python
-Documentation=https://github.com/syapik96/aws
-After=network.target nss-lookup.target
-
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-ovpn 2099
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-END
-
-# Installing Service ws-dropbear
-wget -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/dropbear-ws.py"
-chmod +x /usr/local/bin/ws-dropbear
-
-# Create system Service ws-dropbear
-rm -fr /etc/systemd/system/ws-dropbear.service
-wget -O /etc/systemd/system/ws-dropbear.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-dropbear.service"
-# Installing Service ws-stunnel
-wget -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-stunnel.py"
-chmod +x /usr/local/bin/ws-stunnel
-
-# Create system Service ws-stunnel
-rm -fr /etc/systemd/system/ws-stunnel.service
-wget -O /etc/systemd/system/ws-stunnel.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-stunnel.service"
-
-# Installing Service ws-openssh
-wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/openssh-socket.py"
-chmod +x /usr/local/bin/ws-openssh
-
-# Create system Service ws-openssh
-rm -fr /etc/systemd/system/ws-openssh.service
-wget -O /etc/systemd/system/ws-openssh.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-openssh.service"
-# ENABLE & START/RESTART SERVICE
-systemctl daemon-reload
-systemctl enable ws-ovpn
-systemctl restart ws-ovpn
-systemctl enable ws-dropbear
-systemctl restart ws-dropbear
-systemctl enable ws-stunnel
-systemctl restart ws-stunnel
-systemctl enable ws-openssh
-systemctl restart ws-openssh
 
 # Edit file /etc/systemd/system/rc-local.service
 cat > /etc/systemd/system/rc-local.service <<-END
@@ -95,16 +64,48 @@ echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
 sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 
 #update
-apt-get update -y
+apt update -y
+apt upgrade -y
+apt dist-upgrade -y
+apt-get remove --purge ufw firewalld -y
+apt-get remove --purge exim4 -y
 
 # install wget and curl
-apt-get -y install wget curl
+apt -y install wget curl
+apt -y install net-tools
 
-# remove unnecessary files
-apt -y autoremove
-apt -y autoclean
-apt -y clean
-apt-get -y remove --purge unscd
+# Install Requirements Tools
+apt install ruby -y
+apt install python -y
+apt install make -y
+apt install cmake -y
+apt install coreutils -y
+apt install rsyslog -y
+apt install net-tools -y
+apt install zip -y
+apt install unzip -y
+apt install nano -y
+apt install sed -y
+apt install gnupg -y
+apt install gnupg1 -y
+apt install bc -y
+apt install jq -y
+apt install apt-transport-https -y
+apt install build-essential -y
+apt install dirmngr -y
+apt install libxml-parser-perl -y
+apt install neofetch -y
+apt install git -y
+apt install lsof -y
+apt install libsqlite3-dev -y
+apt install libz-dev -y
+apt install gcc -y
+apt install g++ -y
+apt install libreadline-dev -y
+apt install zlib1g-dev -y
+apt install libssl-dev -y
+apt install libssl1.0-dev -y
+apt install dos2unix -y
 
 # set time GMT +7
 ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
@@ -112,88 +113,117 @@ ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 # set locale
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 
-# install webserver
-#apt-get -y install nginx
-
-# install neofetch
-#apt-get update -y
-#apt-get -y install gcc
-#apt-get -y install make
-#apt-get -y install cmake
-#apt-get -y install git
-#apt-get -y install screen
-#apt-get -y install unzip
-#apt-get -y install curl
-#git clone https://github.com/dylanaraps/neofetch
-#cd neofetch
-#make install
-#make PREFIX=/usr/local install
-#make PREFIX=/boot/home/config/non-packaged install
-#make -i install
-#apt-get -y install neofetch
-#cd
-#echo "clear" >> .profile
-#echo "neofetch" >> .profile
+# install
+apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch git lsof
+echo "clear" >> .profile
+echo "neofetch" >> .profile
 
 # install webserver
-#cd
-#rm /etc/nginx/sites-enabled/default
-#rm /etc/nginx/sites-available/default
-#wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/nginx.conf"
-#mkdir -p /home/vps/public_html
-#echo "<pre>Setup by PandaEver</pre>" > /home/vps/public_html/index.html
-#wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/vps.conf"
-#/etc/init.d/nginx restart
+apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
+rm /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-available/default
+curl https://${akbarvpn}/nginx.conf > /etc/nginx/nginx.conf
+curl https://${akbarvpn}/vps.conf > /etc/nginx/conf.d/vps.conf
+sed -i 's/listen = \/var\/run\/php-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/fpm/pool.d/www.conf
+useradd -m vps;
+mkdir -p /home/vps/public_html
+echo "<?php phpinfo() ?>" > /home/vps/public_html/info.php
+chown -R www-data:www-data /home/vps/public_html
+chmod -R g+rw /home/vps/public_html
+cd /home/vps/public_html
+wget -O /home/vps/public_html/index.html "https://${akbarvpn}/index.html1"
+/etc/init.d/nginx restart
+cd
 
 # install badvpn
 cd
-apt-get install cmake make gcc -y
-cd
-wget https://raw.githubusercontent.com/janda09/private/master/badvpn-1.999.128.tar.bz2
-tar xf badvpn-1.999.128.tar.bz2
-mkdir badvpn-build
-cd badvpn-build
-cmake ~/badvpn-1.999.128 -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1
-make install
-echo 'badvpn-udpgw --listen-addr 127.0.0.1:Badvpn_Port1 > /dev/nul &' >> /etc/rc.local
-badvpn-udpgw --listen-addr 127.0.0.1:Badvpn_Port1 > /dev/nul &
-echo 'badvpn-udpgw --listen-addr 127.0.0.1:Badvpn_Port2 > /dev/nul &' >> /etc/rc.local
-badvpn-udpgw --listen-addr 127.0.0.1:Badvpn_Port2 > /dev/nul &
+wget -O /usr/bin/badvpn-udpgw "https://${akbarvpn}/badvpn-udpgw64"
+chmod +x /usr/bin/badvpn-udpgw
+sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500' /etc/rc.local
+sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500' /etc/rc.local
+sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500' /etc/rc.local
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
+
+
 # setting port ssh
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
-sed -i 's/PermitRootLogin no/PermitRootLogin yes/g' /etc/ssh/sshd_config
-sed -i 's/#PermitRootLogin no/PermitRootLogin yes/g' /etc/ssh/sshd_config
-sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port 2253' /etc/ssh/sshd_config
+echo "Port 22" >> /etc/ssh/sshd_config
+echo "Port 42" >> /etc/ssh/sshd_config
+/etc/init.d/ssh restart
+
 # install dropbear
-apt-get -y install dropbear
+apt -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=143/g' /etc/default/dropbear
-echo "DROPBEAR_PORT=80" >> /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 110 -p 109 -p 456"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109 -p 1153"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
 
-# install squid
+# install squid (proxy nya aku matikan)
 cd
-apt-get -y install squid3
-wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/squid3.conf"
-sudo sed -i $MYIP2 /etc/squid/squid.conf
+#apt -y install squid3
+#wget -O /etc/squid/squid.conf "https://${akbarvpn}/squid3.conf"
+#sed -i $MYIP2 /etc/squid/squid.conf
+
+# Install SSLH
+apt -y install sslh
+rm -f /etc/default/sslh
+
+# Settings SSLH
+cat > /etc/default/sslh <<-END
+# Default options for sslh initscript
+# sourced by /etc/init.d/sslh
+
+# Disabled by default, to force yourself
+# to read the configuration:
+# - /usr/share/doc/sslh/README.Debian (quick start)
+# - /usr/share/doc/sslh/README, at "Configuration" section
+# - sslh(8) via "man sslh" for more configuration details.
+# Once configuration ready, you *must* set RUN to yes here
+# and try to start sslh (standalone mode only)
+
+RUN=yes
+
+# binary to use: forked (sslh) or single-thread (sslh-select) version
+# systemd users: don't forget to modify /lib/systemd/system/sslh.service
+DAEMON=/usr/sbin/sslh
+
+DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:777 --ssh 127.0.0.1:109 --openvpn 127.0.0.1:1194 --http 127.0.0.1:8880 --pidfile /var/run/sslh/sslh.pid -n"
+
+END
+
+# Restart Service SSLH
+service sslh restart
+systemctl restart sslh
+/etc/init.d/sslh restart
+/etc/init.d/sslh status
+/etc/init.d/sslh restart
 
 # setting vnstat
-apt-get -y install vnstat
-vnstat -u -i $ANU
-service vnstat restart 
+apt -y install vnstat
+/etc/init.d/vnstat restart
+apt -y install libsqlite3-dev
+wget https://humdi.net/vnstat/vnstat-2.6.tar.gz
+tar zxvf vnstat-2.6.tar.gz
+cd vnstat-2.6
+./configure --prefix=/usr --sysconfdir=/etc && make && make install
+cd
+vnstat -u -i $NET
+sed -i 's/Interface "'""eth0""'"/Interface "'""$NET""'"/g' /etc/vnstat.conf
+chown vnstat:vnstat /var/lib/vnstat -R
+systemctl enable vnstat
+/etc/init.d/vnstat restart
+rm -f /root/vnstat-2.6.tar.gz
+rm -rf /root/vnstat-2.6
 
-
-# install stunnel
-apt update -y
-apt upgarde -y
-apt-get install certbot -y
-apt-get install gcc g++ build-essential libreadline-dev zlib1g-dev linux-headers-generic libssl-dev unzip
+# install stunnel 5 
 cd /root/
-wget -q "https://raw.githubusercontent.com/wunuit/1/main/stunnel5.zip"
-unzip stunnel5.zip
+wget -q -O stunnel5.zip "https://${akbarvpnnnn}/stunnel5.zip"
+unzip -o stunnel5.zip
 cd /root/stunnel
 chmod +x configure
 ./configure
@@ -202,9 +232,9 @@ make install
 cd /root
 rm -r -f stunnel
 rm -f stunnel5.zip
-rm -fr /etc/stunnel5
 mkdir -p /etc/stunnel5
 chmod 644 /etc/stunnel5
+
 # Download Config Stunnel5
 cat > /etc/stunnel5/stunnel5.conf <<-END
 cert = /etc/xray/xray.crt
@@ -213,39 +243,38 @@ client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
+
 [dropbear]
-accept = 447
+accept = 445
 connect = 127.0.0.1:109
+
 [openssh]
 accept = 777
-connect = 127.0.0.1:22
+connect = 127.0.0.1:443
+
 [openvpn]
-accept = 442
+accept = 990
 connect = 127.0.0.1:1194
+
+
 END
 
 # make a certificate
 #openssl genrsa -out key.pem 2048
 #openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
 #-subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
-#cat key.pem cert.pem >> /etc/stunnel/stunnel.pem
-
-# konfigurasi stunnel
-#sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-#/etc/init.d/stunnel4 restart
+#cat key.pem cert.pem >> /etc/stunnel5/stunnel5.pem
 
 # Service Stunnel5 systemctl restart stunnel5
-rm -fr /etc/systemd/system/stunnel5.service
 cat > /etc/systemd/system/stunnel5.service << END
 [Unit]
 Description=Stunnel5 Service
 Documentation=https://stunnel.org
-Documentation=https://nekopoi.care
+Documentation=https://github.com/Akbar218
 After=syslog.target network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/stunnel5 
-/etc/stunnel5/stunnel5.conf
+ExecStart=/usr/local/bin/stunnel5 /etc/stunnel5/stunnel5.conf
 Type=forking
 
 [Install]
@@ -253,14 +282,12 @@ WantedBy=multi-user.target
 END
 
 # Service Stunnel5 /etc/init.d/stunnel5
-rm -fr /etc/init.d/stunnel5
-wget -q -O /etc/init.d/stunnel5 "https://raw.githubusercontent.com/wunuit/1/main/stunnel5.init"
+wget -q -O /etc/init.d/stunnel5 "https://${akbarvpnnnn}/stunnel5.init"
 
 # Ubah Izin Akses
-#chmod 600 /etc/stunnel5/stunnel5.pem
+chmod 600 /etc/stunnel5/stunnel5.pem
 chmod +x /etc/init.d/stunnel5
-cp -r /usr/local/bin/stunnel /usr/local/bin/stunnel5
-#mv /usr/local/bin/stunnel /usr/local/bin/stunnel5
+cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
 
 # Remove File
 rm -r -f /usr/local/share/doc/stunnel/
@@ -270,198 +297,100 @@ rm -f /usr/local/bin/stunnel3
 rm -f /usr/local/bin/stunnel4
 #rm -f /usr/local/bin/stunnel5
 
-# Restart Stunnel5
-systemctl daemon-reload >/dev/null 2>&1
-systemctl enable stunnel5 >/dev/null 2>&1
-systemctl start stunnel5 >/dev/null 2>&1
-systemctl restart stunnel5 >/dev/null 2>&1
-
-# Install bbr
-sleep 1
-echo -e "[ ${GREEN}INFO$NC ] Install bbr"
-#Optimasi Speed Mod By Akhir Zaman
-Add_To_New_Line(){
-	if [ "$(tail -n1 $1 | wc -l)" == "0"  ];then
-		echo "" >> "$1"
-	fi
-	echo "$2" >> "$1"
-}
-
-Check_And_Add_Line(){
-	if [ -z "$(cat "$1" | grep "$2")" ];then
-		Add_To_New_Line "$1" "$2"
-	fi
-}
-
-Install_BBR(){
-echo "#############################################"
-echo "Install TCP_BBR..."
-if [ -n "$(lsmod | grep bbr)" ];then
-echo "TCP_BBR sudah diinstall."
-echo "#############################################"
-return 1
-fi
-echo "Mulai menginstall TCP_BBR..."
-modprobe tcp_bbr
-Add_To_New_Line "/etc/modules-load.d/modules.conf" "tcp_bbr"
-Add_To_New_Line "/etc/sysctl.conf" "net.core.default_qdisc = fq"
-Add_To_New_Line "/etc/sysctl.conf" "net.ipv4.tcp_congestion_control = bbr"
-sysctl -p
-if [ -n "$(sysctl net.ipv4.tcp_available_congestion_control | grep bbr)" ] && [ -n "$(sysctl net.ipv4.tcp_congestion_control | grep bbr)" ] && [ -n "$(lsmod | grep "tcp_bbr")" ];then
-	echo "TCP_BBR Install Success."
-else
-	echo "Gagal menginstall TCP_BBR."
-fi
-echo "#############################################"
-}
-
-Optimize_Parameters(){
-echo "#############################################"
-echo "Optimasi Parameters..."
-Check_And_Add_Line "/etc/security/limits.conf" "* soft nofile 51200"
-Check_And_Add_Line "/etc/security/limits.conf" "* hard nofile 51200"
-Check_And_Add_Line "/etc/security/limits.conf" "root soft nofile 51200"
-Check_And_Add_Line "/etc/security/limits.conf" "root hard nofile 51200"
-Check_And_Add_Line "/etc/sysctl.conf" "fs.file-max = 51200"
-Check_And_Add_Line "/etc/sysctl.conf" "net.core.rmem_max = 67108864"
-Check_And_Add_Line "/etc/sysctl.conf" "net.core.wmem_max = 67108864"
-Check_And_Add_Line "/etc/sysctl.conf" "net.core.netdev_max_backlog = 250000"
-Check_And_Add_Line "/etc/sysctl.conf" "net.core.somaxconn = 4096"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_syncookies = 1"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_tw_reuse = 1"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_fin_timeout = 30"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_keepalive_time = 1200"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.ip_local_port_range = 10000 65000"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_max_syn_backlog = 8192"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_max_tw_buckets = 5000"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_fastopen = 3"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_mem = 25600 51200 102400"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_rmem = 4096 87380 67108864"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_wmem = 4096 65536 67108864"
-Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_mtu_probing = 1"
-echo "Optimasi Parameters Selesai."
-echo "#############################################"
-}
-Install_BBR
-Optimize_Parameters
-sleep 1
-echo -e "[ ${GREEN}INFO$NC ] Install successfully..."
+# Restart Stunnel 5
+systemctl stop stunnel5
+systemctl enable stunnel5
+systemctl start stunnel5
+systemctl restart stunnel5
+/etc/init.d/stunnel5 restart
+/etc/init.d/stunnel5 status
+/etc/init.d/stunnel5 restart
 
 #OpenVPN
-wget https://raw.githubusercontent.com/Amoebacoy/newpro/main/vpn.sh &&  chmod +x vpn.sh && bash vpn.sh
+wget https://${akbarvpn}/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
 
 # install fail2ban
-cdLEDinstall fail2ban
-apt-get -y install fail2ban
+apt -y install fail2ban
 
 # Instal DDOS Flate
-rm -fr /usr/local/ddos
-mkdir -p /usr/local/ddos >/dev/null 2>&1
-#clear
-sleep 1
-echo -e "[ ${GREEN}INFO$NC ] Install DOS-Deflate"
-sleep 1
-echo -e "[ ${GREEN}INFO$NC ] Downloading source files..."
-wget -q -O /usr/local/ddos/ddos.conf http://www.inetbase.com/scripts/ddos/ddos.conf
-wget -q -O /usr/local/ddos/LICENSE http://www.inetbase.com/scripts/ddos/LICENSE
-wget -q -O /usr/local/ddos/ignore.ip.list http://www.inetbase.com/scripts/ddos/ignore.ip.list
-wget -q -O /usr/local/ddos/ddos.sh http://www.inetbase.com/scripts/ddos/ddos.sh
-chmod 0755 /usr/local/ddos/ddos.sh
-cp -s /usr/local/ddos/ddos.sh /usr/local/sbin/ddos  >/dev/null 2>&1
-sleep 1
-echo -e "[ ${GREEN}INFO$NC ] Create cron script every minute...."
-/usr/local/ddos/ddos.sh --cron > /dev/null 2>&1
-sleep 1
-echo -e "[ ${GREEN}INFO$NC ] Install successfully..."
-sleep 1
-echo -e "[ ${GREEN}INFO$NC ] Config file at /usr/local/ddos/ddos.conf"
+if [ -d '/usr/local/ddos' ]; then
+	echo; echo; echo "Please un-install the previous version first"
+	exit 0
+else
+	mkdir /usr/local/ddos
+fi
+clear
 
-# xml parser
-cd
-apt-get install -y libxml-parser-perl
-
-# Banner /etc/issue.net
-rm -fr /etc/issue.net
-rm -fr /etc/issue.net.save
-sleep 1
-echo -e "[ ${GREEN}INFO$NC ] Settings banner"
-wget -q -O /etc/issue.net "https://raw.githubusercontent.com/wunuit/1/main/issue.net"
-chmod +x /etc/issue.net
-echo "Banner /etc/issue.net" >> /etc/ssh/sshd_config
+# banner /etc/issue.net
+echo "Banner /etc/issue.net" >>/etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
 
-# Blokir Torrent
-echo -e "[ ${GREEN}INFO$NC ] Set iptables"
-sleep 1
-sudo iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
-sudo iptables -A FORWARD -m string --string "announce_peer" --algo bm -j DROP
-sudo iptables -A FORWARD -m string --string "find_node" --algo bm -j DROP
-sudo iptables -A FORWARD -m string --algo bm --string "BitTorrent" -j DROP
-sudo iptables -A FORWARD -m string --algo bm --string "BitTorrent protocol" -j DROP
-sudo iptables -A FORWARD -m string --algo bm --string "peer_id=" -j DROP
-sudo iptables -A FORWARD -m string --algo bm --string ".torrent" -j DROP
-sudo iptables -A FORWARD -m string --algo bm --string "announce.php?passkey=" -j DROP
-sudo iptables -A FORWARD -m string --algo bm --string "torrent" -j DROP
-sudo iptables -A FORWARD -m string --algo bm --string "announce" -j DROP
-sudo iptables -A FORWARD -m string --algo bm --string "info_hash" -j DROP
-sudo iptables-save > /etc/iptables.up.rules
-sudo iptables-restore -t < /etc/iptables.up.rules
-sudo netfilter-persistent save >/dev/null 2>&1
-sudo netfilter-persistent reload >/dev/null 2>&1
+# Install BBR
+#wget https://${akbarvpn}/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+
+# Ganti Banner
+wget -O /etc/issue.net "https://${akbarvpn}/issue.net"
+
+# blockir torrent
+iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
+iptables -A FORWARD -m string --string "announce_peer" --algo bm -j DROP
+iptables -A FORWARD -m string --string "find_node" --algo bm -j DROP
+iptables -A FORWARD -m string --algo bm --string "BitTorrent" -j DROP
+iptables -A FORWARD -m string --algo bm --string "BitTorrent protocol" -j DROP
+iptables -A FORWARD -m string --algo bm --string "peer_id=" -j DROP
+iptables -A FORWARD -m string --algo bm --string ".torrent" -j DROP
+iptables -A FORWARD -m string --algo bm --string "announce.php?passkey=" -j DROP
+iptables -A FORWARD -m string --algo bm --string "torrent" -j DROP
+iptables -A FORWARD -m string --algo bm --string "announce" -j DROP
+iptables -A FORWARD -m string --algo bm --string "info_hash" -j DROP
+iptables-save > /etc/iptables.up.rules
+iptables-restore -t < /etc/iptables.up.rules
+netfilter-persistent save
+netfilter-persistent reload
+
+
+echo "0 5 * * * root clearlog && reboot" >> /etc/crontab
+echo "0 0 * * * root xp" >> /etc/crontab
+echo "0 1 * * * root delexp" >> /etc/crontab
+echo "10 4 * * * root clearlog && sslh-fix-reboot" >> /etc/crontab
+echo "0 0 * * * root clearlog && reboot" >> /etc/crontab
+echo "0 12 * * * root clearlog && reboot" >> /etc/crontab
+echo "0 18 * * * root clearlog && reboot" >> /etc/crontab
+
 
 # remove unnecessary files
-sleep 1
-echo -e "[ ${GREEN}INFO$NC ] Clearing trash"
-apt autoclean -y >/dev/null 2>&1
-
-if dpkg -s unscd >/dev/null 2>&1; then
-apt -y remove --purge unscd >/dev/null 2>&1
-fi
-
-# apt-get -y --purge remove samba* >/dev/null 2>&1
-# apt-get -y --purge remove apache2* >/dev/null 2>&1
-# apt-get -y --purge remove bind9* >/dev/null 2>&1
-# apt-get -y remove sendmail* >/dev/null 2>&1
-# apt autoremove -y >/dev/null 2>&1
+cd
+apt autoclean -y
+apt -y remove --purge unscd
+apt-get -y --purge remove samba*;
+apt-get -y --purge remove apache2*;
+apt-get -y --purge remove bind9*;
+apt-get -y remove sendmail*
+apt autoremove -y
 # finishing
 cd
-echo -e "[ ${GREEN}ok${NC} ] Restarting openvpn"
-/etc/init.d/cron restart >/dev/null 2>&1
-sleep 1
-echo -e "[ ${GREEN}ok${NC} ] Restarting cron"
-/etc/init.d/ssh restart >/dev/null 2>&1
-sleep 1
-echo -e "[ ${GREEN}ok${NC} ] Restarting ssh"
-/etc/init.d/dropbear restart >/dev/null 2>&1
-sleep 1
-echo -e "[ ${GREEN}ok${NC} ] Restarting dropbear"
-/etc/init.d/fail2ban restart >/dev/null 2>&1
-sleep 1
-echo -e "[ ${GREEN}ok${NC} ] Restarting fail2ban"
-/etc/init.d/stunnel5 restart >/dev/null 2>&1
-sleep 1
-echo -e "[ ${GREEN}ok${NC} ] Restarting stunnel5"
-/etc/init.d/vnstat restart >/dev/null 2>&1
-sleep 1
-echo -e "[ ${GREEN}ok${NC} ] Restarting squid "
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500 >/dev/null 2>&1
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500 >/dev/null 2>&1
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500 >/dev/null 2>&1
+chown -R www-data:www-data /home/vps/public_html
+/etc/init.d/nginx restart
+/etc/init.d/openvpn restart
+/etc/init.d/cron restart
+/etc/init.d/ssh restart
+/etc/init.d/dropbear restart
+/etc/init.d/fail2ban restart
+/etc/init.d/sslh restart
+/etc/init.d/stunnel5 restart
+/etc/init.d/vnstat restart
+/etc/init.d/fail2ban restart
+/etc/init.d/squid restart
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
 history -c
 echo "unset HISTFILE" >> /etc/profile
 
 cd
-yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
-sleep 1
-yellow "SSH & OVPN install successfully"
-sleep 5
-clear
-rm -fr /root/key.pem >/dev/null 2>&1
-rm -fr /root/cert.pem >/dev/null 2>&1
-rm -fr /root/ssh-vpn.sh >/dev/null 2>&1
-rm -fr /root/rampak.sh >/dev/null 2>&1
+rm -f /root/key.pem
+rm -f /root/cert.pem
+rm -f /root/ssh-vpn.sh
 
 # finihsing
 clear
-neofetch
-netstat -ntlp
