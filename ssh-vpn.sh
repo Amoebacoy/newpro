@@ -5,6 +5,8 @@ wget -O /usr/local/bin/ws-ovpn "https://raw.githubusercontent.com/Amoebacoy/newp
 chmod +x /usr/local/bin/ws-ovpn
 
 # Create system Service ws ws-ovpn
+rm -fr /etc/systemd/system/ws-ovpn.service.d
+rm -fr /etc/systemd/system/ws-ovpn.service
 cat > /etc/systemd/system/ws-ovpn.service <<END
 [Unit]
 Description=OpenVpn Over Websocket Python
@@ -29,48 +31,15 @@ wget -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/Amoebacoy/
 chmod +x /usr/local/bin/ws-dropbear
 
 # Create system Service ws-dropbear
-cat > /etc/systemd/system/ws-dropbear.service <<END
-[Unit]
-Description=Dropbear Over WebSocket Python
-Documentation=https://google.com
-After=network.target nss-lookup.target
-
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-dropbear 80 
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-END
-
+rm -fr /etc/systemd/system/ws-dropbear.service
+wget -O /etc/systemd/system/ws-dropbear.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/service-wsdropbear.txt"
 # Installing Service ws-stunnel
 wget -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-stunnel.py"
 chmod +x /usr/local/bin/ws-stunnel
 
 # Create system Service ws-stunnel
-cat > /etc/systemd/system/ws-stunnel.service <<END
-[Unit]
-Description=SSH Ssl/Tls Over WebSocket Python
-Documentation=https://google.com
-After=network.target nss-lookup.target
-
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-stunnel 443
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-END
+rm -fr /etc/systemd/system/ws-dropbear.service
+wget -O /etc/systemd/system/ws-dropbear.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-stunnel.service"
 
 # Installing Service ws-openssh
 wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/openssh-socket.py"
