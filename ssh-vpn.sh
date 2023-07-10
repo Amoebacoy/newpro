@@ -32,39 +32,22 @@ chmod +x /usr/local/bin/ws-dropbear
 
 # Create system Service ws-dropbear
 rm -fr /etc/systemd/system/ws-dropbear.service
-wget -O /etc/systemd/system/ws-dropbear.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/service-wsdropbear.txt"
+wget -O /etc/systemd/system/ws-dropbear.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-dropbear.service"
 # Installing Service ws-stunnel
 wget -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-stunnel.py"
 chmod +x /usr/local/bin/ws-stunnel
 
 # Create system Service ws-stunnel
-rm -fr /etc/systemd/system/ws-dropbear.service
-wget -O /etc/systemd/system/ws-dropbear.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-stunnel.service"
+rm -fr /etc/systemd/system/ws-stunnel.service
+wget -O /etc/systemd/system/ws-stunnel.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-stunnel.service"
 
 # Installing Service ws-openssh
 wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/openssh-socket.py"
 chmod +x /usr/local/bin/ws-openssh
 
 # Create system Service ws-openssh
-cat > /etc/systemd/system/ws-openssh.service <<END
-[Unit]
-Description=SSH Over Websocket Python Prince
-Documentation=https://google.com
-After=network.target nss-lookup.target
-
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-Restart=on-failure
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-openssh 100
-
-[Install]
-WantedBy=multi-user.target
-END
-
+rm -fr /etc/systemd/system/ws-openssh.service
+wget -O /etc/systemd/system/ws-openssh.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-openssh.service"
 # ENABLE & START/RESTART SERVICE
 systemctl daemon-reload
 systemctl enable ws-ovpn
