@@ -188,18 +188,18 @@ echo -e "\033[0;34m│ $NC${BIWhite} SSH ${NC}: $ressh"" ${BIWhite} NGINX ${NC}:
 echo -e "\033[0;34m│ $NC${BIWhite}          DROPBEAR ${NC}: $resdbr" "${BIWhite} SSH-WS ${NC}: $ressshws \E[0m\033[0;34m               │"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}01${BIGREEN}] ${NC}SSH MANAGER${BIGREEN}${BIYellow}${BIGREEN}${NC}             ${BIGREEN}[${BIWhite}13${BIGREEN}] ${NC}EDIT-BANNER ${BIGREEN}${BIYellow}${BIGREEN}${NC}" 
-echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}02${BIGREEN}] ${NC}VMESS MANAGER ${BIGREEN}${BIYellow}${BIGREEN}${NC}          ${BIGREEN}[${BIWhite}14${BIGREEN}] ${NC}CEK-SERVICE ${BIGREEN}${BIYellow}${BIGREEN}${NC}" 
-echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}03${BIGREEN}] ${NC}VLESS MANAGER ${BIGREEN}${BIYellow}${BIGREEN}${NC}          ${BIGREEN}[${BIWhite}15${BIGREEN}] ${NC}CEK-TRAFIK ${BIGREEN}${BIYellow}${BIGREEN}${NC}" 
-echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}04${BIGREEN}] ${NC}TROJAN MANAGER ${BIGREEN}${BIYellow}${BIGREEN}${NC}         ${BIGREEN}[${BIWhite}16${BIGREEN}] ${NC}CEK-SPEED SERVER${BIGREEN}${BIYellow}${BIGREEN}${NC}"
-echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}05${BIGREEN}] ${NC}SHADOWSOCKS MANAGER ${BIGREEN}${BIYellow}${BIGREEN}${NC}    ${BIGREEN}[${BIWhite}17${BIGREEN}] ${NC}CEK-BANDWIDTH ${BIGREEN}${BIYellow}${BIGREEN}${NC}"
-echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}06${BIGREEN}] ${NC}TENDANG  USER${BIGREEN}${BIYellow}${BIGREEN}${NC}           ${BIGREEN}[${BIWhite}18${BIGREEN}] ${NC}LIMIT-SPEED ${BIGREEN}${BIYellow}${BIGREEN}${NC}"
-echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}07${BIGREEN}] ${NC}AUTO-REBOOT SERVER${BIGREEN}${BIYellow}${BIGREEN}${NC}      ${BIGREEN}[${BIWhite}19${BIGREEN}] ${NC}WEBMIN ${BIGREEN}${BIYellow}${BIGREEN}${NC}"
-echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}08${BIGREEN}] ${NC}REBOOT SERVER${BIGREEN}${BIYellow}${BIGREEN}${NC}           ${BIGREEN}[${BIWhite}20${BIGREEN}] ${NC}INFO-SCRIPT ${BIGREEN}${BIYellow}${BIGREEN}${NC}" 
-echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}09${BIGREEN}] ${NC}RESTART SERVER${BIGREEN}${BIYellow}${BIGREEN}${NC}          ${BIGREEN}[${BIWhite}21${BIGREEN}] ${NC}CLEAR-LOG ${BIGREEN}${BIYellow}${BIGREEN}${NC}" 
-echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}10${BIGREEN}] ${NC}BACKUP/RESTORE ${BIGREEN}${BIYellow}${BIGREEN}${NC}         ${BIGREEN}[${BIWhite}xx${BIGREEN}] ${NC} EXIT ${BIGREEN}${BIYellow}${BIGREEN}${NC}"  
-echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}11${BIGREEN}] ${NC}ADD-HOST/DOMAIN ${BIGREEN}${BIYellow}${BIGREEN}${NC}" 
-echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}12${BIGREEN}] ${NC}RENEW SSL CERTIFIKATE ${BIGREEN}${BIYellow}${BIGREEN}${NC}"
+echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}01${BIGREEN}] ${NC}SSH & OpenVPN MENU ${BIGREEN}${BIYellow}${BIGREEN}${NC}             ${BIGREEN}[${BIWhite}13${BIGREEN}] ${NC}Settings (Pengaturan) ${BIGREEN}${BIYellow}${BIGREEN}${NC}" 
+echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}02${BIGREEN}] ${NC}XRAY VMESS MENU ${BIGREEN}${BIYellow}${BIGREEN}${NC}          ${BIGREEN}[${BIWhite}14${BIGREEN}] ${NC}copyrepo (Salin Repo Script Mantap) ${BIGREEN}${BIYellow}${BIGREEN}${NC}" 
+echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}03${BIGREEN}] ${NC}XRAY VLESS MENU ${BIGREEN}${BIYellow}${BIGREEN}${NC}          ${BIGREEN}[${BIWhite}15${BIGREEN}] ${NC}menuinfo (Untuk Mendapatkan Informasi) ${BIGREEN}${BIYellow}${BIGREEN}${NC}" 
+echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}04${BIGREEN}] ${NC}XRAY TROJAN MENU ${BIGREEN}${BIYellow}${BIGREEN}${NC}         ${BIGREEN}[${BIWhite}16${BIGREEN}] ${NC}Shadowsocks Plugin (Buat Akun) ${BIGREEN}${BIYellow}${BIGREEN}${NC}"
+echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}05${BIGREEN}] ${NC}SHADOWSOCKS MENU ${BIGREEN}${BIYellow}${BIGREEN}${NC}    ${BIGREEN}[${BIWhite}17${BIGREEN}] ${NC}L2TP MENU ${BIGREEN}${BIYellow}${BIGREEN}${NC}"
+echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}06${BIGREEN}] ${NC}XRAY GRPC MENU ${BIGREEN}${BIYellow}${BIGREEN}${NC}           ${BIGREEN}[${BIWhite}18${BIGREEN}] ${NC}PPTP MENU ${BIGREEN}${BIYellow}${BIGREEN}${NC}"
+echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}07${BIGREEN}] ${NC}TROJAN GO MENU ${BIGREEN}${BIYellow}${BIGREEN}${NC}      ${BIGREEN}[${BIWhite}19${BIGREEN}] ${NC}SSTP MENU ${BIGREEN}${BIYellow}${BIGREEN}${NC}"
+echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}08${BIGREEN}] ${NC}SLOWDNS MENU ${BIGREEN}${BIYellow}${BIGREEN}${NC}           ${BIGREEN}[${BIWhite}20${BIGREEN}] ${NC}WIREGUARD MENU ${BIGREEN}${BIYellow}${BIGREEN}${NC}" 
+echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}09${BIGREEN}] ${NC}CEK SEMUA IP PORT ${BIGREEN}${BIYellow}${BIGREEN}${NC}          ${BIGREEN}[${BIWhite}21${BIGREEN}] ${NC}SHADOWSOCKSR MENU ${BIGREEN}${BIYellow}${BIGREEN}${NC}" 
+echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}10${BIGREEN}] ${NC}CEK SEMUA SERVICE ${BIGREEN}${BIYellow}${BIGREEN}${NC}         ${BIGREEN}[${BIWhite}xx${BIGREEN}] ${NC} Exit (Keluar) ${BIGREEN}${BIYellow}${BIGREEN}${NC}"  
+echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}11${BIGREEN}] ${NC}UPDATE MENU (Update) ${BIGREEN}${BIYellow}${BIGREEN}${NC}" 
+echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}12${BIGREEN}] ${NC}sl-fix (Perbaiki Error SSLH+WS-TLS setelah reboot) ${BIGREEN}${BIYellow}${BIGREEN}${NC}"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "\033[0;34m│ $NC Version      ${NC} : $sem Last Update"
@@ -209,30 +209,96 @@ echo -e "\033[0;34m└───────────────────�
 echo
 read -p " Select menu : " opt
 echo -e ""
-case $opt in
-1 | 01) clear ; menu-ssh ;;
-2 | 02) clear ; menu-vmess ;;
-3 | 03) clear ; menu-vless ;;
-4 | 04) clear ; menu-trojan ;;
-5 | 04) clear ; menu-ss ;;
-6 | 06) clear ; tendang ;;
-7 | 07) clear ; autoreboot ;;
-8 | 08) clear ; reboot ;;
-9 | 09) clear ; restart ;;
-10) clear ; menu-bckp ;;
-11) clear ; addhost ;;
-12) clear ; genssl ;;
-13) clear ; nano /etc/issue.net ;;
-14) clear ; running ;;
-15) clear ; cek-trafik ;;
-16) clear ; cek-speed ;;
-17) clear ; cek-bandwidth ;;
-#18) clear ; cek-ram ;;
-18) clear ; limit-speed ;;
-19) clear ; wbm ;;
-20) clear ; cat /root/log-install.txt ;;
-21) clear ; clearlog ;;
-#99) clear ; update ;;
+case $menu in
+1)
+clear
+sshovpnmenu
+;;
+2)
+clear
+vmessmenu
+;;
+3)
+clear
+vlessmenu
+;;
+4)
+clear
+trmenu
+;;
+5)
+clear
+ssmenu
+;;
+6)
+clear
+grpcmenu
+;;
+7)
+clear
+trgomenu
+;;
+8)
+clear
+slowdnsmenu
+;;
+9)
+clear
+ipsaya
+;;
+10)
+clear
+running
+;;
+11)
+clear
+updatemenu
+;;
+12)
+clear
+sl-fix
+;;
+13)
+clear
+setmenu
+;;
+14)
+clear
+copyrepo
+;;
+15)
+clear
+menuinfo
+;;
+16)
+clear
+addss-p
+;;
+17)
+clear
+l2tpmenu
+;;
+18)
+clear
+pptpmenu
+;;
+19)
+clear
+sstpmenu
+;;
+20)
+clear
+wgmenu
+;;
+21)
+clear
+ssrmenu
+;;
+*)
+clear
+menu
+;;
+esac
 0 | 00) clear ; menu ;;
 x | xx) exit ;;
 *) echo -e "" ; echo "Press any key to back exit" ; sleep 1 ; exit ;;
