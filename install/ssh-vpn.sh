@@ -82,14 +82,14 @@ echo "prince" >> .profile
 
 
 # install webserver
-apt -y install nginx
+#apt -y install nginx
 cd
 #rm /etc/nginx/sites-enabled/default
 #rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/nginx.conf"
+#wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/nginx.conf"
 
-Index_port='81'
-IPADDR=$(wget -qO- icanhazip.com);
+#Index_port='81'
+#IPADDR=$(wget -qO- icanhazip.com);
 # creating page download Openvpn config file
 mkdir -p /home/vps/public_html
 wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/syapik96/aws/main/lain2/index.html"
