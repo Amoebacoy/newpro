@@ -32,35 +32,37 @@ export BOLD="\e[1m"
 export WARNING="${RED}\e[5m"
 export UNDERLINE="\e[4m"
 if [ "${EUID}" -ne 0 ]; then
-echo -e "${EROR} Please Run This Script As Root User !"
-exit 1
+clear
+red='\e[1;31m'
+green='\e[0;32m'
+yell='\e[1;33m'
+tyblue='\e[1;36m'
+NC='\e[0m'
+cd /root
+#System version number
+if [ "${EUID}" -ne 0 ]; then
+		echo "You need to run this script as root"
+		exit 1
 fi
-export IP=$( curl -s https://ipinfo.io/ip/ )
-export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
-if [[ -r /etc/xray/domain ]]; then
-clear
-echo -e "${INFO} Having Script Detected !"
-echo -e "${INFO} If You Replacing Script, All Client Data On This VPS Will Be Cleanup !"
-read -p "Are You Sure Wanna Replace Script ? (Y/N) " lanjutkan
-if [[ $lanjutkan == "Y" ]]; then
-clear
-echo -e "${INFO} Starting Replacing Script !"
-elif [[ $lanjutkan == "y" ]]; then
-clear
-echo -e "${INFO} Starting Replacing Script !"
-rm -rf /var/lib/scrz-prem
-elif [[ $lanjutkan == "N" ]]; then
-echo -e "${INFO} Action Canceled !"
-exit 1
-elif [[ $lanjutkan == "n" ]]; then
-echo -e "${INFO} Action Canceled !"
-exit 1
-else
-echo -e "${EROR} Your Input Is Wrong !"
-exit 1
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
 fi
-clear
+
+localip=$(hostname -I | cut -d\  -f1)
+hst=( `hostname` )
+dart=$(cat /etc/hosts | grep -w `hostname` | awk '{print $2}')
+if [[ "$hst" != "$dart" ]]; then
+echo "$localip $(hostname)" >> /etc/hosts
 fi
+
+mkdir -p /etc/xray
+mkdir -p /etc/v2ray
+touch /etc/xray/domain
+touch /etc/v2ray/domain
+touch /etc/xray/scdomain
+touch /etc/v2ray/scdomain
+
 echo -e "${GREEN}Starting Installation............${NC}"
 cd /root/
 apt update -y
@@ -77,31 +79,46 @@ apt dist-upgrade -y
 clear
 clear && clear && clear
 clear;clear;clear
-read -p "Input Your Domain : " domain
-if [[ $domain == "" ]]; then
+mkdir -p /var/lib/ >/dev/null 2>&1
+echo "IP=" >> /var/lib/ipvps.conf
+
+echo ""
+#wget -q https://raw.githubusercontent.com/nanotechid/supreme/aio/tools.sh;chmod +x tools.sh;./tools.sh
+#rm tools.sh
 clear
-echo -e "${EROR} No Input Detected !"
-exit 1
-fi
-apt purge nginx nginx-common nginx-core -y
-mkdir -p /usr/bin
-rm -fr /usr/local/bin/xray
-rm -fr /usr/local/bin/stunnel
-rm -fr /usr/local/bin/stunnel5
-rm -fr /etc/nginx
-rm -fr /var/lib/scrz-prem/
-rm -fr /usr/bin/xray
-rm -fr /etc/xray
-rm -fr /usr/local/etc/xray
-mkdir -p /etc/nginx
-mkdir -p /var/lib/scrz-prem/
-mkdir -p /usr/bin/xray
-mkdir -p /etc/xray
-mkdir -p /usr/local/etc/xray
-echo "$domain" > /etc/domain.txt
-echo "IP=$domain" > /var/lib/scrz-prem/ipvps.conf
-echo "$domain" > /root/domain
-domain=$(cat /root/domain)
+mkdir -p /var/lib/ >/dev/null 2>&1
+echo "IP=" >> /var/lib/ipvps.conf
+
+echo ""
+#wget -q https://raw.githubusercontent.com/nanotechid/supreme/aio/tools.sh;chmod +x tools.sh;./tools.sh
+#rm tools.sh
+clear
+red "Tambah Domain Untuk XRAY"
+echo " "
+read -rp "Input domain kamu : " -e dns
+    if [ -z $dns ]; then
+        echo -e "
+        Nothing input for domain!
+        Then a random domain will be created"
+    else
+  apt purge nginx nginx-common nginx-core -y
+  mkdir -p /usr/bin
+  rm -fr /usr/local/bin/xray
+  rm -fr /usr/local/bin/stunnel
+  rm -fr /usr/local/bin/stunnel5
+  rm -fr /etc/nginx
+  rm -fr /var/lib/ipvps.conf
+  rm -fr /usr/bin/xray
+  rm -fr /etc/xray
+  rm -fr /usr/local/etc/xray
+  echo "$dns" > /root/scdomain
+	echo "$dns" > /etc/xray/scdomain
+	echo "$dns" > /etc/xray/domain
+	echo "$dns" > /etc/v2ray/domain
+	echo $dns > /root/domain
+  echo "IP=$dns" > /var/lib/ipvps.conf
+    fi
+$dns=$(cat /root/domain)
 cp -r /root/domain /etc/xray/domain
 clear
 echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... "
@@ -114,9 +131,9 @@ chmod +x /root/.acme.sh/acme.sh
 /root/.acme.sh/acme.sh --upgrade
 /root/.acme.sh/acme.sh --upgrade --auto-upgrade
 /root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-/root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
-echo -e "${OKEY} Your Domain : $domain"
+/root/.acme.sh/acme.sh --issue -d $dns --standalone -k ec-256
+~/.acme.sh/acme.sh --installcert -d $dns --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
+echo -e "${OKEY} Your Domain : $dns"
 sleep 2
 #install janggut
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
@@ -141,7 +158,7 @@ IP=$(echo $SSH_CLIENT | awk '{print $1}')
 TMPFILE='/tmp/ipinfo-$DATE_EXEC.txt'
 curl http://ipinfo.io/$IP -s -o $TMPFILE
 ORG=$(cat $TMPFILE | jq '.org' | sed 's/"//g')
-domain=$(cat /etc/xray/domain)
+$dns=$(cat /etc/xray/domain)
 LocalVersion=$(cat /root/versi)
 IPVPS=$(curl -s ipinfo.io/ip )
 ISPVPS=$( curl -s ipinfo.io/org )
@@ -153,7 +170,7 @@ DATE_EXEC="$(date "+%d %b %Y %H:%M")"
 CITY=$(cat $TMPFILE | jq '.city' | sed 's/"//g')
 REGION=$(cat $TMPFILE | jq '.region' | sed 's/"//g')
 COUNTRY=$(cat $TMPFILE | jq '.country' | sed 's/"//g')
-curl -s -X POST "https://api.telegram.org/bot$token/sendMessage" -d chat_id="$chatid" -d text="$IPVPS domain $domain telah install XrayCol pada $DATE_EXEC di $CITY, $REGION via $ORG" > /dev/null 2>&1
+curl -s -X POST "https://api.telegram.org/bot$token/sendMessage" -d chat_id="$chatid" -d text="$IPVPS domain $dns telah install XrayCol pada $DATE_EXEC di $CITY, $REGION via $ORG" > /dev/null 2>&1
 clear
 
 cat > /etc/cron.d/xp_otm <<-END
