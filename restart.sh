@@ -95,6 +95,23 @@ case $Restart in
                 /etc/init.d/fail2ban restart
                 /etc/init.d/cron restart
                 /etc/init.d/nginx restart
+		systemctl daemon-reload 
+  		systemctl stop ws-ovpn
+		systemctl enable ws-ovpn
+		systemctl start ws-ovpn
+		systemctl restart ws-ovpn
+		systemctl stop ws-dropbear
+		systemctl enable ws-dropbear
+		systemctl start ws-dropbear
+		systemctl restart ws-dropbear
+		systemctl stop ws-stunnel
+		systemctl enable ws-stunnel
+		systemctl start ws-stunnel
+		systemctl restart ws-stunnel
+		systemctl stop ws-openssh
+		systemctl enable ws-openssh
+		systemctl start ws-openssh
+		systemctl restart ws-openssh
                 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000
                 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000
                 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000
