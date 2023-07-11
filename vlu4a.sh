@@ -1,99 +1,66 @@
 clear
+#Minacantik
+export LANG='en_US.UTF-8'
+export LANGUAGE='en_US.UTF-8'
+export RED='\033[0;31m'
+export GREEN='\033[0;32m'
+export YELLOW='\033[0;33m'
+export BLUE='\033[0;34m'
+export PURPLE='\033[0;35m'
+export CYAN='\033[0;36m'
+export LIGHT='\033[0;37m'
+export NC='\033[0m'
+BIRed='\033[1;91m'
+red='\e[1;31m'
+bo='\e[1m'
 red='\e[1;31m'
 green='\e[0;32m'
 yell='\e[1;33m'
 tyblue='\e[1;36m'
-NC='\e[0m'
 purple() { echo -e "\\033[35;1m${*}\\033[0m"; }
 tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
 yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
 green() { echo -e "\\033[32;1m${*}\\033[0m"; }
 red() { echo -e "\\033[31;1m${*}\\033[0m"; }
-cd /root
-#System version number
+export EROR="[${RED} ERROR ${NC}]"
+export INFO="[${YELLOW} INFO ${NC}]"
+export OKEY="[${GREEN} OKEY ${NC}]"
+export PENDING="[${YELLOW} PENDING ${NC}]"
+export SEND="[${YELLOW} SEND ${NC}]"
+export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+export BOLD="\e[1m"
+export WARNING="${RED}\e[5m"
+export UNDERLINE="\e[4m"
 if [ "${EUID}" -ne 0 ]; then
-		echo "You need to run this script as root"
-		exit 1
+echo -e "${EROR} Please Run This Script As Root User !"
+exit 1
 fi
-if [ "$(systemd-detect-virt)" == "openvz" ]; then
-		echo "OpenVZ is not supported"
-		exit 1
-fi
-
-localip=$(hostname -I | cut -d\  -f1)
-hst=( `hostname` )
-dart=$(cat /etc/hosts | grep -w `hostname` | awk '{print $2}')
-if [[ "$hst" != "$dart" ]]; then
-echo "$localip $(hostname)" >> /etc/hosts
-fi
-
-mkdir -p /etc/xray
-mkdir -p /etc/v2ray
-touch /etc/xray/domain
-touch /etc/v2ray/domain
-touch /etc/xray/scdomain
-touch /etc/v2ray/scdomain
-
-
-echo -e "[ ${tyblue}NOTES${NC} ] Before we go.. "
-sleep 0.5
-echo -e "[ ${tyblue}NOTES${NC} ] I need check your headers first.."
-sleep 0.5
-echo -e "[ ${green}INFO${NC} ] Checking headers"
-sleep 0.5
-totet=`uname -r`
-REQUIRED_PKG="linux-headers-$totet"
-PKG_OK=$(dpkg-query -W --showformat='${Status}\n' $REQUIRED_PKG|grep "install ok installed")
-echo Checking for $REQUIRED_PKG: $PKG_OK
-if [ "" = "$PKG_OK" ]; then
-  sleep 0.5
-  echo -e "[ ${yell}WARNING${NC} ] Try to install ...."
-  echo "No $REQUIRED_PKG. Setting up $REQUIRED_PKG."
-  apt-get --yes install $REQUIRED_PKG
-  sleep 0.5
-  echo ""
-  sleep 0.5
-  echo -e "[ ${tyblue}NOTES${NC} ] If error you need.. to do this"
-  sleep 0.5
-  echo ""
-  sleep 0.5
-  echo -e "[ ${tyblue}NOTES${NC} ] apt update && upgrade"
-  sleep 0.5
-  echo ""
-  sleep 0.5
-  echo -e "[ ${tyblue}NOTES${NC} ] After this"
-  sleep 0.5
-  echo -e "[ ${tyblue}NOTES${NC} ] Then run this script again"
-  echo -e "[ ${tyblue}NOTES${NC} ] enter now"
-  read
+export IP=$( curl -s https://ipinfo.io/ip/ )
+export NETWORK_IFACE="$(ip route show to default | awk '{print $5}')"
+if [[ -r /etc/xray/domain ]]; then
+clear
+echo -e "${INFO} Having Script Detected !"
+echo -e "${INFO} If You Replacing Script, All Client Data On This VPS Will Be Cleanup !"
+read -p "Are You Sure Wanna Replace Script ? (Y/N) " lanjutkan
+if [[ $lanjutkan == "Y" ]]; then
+clear
+echo -e "${INFO} Starting Replacing Script !"
+elif [[ $lanjutkan == "y" ]]; then
+clear
+echo -e "${INFO} Starting Replacing Script !"
+rm -rf /var/lib/scrz-prem
+elif [[ $lanjutkan == "N" ]]; then
+echo -e "${INFO} Action Canceled !"
+exit 1
+elif [[ $lanjutkan == "n" ]]; then
+echo -e "${INFO} Action Canceled !"
+exit 1
 else
-  echo -e "[ ${green}INFO${NC} ] Oke installed"
+echo -e "${EROR} Your Input Is Wrong !"
+exit 1
 fi
-
-ttet=`uname -r`
-ReqPKG="linux-headers-$ttet"
-if ! dpkg -s $ReqPKG  >/dev/null 2>&1; then
-  rm /root/setup.sh >/dev/null 2>&1 
-  exit
-else
-  clear
+clear
 fi
-
-
-secs_to_human() {
-    echo "Installation time : $(( ${1} / 3600 )) hours $(( (${1} / 60) % 60 )) minute's $(( ${1} % 60 )) seconds"
-}
-start=$(date +%s)
-ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
-sysctl -w net.ipv6.conf.all.disable_ipv6=1 >/dev/null 2>&1
-sysctl -w net.ipv6.conf.default.disable_ipv6=1 >/dev/null 2>&1
-
-echo -e "[ ${green}INFO${NC} ] Preparing the install file"
-apt install git curl -y >/dev/null 2>&1
-apt install python -y >/dev/null 2>&1
-echo -e "[ ${green}INFO${NC} ] Aight good ... installation file is ready"
-sleep 0.5
-
 echo -e "${GREEN}Starting Installation............${NC}"
 cd /root/
 apt update -y
@@ -101,30 +68,44 @@ apt-get --reinstall --fix-missing install -y sudo dpkg psmisc socat jq ruby wond
 apt-get --reinstall --fix-missing install -y libreadline-dev zlib1g-dev libssl-dev python2 screen curl jq bzip2 gzip coreutils rsyslog iftop htop zip unzip net-tools sed gnupg gnupg1 bc sudo apt-transport-https build-essential dirmngr libxml-parser-perl neofetch screenfetch git lsof openssl easy-rsa fail2ban tmux vnstat dropbear libsqlite3-dev socat cron bash-completion ntpdate xz-utils sudo apt-transport-https gnupg2 gnupg1 dnsutils lsb-release chrony
 gem install lolcat
 sleep 1
-mkdir -p /var/lib/ >/dev/null 2>&1
-echo "IP=" >> /var/lib/ipvps.conf
-
-echo ""
-#wget -q https://raw.githubusercontent.com/nanotechid/supreme/aio/tools.sh;chmod +x tools.sh;./tools.sh
-#rm tools.sh
+echo -e "[ ${green}INFO$NC ] Disable ipv6"
+echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6 >/dev/null 2>&1
+sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local >/dev/null 2>&1
+apt update -y
+apt upgrade -y
+apt dist-upgrade -y
 clear
-red "Tambah Domain Untuk XRAY"
-echo " "
-read -rp "Input domain kamu : " -e dns
-    if [ -z $domain ]; then
-        echo -e "
-        Nothing input for domain!
-        Then a random domain will be created"
-    else
-	echo "$domain" > /root/scdomain
-	echo "$domain" > /etc/xray/scdomain
-	echo "$domain" > /etc/xray/domain
-	echo "$domain" > /etc/v2ray/domain
-	echo $domain > /root/domain
-  	echo "IP=$domain" > /var/lib/ipvps.conf
-    fi
-$domain=$(cat /root/domain)
+clear && clear && clear
+clear;clear;clear
+read -p "Input Your Domain : " domain
+if [[ $domain == "" ]]; then
+clear
+echo -e "${EROR} No Input Detected !"
+exit 1
+fi
+apt purge nginx nginx-common nginx-core -y
+mkdir -p /usr/bin
+rm -fr /usr/local/bin/xray
+rm -fr /usr/local/bin/stunnel
+rm -fr /usr/local/bin/stunnel5
+rm -fr /etc/nginx
+rm -fr /var/lib/scrz-prem/
+rm -fr /usr/bin/xray
+rm -fr /etc/xray
+rm -fr /usr/local/etc/xray
+mkdir -p /etc/nginx
+mkdir -p /var/lib/scrz-prem/
+mkdir -p /usr/bin/xray
+mkdir -p /etc/xray
+mkdir -p /usr/local/etc/xray
+echo "$domain" > /etc/domain.txt
+echo "$domain" > /root/domain
+echo "$domain" > /root/scdomain
+echo "IP=$domain" > /var/lib/scrz-prem/ipvps.conf
+domain=$(cat /root/domain)
 cp -r /root/domain /etc/xray/domain
+cp -r /root/domain /etc/v2ray/domain
+cp -r /root/domain /etc/xray/scdomain
 clear
 echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... "
 sleep 2
