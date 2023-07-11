@@ -285,11 +285,11 @@ wget -q -O /usr/bin/add-tr "https://raw.githubusercontent.com/Amoebacoy/newpro/m
 #wget -q -O /usr/bin/add-trgo "https://raw.githubusercontent.com/Amoebacoy/newpro/main/add-trgo.sh"
 wget -q -O /usr/bin/autoreboot "https://raw.githubusercontent.com/Amoebacoy/newpro/main/autoreboot.sh"
 wget -q -O /usr/bin/restart "https://raw.githubusercontent.com/Amoebacoy/newpro/main/restart.sh"
-wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/Amoebacoy/newpro/tendang.sh"
-wget -q -O /usr/bin/clearlog "https://raw.githubusercontent.com/Amoebacoy/newpro/clearlog.sh"
-wget -q -O /usr/bin/running "https://raw.githubusercontent.com/Amoebacoy/newpro/running.sh"
-wget -q -O /usr/bin/cek-trafik "https://raw.githubusercontent.com/Amoebacoy/newpromain/cek-trafik.sh"
-wget -q -O /usr/bin/cek-speed "https://raw.githubusercontent.com/Amoebacoy/newpro/speedtes_cli.py"
+wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/Amoebacoy/newpro/main/tendang.sh"
+wget -q -O /usr/bin/clearlog "https://raw.githubusercontent.com/Amoebacoy/newpro/main/clearlog.sh"
+wget -q -O /usr/bin/running "https://raw.githubusercontent.com/Amoebacoy/newpro/main/running.sh"
+wget -q -O /usr/bin/cek-trafik "https://raw.githubusercontent.com/Amoebacoy/newpro/main/cek-trafik.sh"
+wget -q -O /usr/bin/cek-speed "https://raw.githubusercontent.com/Amoebacoy/newpro/main/speedtes_cli.py"
 wget -q -O /usr/bin/cek-bandwidth "https://raw.githubusercontent.com/Amoebacoy/newpro/main/cek-bandwidth.sh"
 #wget -q -O /usr/bin/cek-ram "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ram.sh"
 wget -q -O /usr/bin/limit-speed "https://raw.githubusercontent.com/Amoebacoy/newpro/main/limit-speed.sh"
@@ -338,12 +338,7 @@ chmod +x /usr/bin/menu
 chmod +x /usr/bin/wbm
 chmod +x /usr/bin/xp
 #chmod +x /usr/bin/update
-#chmod +x port-ssl
-#chmod +x port-ovpn
-#chmod +x port-tr
-chmod +x xp
-#chmod +x asu
-chmod +x sshws
+
 cd
 
 
