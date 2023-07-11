@@ -9,97 +9,37 @@ wget -O /usr/local/bin/ws-ovpn "https://raw.githubusercontent.com/Amoebacoy/newp
 chmod +x /usr/local/bin/ws-ovpn
 
 # Create system Service ws ws-ovpn
-cat > /etc/systemd/system/ws-ovpn.service <<END
-[Unit]
-Description=OpenVpn Over Websocket Python
-Documentation=https://github.com/syapik96/aws
-After=network.target nss-lookup.target
-
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-ovpn 2099
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-END
-
+cd
+rm /etc/systemd/system/ws-ovpn.service
+wget -O /etc/systemd/system/ws-ovpn.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ovpn.service"
+chmod +x /etc/systemd/system/ws-ovpn.service
 # Installing Service ws-dropbear
 wget -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws-dropbear"
 chmod +x /usr/local/bin/ws-dropbear
 
 # Create system Service ws-dropbear
-cat > /etc/systemd/system/ws-dropbear.service <<END
-[Unit]
-Description=Dropbear Over Websocket Python
-Documentation=https://github.com/syapik96/aws
-After=network.target nss-lookup.target
-
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-dropbear
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-END
-
+cd
+rm /etc/systemd/system/ws-dropbear.service
+wget -O /etc/systemd/system/ws-dropbear.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-dropbear.service"
+chmod +x /etc/systemd/system/ws-dropbear.service
 # Installing Service ws-stunnel
 wget -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws-stunnel"
 chmod +x /usr/local/bin/ws-stunnel
 
 # Create system Service ws-stunnel
-cat > /etc/systemd/system/ws-stunnel.service <<END
-[Unit]
-Description=Ssl/tls Proxy Over Websocket Python
-Documentation=https://github.com/syapik96/aws
-After=network.target nss-lookup.target
-
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-stunnel
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-END
-
+cd
+rm /etc/systemd/system/ws-stunnel.service
+wget -O /etc/systemd/system/ws-stunnel.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-stunnel.service"
+chmod +x /etc/systemd/system/ws-stunnel.service
 # Installing Service ws-openssh
 wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws-openssh"
 chmod +x /usr/local/bin/ws-openssh
 
 # Create system Service ws-openssh
-cat > /etc/systemd/system/ws-openssh.service <<END
-[Unit]
-Description=OpenSSH Over Websocket Python
-Documentation=https://github.com/syapik96/aws
-After=network.target nss-lookup.target
-
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-openssh
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-END
-
+cd
+rm /etc/systemd/system/ws-openssh.service
+wget -O /etc/systemd/system/ws-openssh.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-openssh.service"
+chmod +x /etc/systemd/system/ws-openssh.service
 # ENABLE & START/RESTART SERVICE
 systemctl daemon-reload
 systemctl enable ws-ovpn
