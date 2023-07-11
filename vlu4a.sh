@@ -129,13 +129,14 @@ echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
 echo -e " \E[41;1;39m          ? Install SSH / WS ?           \E[0m$NC"
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
 sleep 1
-wget -q https://raw.githubusercontent.com/Amoebacoy/newpro/main/install/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
+wget -q https://raw.githubusercontent.com/nanotechid/supreme/aio/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 #install ins-xray
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
 echo -e " \E[41;1;39m            ? Install Xray ?             \E[0m$NC"
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
 sleep 1 
-wget -q https://raw.githubusercontent.com/Amoebacoy/private/main/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+wget https://raw.githubusercontent.com/nanotechid/supreme/aio/xray/ins-xray.sh && chmod +x ins-xray.sh && ./ins-xray.sh
+wget https://raw.githubusercontent.com/nanotechid/supreme/aio/sshws/insshws.sh && chmod +x insshws.sh && ./insshws.sh
 IP=$(echo $SSH_CLIENT | awk '{print $1}')
 TMPFILE='/tmp/ipinfo-$DATE_EXEC.txt'
 curl http://ipinfo.io/$IP -s -o $TMPFILE
@@ -154,69 +155,7 @@ REGION=$(cat $TMPFILE | jq '.region' | sed 's/"//g')
 COUNTRY=$(cat $TMPFILE | jq '.country' | sed 's/"//g')
 curl -s -X POST "https://api.telegram.org/bot$token/sendMessage" -d chat_id="$chatid" -d text="$IPVPS domain $domain telah install XrayCol pada $DATE_EXEC di $CITY, $REGION via $ORG" > /dev/null 2>&1
 clear
-# // Download Data
-echo -e "${GREEN}Download Data${NC}"
-wget -q -O /usr/bin/add-ws "https://raw.githubusercontent.com/Amoebacoy/newpro/main/add-ws.sh"
-wget -q -O /usr/bin/add-ssws "https://raw.githubusercontent.com/Amoebacoy/newpro/main/add-ssws.sh"
-#wget -q -O /usr/bin/add-socks "https://raw.githubusercontent.com/Amoebacoy/newpro/main/add-socks.sh"
-wget -q -O /usr/bin/add-vless "https://raw.githubusercontent.com/Amoebacoy/newpro/main/add-vless.sh"
-wget -q -O /usr/bin/add-tr "https://raw.githubusercontent.com/Amoebacoy/newpro/main/add-tr.sh"
-#wget -q -O /usr/bin/add-trgo "https://raw.githubusercontent.com/Amoebacoy/newpro/main/add-trgo.sh"
-wget -q -O /usr/bin/autoreboot "https://raw.githubusercontent.com/Amoebacoy/newpro/main/autoreboot.sh"
-wget -q -O /usr/bin/restart "https://raw.githubusercontent.com/Amoebacoy/newpro/main/restart.sh"
-wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/Amoebacoy/newpro/main/tendang.sh"
-wget -q -O /usr/bin/clearlog "https://raw.githubusercontent.com/Amoebacoy/newpro/main/clearlog.sh"
-wget -q -O /usr/bin/running "https://raw.githubusercontent.com/Amoebacoy/newpro/main/running.sh"
-wget -q -O /usr/bin/cek-trafik "https://raw.githubusercontent.com/Amoebacoy/newpro/main/cek-trafik.sh"
-wget -q -O /usr/bin/cek-speed "https://raw.githubusercontent.com/Amoebacoy/newpro/main/speedtes_cli.py"
-wget -q -O /usr/bin/cek-bandwidth "https://raw.githubusercontent.com/Amoebacoy/newpro/main/cek-bandwidth.sh"
-#wget -q -O /usr/bin/cek-ram "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ram.sh"
-wget -q -O /usr/bin/limit-speed "https://raw.githubusercontent.com/Amoebacoy/newpro/main/limit-speed.sh"
-wget -q -O /usr/bin/menu-vless "https://raw.githubusercontent.com/Amoebacoy/newpro/main/menu-vless.sh"
-wget -q -O /usr/bin/menu-vmess "https://raw.githubusercontent.com/Amoebacoy/newpro/main/menu-vmess.sh"
-#wget -q -O /usr/bin/menu-socks "https://raw.githubusercontent.com/Amoebacoy/newpro/main/menu-socks.sh"
-wget -q -O /usr/bin/menu-ss "https://raw.githubusercontent.com/Amoebacoy/newpro/main/menu-ss.sh"
-wget -q -O /usr/bin/menu-trojan "https://raw.githubusercontent.com/Amoebacoy/newpro/main/menu-trojan.sh"
-#wget -q -O /usr/bin/menu-trgo "https://raw.githubusercontent.com/Amoebacoy/newpro/main/menu-trgo.sh"
-wget -q -O /usr/bin/menu-ssh "https://raw.githubusercontent.com/Amoebacoy/newpro/main/menu-ssh.sh"
-#wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/Amoebacoy/newpro/main/menu-bckp-telegram.sh"
-wget -q -O /usr/bin/menu-bckp "https://raw.githubusercontent.com/Amoebacoy/newpro/main/menu-bckp-github.sh"
-#wget -q -O /usr/bin/bckp "https://raw.githubusercontent.com/Amoebacoy/newpro/main/bckpbot.sh"
-wget -q -O /usr/bin/usernew "https://raw.githubusercontent.com/Amoebacoy/newpro/main/usernew.sh"
-wget -q -O /usr/bin/menu "https://raw.githubusercontent.com/Amoebacoy/newpro/main/menu.sh"
-wget -q -O /usr/bin/wbm "https://raw.githubusercontent.com/Amoebacoy/newpro/main/webmin.sh"
-wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/Amoebacoy/newpro/main/xp.sh"
-#wget -q -O /usr/bin/update "https://raw.githubusercontent.com/Amoebacoy/newpro/main/update.sh"
-chmod +x /usr/bin/add-ws
-chmod +x /usr/bin/add-ssws
-#chmod +x /usr/bin/add-socks
-chmod +x /usr/bin/add-vless
-chmod +x /usr/bin/add-tr
-#chmod +x /usr/bin/add-trgo
-chmod +x /usr/bin/usernew
-chmod +x /usr/bin/autoreboot
-chmod +x /usr/bin/restart
-chmod +x /usr/bin/tendang
-chmod +x /usr/bin/clearlog
-chmod +x /usr/bin/running
-chmod +x /usr/bin/cek-trafik
-chmod +x /usr/bin/cek-speed
-chmod +x /usr/bin/cek-bandwidth
-#chmod +x /usr/bin/cek-ram
-chmod +x /usr/bin/limit-speed
-chmod +x /usr/bin/menu-vless
-chmod +x /usr/bin/menu-vmess
-chmod +x /usr/bin/menu-ss
-#chmod +x /usr/bin/menu-socks
-chmod +x /usr/bin/menu-trojan
-#chmod +x /usr/bin/menu-trgo
-chmod +x /usr/bin/menu-ssh
-chmod +x /usr/bin/menu-bckp
-chmod +x /usr/bin/menu
-#chmod +x /usr/bin/bckp
-chmod +x /usr/bin/wbm
-chmod +x /usr/bin/xp
-#chmod +x /usr/bin/update
+
 cat > /etc/cron.d/xp_otm <<-END
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
@@ -274,22 +213,25 @@ echo "------------------------------------------------------------"
 echo ""
 echo ""
 echo "   >>> Service & Port"  | tee -a log-install.txt
-echo "   - OpenSSH                 : 22"  | tee -a log-install.txt
-echo "   - SSH Websocket           : 80" | tee -a log-install.txt
-echo "   - SSH SSL Websocket       : 443" | tee -a log-install.txt
-echo "   - Stunnel5                : 447, 777" | tee -a log-install.txt
-echo "   - Dropbear                : 109, 143" | tee -a log-install.txt
-echo "   - Badvpn                  : 7100-7300" | tee -a log-install.txt
-echo "   - Nginx                   : 81" | tee -a log-install.txt
-echo "   - XRAY  Vmess TLS         : 443" | tee -a log-install.txt
-echo "   - XRAY  Vmess None TLS    : 80" | tee -a log-install.txt
-echo "   - XRAY  Vless TLS         : 443" | tee -a log-install.txt
-echo "   - XRAY  Vless None TLS    : 80" | tee -a log-install.txt
-echo "   - Trojan GRPC             : 443" | tee -a log-install.txt
-echo "   - Trojan WS               : 443" | tee -a log-install.txt
-echo "   - Trojan GO               : 443" | tee -a log-install.txt
-#echo "   - Trojan GFW              : 443" | tee -a log-install.txt
-echo "   - Sodosok WS/GRPC         : 443" | tee -a log-install.txt
+echo "   - OpenSSH                  : 22"  | tee -a log-install.txt
+echo "   - SSH Websocket            : 80 [ON]" | tee -a log-install.txt
+echo "   - SSH SSL Websocket        : 443" | tee -a log-install.txt
+echo "   - Stunnel4                 : 222, 777" | tee -a log-install.txt
+echo "   - Dropbear                 : 109, 143" | tee -a log-install.txt
+echo "   - Badvpn                   : 7100-7900" | tee -a log-install.txt
+echo "   - Nginx                    : 81" | tee -a log-install.txt
+echo "   - Vmess WS TLS             : 443" | tee -a log-install.txt
+echo "   - Vless WS TLS             : 443" | tee -a log-install.txt
+echo "   - Trojan WS TLS            : 443" | tee -a log-install.txt
+echo "   - Shadowsocks WS TLS       : 443" | tee -a log-install.txt
+echo "   - Vmess WS none TLS        : 80" | tee -a log-install.txt
+echo "   - Vless WS none TLS        : 80" | tee -a log-install.txt
+echo "   - Trojan WS none TLS       : 80" | tee -a log-install.txt
+echo "   - Shadowsocks WS none TLS  : 80" | tee -a log-install.txt
+echo "   - Vmess gRPC               : 443" | tee -a log-install.txt
+echo "   - Vless gRPC               : 443" | tee -a log-install.txt
+echo "   - Trojan gRPC              : 443" | tee -a log-install.txt
+echo "   - Shadowsocks gRPC         : 443" | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "   >>> Server Information & Other Features"  | tee -a log-install.txt
 echo "   - Timezone                : Asia/Jakarta (GMT +7)"  | tee -a log-install.txt
