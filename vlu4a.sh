@@ -89,19 +89,20 @@ rm -fr /usr/local/bin/xray
 rm -fr /usr/local/bin/stunnel
 rm -fr /usr/local/bin/stunnel5
 rm -fr /etc/nginx
-rm -fr /var/lib/scrz-prem/
+rm -fr /var/lib/ipvps.conf
 rm -fr /usr/bin/xray
 rm -fr /etc/xray
 rm -fr /usr/local/etc/xray
 mkdir -p /etc/nginx
-mkdir -p /var/lib/scrz-prem/
+mkdir -p /var/lib
 mkdir -p /usr/bin/xray
 mkdir -p /etc/xray
+mkdir -p /etc/vray
 mkdir -p /usr/local/etc/xray
 echo "$domain" > /etc/domain.txt
 echo "$domain" > /root/domain
 echo "$domain" > /root/scdomain
-echo "IP=$domain" > /var/lib/scrz-prem/ipvps.conf
+echo "IP=$domain" > /var/lib/ipvps.conf
 domain=$(cat /root/domain)
 cp -r /root/domain /etc/xray/domain
 cp -r /root/domain /etc/v2ray/domain
