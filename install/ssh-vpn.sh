@@ -148,7 +148,7 @@ RUN=yes
 
 DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:777 --ssh 127.0.0.1:109 --openvpn 127.0.0.1:1194 --http 127.0.0.1:8880 --pidfile /var/run/sslh/sslh.pid -n"
 
-EOF12
+EOF12->>
   
 ​#​ Restart Service SSLH 
 service sslh restart 
