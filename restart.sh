@@ -95,7 +95,15 @@ case $Restart in
                 /etc/init.d/fail2ban restart
                 /etc/init.d/cron restart
                 /etc/init.d/nginx restart
-		systemctl daemon-reload 
+		systemctl daemon-reload
+  		systemctl stop xray
+  		systemctl enable xray
+    		systemctl start xray
+		systemctl restart xray
+		systemctl stop runn 
+		systemctl enable runn
+  		systemctl start runn
+		systemctl restart runn
   		systemctl stop ws-ovpn
 		systemctl enable ws-ovpn
 		systemctl start ws-ovpn
