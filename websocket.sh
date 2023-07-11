@@ -12,7 +12,6 @@ chmod +x /usr/local/bin/ws-ovpn
 cd
 rm /etc/systemd/system/ws-ovpn.service
 wget -O /etc/systemd/system/ws-ovpn.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ovpn.service"
-chmod +x /etc/systemd/system/ws-ovpn.service
 # Installing Service ws-dropbear
 wget -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws-dropbear"
 chmod +x /usr/local/bin/ws-dropbear
@@ -21,7 +20,6 @@ chmod +x /usr/local/bin/ws-dropbear
 cd
 rm /etc/systemd/system/ws-dropbear.service
 wget -O /etc/systemd/system/ws-dropbear.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-dropbear.service"
-chmod +x /etc/systemd/system/ws-dropbear.service
 # Installing Service ws-stunnel
 wget -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws-stunnel"
 chmod +x /usr/local/bin/ws-stunnel
@@ -30,7 +28,6 @@ chmod +x /usr/local/bin/ws-stunnel
 cd
 rm /etc/systemd/system/ws-stunnel.service
 wget -O /etc/systemd/system/ws-stunnel.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-stunnel.service"
-chmod +x /etc/systemd/system/ws-stunnel.service
 # Installing Service ws-openssh
 wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws-openssh"
 chmod +x /usr/local/bin/ws-openssh
@@ -39,7 +36,6 @@ chmod +x /usr/local/bin/ws-openssh
 cd
 rm /etc/systemd/system/ws-openssh.service
 wget -O /etc/systemd/system/ws-openssh.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-openssh.service"
-chmod +x /etc/systemd/system/ws-openssh.service
 # ENABLE & START/RESTART SERVICE
 systemctl daemon-reload
 systemctl enable ws-ovpn
