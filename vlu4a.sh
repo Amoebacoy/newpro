@@ -129,7 +129,7 @@ echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
 echo -e " \E[41;1;39m          ? Install SSH / WS ?           \E[0m$NC"
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
 sleep 1
-wget -q https://raw.githubusercontent.com/nanotechid/supreme/aio/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
+wget -q https://raw.githubusercontent.com/Amoebacoy/newpro/main/ssh-vpn.sh && chmod +x ssh-vpn.sh && ./ssh-vpn.sh
 #install ins-xray
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
 echo -e " \E[41;1;39m            ? Install Xray ?             \E[0m$NC"
