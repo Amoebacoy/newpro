@@ -83,7 +83,7 @@ echo "prince" >> .profile
 
 # install webserver
 #apt -y install nginx
-cd
+#cd
 #rm /etc/nginx/sites-enabled/default
 #rm /etc/nginx/sites-available/default
 #wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/nginx.conf"
@@ -91,16 +91,16 @@ cd
 #Index_port='81'
 #IPADDR=$(wget -qO- icanhazip.com);
 # creating page download Openvpn config file
-mkdir -p /home/vps/public_html
-wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/syapik96/aws/main/lain2/index.html"
+#mkdir -p /home/vps/public_html
+#wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/syapik96/aws/main/lain2/index.html"
 
 # Setting template's correct name,IP address and nginx Port Page Openvpn
-sed -i "s|NGINXPORT|$Index_port|g" /home/vps/public_html/index.html
-sed -i "s|IP-ADDRESS|$IPADDR|g" /home/vps/public_html/index.html
+#sed -i "s|NGINXPORT|$Index_port|g" /home/vps/public_html/index.html
+#sed -i "s|IP-ADDRESS|$IPADDR|g" /home/vps/public_html/index.html
 
 # Restarting nginx service
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/vps.conf"
-systemctl restart nginx
+#wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/vps.conf"
+#systemctl restart nginx
 
 cd
 # setting port ssh
@@ -128,8 +128,7 @@ apt -y install sslh
 ​rm -f /etc/default/sslh 
   
 ​#​ Settings SSLH
-
-​cat ​>​ "/etc/default/sslh" ​<<​-EOF12
+cat ​>​ "/etc/default/sslh" ​<<​-EOF12
 ​# Default options for sslh initscript 
 ​# sourced by /etc/init.d/sslh 
   
