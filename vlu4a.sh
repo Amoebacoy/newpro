@@ -48,7 +48,7 @@ echo -e "${INFO} Starting Replacing Script !"
 elif [[ $lanjutkan == "y" ]]; then
 clear
 echo -e "${INFO} Starting Replacing Script !"
-rm -rf /var/lib/scrz-prem
+rm -rf /var/lib/ipvps.conf
 elif [[ $lanjutkan == "N" ]]; then
 echo -e "${INFO} Action Canceled !"
 exit 1
