@@ -117,19 +117,6 @@ cp -r /root/domain /etc/v2ray/domain
 cp -r /root/domain /etc/xray/scdomain
 cp -r /root/domain /etc/vray/scdomain
 clear
-echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... "
-sleep 2
-echo -e "${OKEY} Starting Generating Certificate"
-rm -fr /root/.acme.sh
-mkdir -p /root/.acme.sh
-curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
-chmod +x /root/.acme.sh/acme.sh
-/root/.acme.sh/acme.sh --upgrade
-/root/.acme.sh/acme.sh --upgrade --auto-upgrade
-/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-/root/.acme.sh/acme.sh --issue -d $domain --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key --ecc
-echo -e "${OKEY} Your Domain : $domain"
 sleep 2
 #install janggut
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
