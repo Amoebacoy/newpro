@@ -117,23 +117,6 @@ cp -r /root/domain /etc/v2ray/domain
 cp -r /root/domain /etc/xray/scdomain
 cp -r /root/domain /etc/vray/scdomain
 clear
-clear && clear && clear
-clear;clear;clear
-clear
-red "Tambah Domain Untuk XRAY"
-echo " "
-read -rp "Input nsdomain kamu : " -e nsdomain
-    if [ -z $NS_DOMAIN ]; then
-        echo -e "
-        Nothing input for domain!
-        Then a random domain will be created"
-    else
-        rm -rf /root/nsdomain
-        mkdir -p /root/nsdomain
-        touch /root/nsdomain
-        echo $NS_DOMAIN > /root/nsdomain
-fi
-clear
 sleep 2
 #install websocket
 echo -e "$white\033[0;34m+-----------------------------------------+${NC}"
@@ -233,7 +216,6 @@ echo "   - OpenSSH                  : 22"  | tee -a log-install.txt
 echo "   - SSH Websocket            : 80 [ON]" | tee -a log-install.txt
 echo "   - SSH SSL Websocket        : 443" | tee -a log-install.txt
 echo "   - Stunnel5                 : 222, 777" | tee -a log-install.txt
-echo "   - UDP Custom               : 1-65350" | tee -a log-install.txt
 echo "   - Dropbear                 : 109, 143" | tee -a log-install.txt
 echo "   - Badvpn                   : 7100-7900" | tee -a log-install.txt
 echo "   - Nginx                    : 81" | tee -a log-install.txt
