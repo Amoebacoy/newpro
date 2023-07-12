@@ -5,13 +5,13 @@
 # (C) Copyright 2021-2022
 # =========================================
 vlx=$(grep -c -E "^#& " "/etc/xray/config.json")
-let vla=$vlx/2
+let vla=$vless/2
 vmc=$(grep -c -E "^### " "/etc/xray/config.json")
-let vma=$vmc/2
+let vma=$vmess/2
 ssh1="$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
 
 trx=$(grep -c -E "^#! " "/etc/xray/config.json")
-let tra=$trx/2
+let tra=$trojan/2
 ssx=$(grep -c -E "^## " "/etc/xray/config.json")
 let ssa=$ssx/2
 COLOR1='\033[0;35m'
@@ -201,8 +201,8 @@ echo -e "\033[0;34m│ $NC${BIWhite} SSH ${NC}: $ressh"" ${BIWhite} NGINX ${NC}:
 echo -e "\033[0;34m│ $NC${BIWhite}          DROPBEAR ${NC}: $resdbr" "${BIWhite} SSH-WS ${NC}: $ressshws \E[0m\033[0;34m               │"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "\033[0;34m│  \033[0m ${BOLD}${YELLOW}SSH     VMESS       VLESS      TROJAN       SHADOWSOCKS$NC  $COLOR1"
-echo -e "\033[0;34m│  \033[0m ${Blue} $ssh1        $vma           $vla          $tra               $ssa   $NC"
+echo -e "\033[0;34m│  \033[0m ${BOLD}${YELLOW}SSH	VMESS	VLESS	TROJAN	SHADOWSOCKS$NC  $COLOR1"
+	echo -e "\033[0;34m│  \033[0m ${Blue} $ssh1	$vma	$vla	$tra	$ssa   $NC"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}01${BIGREEN}] ${NC}SSH MANAGER${BIGREEN}${BIYellow}${BIGREEN}${NC}             ${BIGREEN}[${BIWhite}13${BIGREEN}] ${NC}EDIT-BANNER ${BIGREEN}${BIYellow}${BIGREEN}${NC}" 
