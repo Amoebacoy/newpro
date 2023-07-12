@@ -219,9 +219,9 @@ echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}11${BIGREEN}] ${NC}ADD-HOST/DOMAI
 echo -e "\033[0;34m│ $NC${BIGREEN}[${BIWhite}12${BIGREEN}] ${NC}RENEW SSL CERTIFIKATE ${BIGREEN}${BIYellow}${BIGREEN}${NC}"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "\033[0;34m│ ${BIGREEN}Version		: ${BIPurple}Last Update"
-echo -e "\033[0;34m│ ${BIGREEN}User		: ${BIYellow}$FABUMI${NC}"
-echo -e "\033[0;34m│ ${BIGREEN}Expiry script	: ${BIWhite}$UNLIMITED${NC} Days"
+echo -e "\033[0;34m│ ${BIGREEN}Version${NC}		: $sem Last Update"
+echo -e "\033[0;34m│ ${BIGREEN}User${NC}		: FABUMI"
+echo -e "\033[0;34m│ ${BIGREEN}Expiry script${NC}	: UNLIMITED Days"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo
 read -p " Select menu : " opt
