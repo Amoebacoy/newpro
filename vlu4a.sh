@@ -97,8 +97,12 @@ mkdir -p /etc/nginx
 mkdir -p /var/lib
 mkdir -p /usr/bin/xray
 mkdir -p /etc/xray
-mkdir -p /etc/vray
+mkdir -p /etc/v2ray
 mkdir -p /usr/local/etc/xray
+touch /etc/xray/domain
+touch /etc/v2ray/domain
+touch /etc/xray/scdomain
+touch /etc/v2ray/scdomain
 echo "$domain" > /etc/domain.txt
 echo "$domain" > /root/domain
 echo "$domain" > /root/scdomain
