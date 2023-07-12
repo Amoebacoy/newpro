@@ -131,7 +131,7 @@ read -rp "Input nsdomain kamu : " -e nsdomain
         rm -rf /root/nsdomain
         mkdir -p /root/nsdomain
         touch /root/nsdomain
-echo "$NS_DOMAIN" > /root/nsdomain
+        echo $NS_DOMAIN > /root/nsdomain
 fi
 clear
 sleep 2
