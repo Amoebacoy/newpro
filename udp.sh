@@ -108,5 +108,5 @@ sleep 0,5
 clear
 rm -rf /usr/bin/udp
 rm -rf slowdns.sh
-echo -e "\e[1;32m auto reboot in 5s \e[0m"
+
 sleep 2
