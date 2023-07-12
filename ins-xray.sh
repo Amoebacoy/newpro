@@ -5,62 +5,33 @@ date
 echo ""
 domain=$(cat /root/domain)
 sleep 0.5
-#!/bin/bash
-# =========================================
-# Quick Setup | Script Setup Manager
-# Edition : Stable Edition V1.0
-# Auther  : Adit Ardiansyah
-# (C) Copyright 2022
-# =========================================
-# // Export Color & Information
-export RED='\033[0;31m'
-export GREEN='\033[0;32m'
-export YELLOW='\033[0;33m'
-export BLUE='\033[0;34m'
-export PURPLE='\033[0;35m'
-export CYAN='\033[0;36m'
-export LIGHT='\033[0;37m'
-export NC='\033[0m'
-
-# // Export Banner Status Information
-export EROR="[${RED} EROR ${NC}]"
-export INFO="[${YELLOW} INFO ${NC}]"
-export OKEY="[${GREEN} OKEY ${NC}]"
-export PENDING="[${YELLOW} PENDING ${NC}]"
-export SEND="[${YELLOW} SEND ${NC}]"
-export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
-
-# // Export Align
-export BOLD="\e[1m"
-export WARNING="${RED}\e[5m"
-export UNDERLINE="\e[4m"
-mkdir /user/curent > /dev/null 2>&1
-touch /user/current
-clear
-echo "IP=$domain" > /var/lib/ipvps.conf
-if [[ "$IP" = "" ]]; then
-domain=$(cat /etc/xray/domain)
-else
-domain=$IP
-fi
-
-echo -e "[ ${GREEN}INFO${NC} ] Checking... "
-sleep 1
-echo -e "[ ${GREEN}INFO$NC ] Setting ntpdate"
-sleep 1
-domain=$(cat /etc/xray/domain)
+mkdir -p /etc/xray 
+echo -e "[ ${green}INFO${NC} ] Checking... "
 apt install iptables iptables-persistent -y
-apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y
-apt install socat cron bash-completion ntpdate -y
-#ntpdate pool.ntp.org
-ntpdate -u pool.ntp.org
-apt -y install chrony
+sleep 0.5
+echo -e "[ ${green}INFO$NC ] Setting ntpdate"
+ntpdate pool.ntp.org 
 timedatectl set-ntp true
-#systemctl enable chronyd && systemctl restart chronyd
-systemctl enable chrony && systemctl restart chrony
+sleep 0.5
+echo -e "[ ${green}INFO$NC ] Enable chronyd"
+systemctl enable chronyd
+systemctl restart chronyd
+sleep 0.5
+echo -e "[ ${green}INFO$NC ] Enable chrony"
+systemctl enable chrony
+systemctl restart chrony
 timedatectl set-timezone Asia/Jakarta
-#chronyc sourcestats -v
-#chronyc tracking -v
+sleep 0.5
+echo -e "[ ${green}INFO$NC ] Setting chrony tracking"
+chronyc sourcestats -v
+chronyc tracking -v
+echo -e "[ ${green}INFO$NC ] Setting dll"
+apt clean all && apt update
+apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
+apt install socat cron bash-completion ntpdate -y
+ntpdate pool.ntp.org
+apt -y install chrony
+apt install zip -y
 apt install curl pwgen openssl netcat cron -y
 
 # Make Folder & Log XRay & Log Trojan
@@ -136,17 +107,6 @@ if ! grep -q 'ssl_renew.sh' /var/spool/cron/crontabs/root;then (crontab -l;echo 
 
 mkdir -p /home/vps/public_html
 
-trojanws=$((RANDOM + 10000))
-ssws=$((RANDOM + 10000))
-ssgrpc=$((RANDOM + 10000))
-vless=$((RANDOM + 10000))
-vlessgrpc=$((RANDOM + 10000))
-vmess=$((RANDOM + 10000))
-vmessgrpc=$((RANDOM + 10000))
-trojangrpc=$((RANDOM + 10000))
-# xray config
-# seting ulang json
-#mv -f /etc/xray/config.json /etc/xray/config.json.bak
 #pw sodosok
 openssl rand -base64 16 > /etc/xray/passwd
 bijikk=$(openssl rand -base64 16 )
