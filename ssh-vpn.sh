@@ -405,7 +405,7 @@ sleep 0.5
 echo -e "$yell[SERVICE]$NC Restart All service SSH & OVPN"
 /etc/init.d/nginx restart >/dev/null 2>&1
 sleep 0.5
-echo -e "[ ${green}ok${NC} ] Restarting nginx"
+echo -e "[ ${green}ok${NC} ] Restarting nginx "
 /etc/init.d/openvpn restart >/dev/null 2>&1
 sleep 0.5
 echo -e "[ ${green}ok${NC} ] Restarting cron "
@@ -418,7 +418,7 @@ echo -e "[ ${green}ok${NC} ] Restarting dropbear "
 /etc/init.d/fail2ban restart >/dev/null 2>&1
 sleep 0.5
 echo -e "[ ${green}ok${NC} ] Restarting fail2ban "
-/etc/init.d/stunnel5 restart >/dev/null 2>&1
+/etc/init.d/stunnel4 restart >/dev/null 2>&1
 sleep 0.5
 echo -e "[ ${green}ok${NC} ] Restarting stunnel5 "
 /etc/init.d/vnstat restart >/dev/null 2>&1
