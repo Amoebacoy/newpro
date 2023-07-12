@@ -3,12 +3,10 @@
 # ====================================
 # UPDATED 22-1-28
 
-cd 
 # Installing Service ws ws-ovpn
 wget -O /usr/local/bin/ws-ovpn "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ovpn.py"
 chmod +x /usr/local/bin/ws-ovpn
 # Create system Service ws ws-ovpn
-cd
 rm /etc/systemd/system/ws-ovpn.service
 wget -O /etc/systemd/system/ws-ovpn.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ovpn.service"
 
@@ -16,7 +14,6 @@ wget -O /etc/systemd/system/ws-ovpn.service "https://raw.githubusercontent.com/A
 wget -O /usr/local/bin/ws-dropbear "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws-dropbear"
 chmod +x /usr/local/bin/ws-dropbear
 # Create system Service ws-dropbear
-cd
 rm /etc/systemd/system/ws-dropbear.service
 wget -O /etc/systemd/system/ws-dropbear.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-dropbear.service"
 
@@ -24,7 +21,6 @@ wget -O /etc/systemd/system/ws-dropbear.service "https://raw.githubusercontent.c
 wget -O /usr/local/bin/ws-stunnel "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws-stunnel"
 chmod +x /usr/local/bin/ws-stunnel
 # Create system Service ws-stunnel
-cd
 rm /etc/systemd/system/ws-stunnel.service
 wget -O /etc/systemd/system/ws-stunnel.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-stunnel.service"
 
@@ -32,7 +28,6 @@ wget -O /etc/systemd/system/ws-stunnel.service "https://raw.githubusercontent.co
 wget -O /usr/local/bin/ws-openssh "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws-openssh"
 chmod +x /usr/local/bin/ws-openssh
 # Create system Service ws-openssh
-cd
 rm /etc/systemd/system/ws-openssh.service
 wget -O /etc/systemd/system/ws-openssh.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ws/ws-openssh.service"
 # ENABLE & START/RESTART SERVICE
