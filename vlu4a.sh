@@ -254,7 +254,7 @@ echo ""
 echo ""
 echo "------------------------------------------------------------"
 echo ""
-echo "===============-[ Script Created By Kenn Hiroyuki ]-==============="
+echo "===============-[ Script Created By Aby & Fabumi ]-==============="
 echo -e ""
 echo ""
 echo "" | tee -a log-install.txt
