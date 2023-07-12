@@ -13,18 +13,18 @@
 BGreen='\e[1;32m'
 NC='\e[0m'
 cd
-rm -rf /usr/bin/usernew
-rm -rf /usr/bin/trial
+#rm -rf /usr/bin/usernew
+#rm -rf /usr/bin/trial
 rm -rf slowdns.sh
-echo "\e[1;32m Update Menu.. \e[0m"
-sleep 1
-wget -q -O /usr/bin/usernew https://raw.githubusercontent.com/Amoebacoy/newpro/main/usernew.sh
-wget -q -O /usr/bin/trial https://raw.githubusercontent.com/givpn/AutoScriptXray/master/udp-custom/ssh/trial.sh
+#echo "\e[1;32m Update Menu.. \e[0m"
+#sleep 1
+#wget -q -O /usr/bin/usernew https://raw.githubusercontent.com/Amoebacoy/newpro/main/usernew.sh
+#wget -q -O /usr/bin/trial https://raw.githubusercontent.com/givpn/AutoScriptXray/master/udp-custom/ssh/trial.sh
 echo "\e[1;32m Proses Download Script Slowdns.. \e[0m"
 wget https://https://raw.githubusercontent.com/Amoebacoy/newpro/main/slowdns.sh && chmod +x slowdns.sh && ./slowdns.sh
 sleep 1
-chmod +x /usr/bin/usernew
-chmod +x /usr/bin/trial
+#chmod +x /usr/bin/usernew
+#chmod +x /usr/bin/trial
 rm -rf /root/udp
 mkdir -p /root/udp
 # install udp-custom
@@ -42,7 +42,7 @@ clear
 echo "\e[1;32m Please Waiting Proses Downloading Toll UdpCustom.. \e[0m"
 sleep 1
 clear
-wget -q --show-progress --load-cookies /tmp/cookies.txt "https://github.com/givpn/AutoScriptXray/raw/master/udp-custom/udp-custom-linux-amd64" -O /root/udp/udp-custom && rm -rf /tmp/cookies.txt
+wget -q --show-progress --load-cookies /tmp/cookies.txt "https://raw.githubusercontent.com/Amoebacoy/newpro/main/udp-custom-linux-amd64" -O /root/udp/udp-custom && rm -rf /tmp/cookies.txt
 chmod +x /root/udp/udp-custom
 clear
 # install Config Default Udp
