@@ -83,6 +83,15 @@ clear
 echo -e "${EROR} No Input Detected !"
 exit 1
 fi
+clear
+clear && clear && clear
+clear;clear;clear
+read -p "Input Your NS-Domain : " nsdomain
+if [[ $NS_DOMAIN == "" ]]; then
+clear
+echo -e "${EROR} No Input Detected !"
+exit 1
+fi
 apt purge nginx nginx-common nginx-core -y
 mkdir -p /usr/bin
 rm -fr /usr/local/bin/xray
@@ -93,16 +102,19 @@ rm -fr /var/lib/ipvps.conf
 rm -fr /usr/bin/xray
 rm -fr /etc/xray
 rm -fr /usr/local/etc/xray
+rm -rf /root/nsdomain
 mkdir -p /etc/nginx
 mkdir -p /var/lib
 mkdir -p /usr/bin/xray
 mkdir -p /etc/xray
 mkdir -p /etc/v2ray
 mkdir -p /usr/local/etc/xray
+mkdir -p /root/nsdomain
 touch /etc/xray/domain
 touch /etc/v2ray/domain
 touch /etc/xray/scdomain
 touch /etc/v2ray/scdomain
+touch /root/nsdomain
 echo "$domain" > /etc/domain.txt
 echo "$domain" > /etc/xray/domain
 echo "$domain" > /etc/v2ray/domain
@@ -111,6 +123,7 @@ echo "$domain" > /etc/v2ray/scdomain
 echo "$domain" > /root/domain
 echo "$domain" > /root/scdomain
 echo "IP=$domain" > /var/lib/ipvps.conf
+echo "$NS_DOMAIN" > /root/nsdomain
 domain=$(cat /root/domain)
 cp -r /root/domain /etc/xray/domain
 cp -r /root/domain /etc/v2ray/domain
