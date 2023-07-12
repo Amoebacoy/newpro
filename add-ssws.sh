@@ -63,26 +63,33 @@ if [ "${EUID}" -ne 0 ]; then
 fi
 
 # // Exporting IP Address
-export IP=$( curl -s https://ipinfo.io/ip/ )
+clear
+source /var/lib/ipvps.conf
+if [[ "$IP" = "" ]]; then
+domain=$(cat /etc/xray/domain)
+else
+domain=$IP
+fi
 
-tls="$(cat ~/log-install.txt | grep -w "Sodosok WS/GRPC" | cut -d: -f2|sed 's/ //g')"
+tls="$(cat ~/log-install.txt | grep -w "Shadowsocks WS TLS" | cut -d: -f2|sed 's/ //g')"
+ntls="$(cat ~/log-install.txt | grep -w "Shadowsocks WS none TLS" | cut -d: -f2|sed 's/ //g')"
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
-echo -e "\033[0;34mג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”\033[0m"
-echo -e "\\E[0;41;36m      Add Sodosok Ws/Grpc Account    \E[0m"
-echo -e "\033[0;34mג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”\033[0m"
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "\\E[0;41;36m      Add Shadowsocks Account    \E[0m"
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 
 		read -rp "User: " -e user
 		CLIENT_EXISTS=$(grep -w $user /etc/xray/config.json | wc -l)
 
 		if [[ ${CLIENT_EXISTS} == '1' ]]; then
 clear
-            echo -e "\033[0;34mג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”\033[0m"
-            echo -e "\\E[0;41;36m      Add Sodosok Ws/Grpc Account      \E[0m"
-            echo -e "\033[0;34mג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”\033[0m"
+            echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+            echo -e "\\E[0;41;36m      Add Shadowsocks Account      \E[0m"
+            echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 			echo ""
 			echo "A client with the specified name was already created, please choose another name."
 			echo ""
-			echo -e "\033[0;34mג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”ג”\033[0m"
+			echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 			read -n 1 -s -r -p "Press any key to back on menu"
 v2ray-menu
 		fi
@@ -100,22 +107,14 @@ echo $cipher:$uuid > /tmp/log
 shadowsocks_base64=$(cat /tmp/log)
 echo -n "${shadowsocks_base64}" | base64 > /tmp/log1
 shadowsocks_base64e=$(cat /tmp/log1)
-shadowsockslink="ss://${shadowsocks_base64e}@$domain:$tls?plugin=xray-plugin;mux=0;path=/ss-ws;host=$domain;tls#${user}"
-shadowsockslink1="ss://${shadowsocks_base64e}@$domain:$tls?plugin=xray-plugin;mux=0;serviceName=ss-grpc;host=$domain;tls#${user}"
-
-#buat ss WEBSOCKET
-sslinkws="ss://${shadowsocks_base64e}@${domain}:443?path=/ss-ws&security=tls&encryption=none&type=ws#${user}"
-nonsslinkws="ss://${shadowsocks_base64e}@${domain}:80?path=/ss-ws&security=none&encryption=none&type=ws#${user}"
-
-#buat ss GRPC
-sslinkgrpc="ss://${shadowsocks_base64e}@${domain}:443?mode=gun&security=tls&encryption=none&type=grpc&serviceName=ss-grpc&sni=bug.com#${user}"
-nonsslinkgrpc="ss://${shadowsocks_base64e}@${domain}:80?mode=gun&security=none&encryption=none&type=grpc&serviceName=ss-grpc&sni=bug.com#${user}"
-
+shadowsockslink="ss://${shadowsocks_base64e}@isi_bug_disini:$tls?path=ss-ws&security=tls&host=${domain}&type=ws&sni=${domain}#${user}"
+shadowsockslink1="ss://${shadowsocks_base64e}@isi_bug_disini:$ntls?path=ss-ws&security=none&host=${domain}&type=ws#${user}"
+shadowsockslink2="ss://${shadowsocks_base64e}@${domain}:$tls?mode=gun&security=tls&type=grpc&serviceName=ss-grpc&sni=bug.com#${user}"
 systemctl restart xray
-#buatshadowsocks custom
 rm -rf /tmp/log
 rm -rf /tmp/log1
-cat > /home/vps/public_html/sodosokws-$user.txt <<-END
+cat > /home/vps/public_html/ss-$user.txt <<-END
+# sodosok ws
 { 
  "dns": {
     "servers": [
@@ -220,9 +219,11 @@ cat > /home/vps/public_html/sodosokws-$user.txt <<-END
 "rules": []
   },
   "stats": {}
-}
-END
-cat > /home/vps/public_html/sodosokgrpc-$user.txt <<-END
+ }
+ 
+ # SODOSOK grpc
+
+
 {
     "dns": {
     "servers": [
@@ -330,33 +331,29 @@ END
 systemctl restart xray > /dev/null 2>&1
 service cron restart > /dev/null 2>&1
 clear
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "\\E[0;41;36m        Sodosok WS/GRPC Account    \E[0m" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "Remarks : ${user}" | tee -a /etc/log-create-user.log
-echo -e "Domain : ${domain}" | tee -a /etc/log-create-user.log
-echo -e "Port WS : ${tls}/80" | tee -a /etc/log-create-user.log
-echo -e "Port GRPC : ${tls}" | tee -a /etc/log-create-user.log
-echo -e "Password : ${uuid}" | tee -a /etc/log-create-user.log
-echo -e "Cipers : aes-128-gcm" | tee -a /etc/log-create-user.log
-echo -e "Network : ws/grpc" | tee -a /etc/log-create-user.log
-echo -e "Path : /ss-ws" | tee -a /etc/log-create-user.log
-echo -e "ServiceName : ss-grpc" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "Link WS TLS : ${sslinkws}" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "Link WS None TLS : ${nonsslinkws}" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "Link GRPC TLS : ${sslinkgrpc}" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "Link GRPC None TLS : ${nonsslinkgrpc}" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "Link JSON WS : http://${domain}:81/sodosokws-$user.txt" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "Link JSON gRPC : http://${domain}:81/sodosokgrpc-$user.txt" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "Expired On : $exp" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
+echo -e "\\E[0;41;36m        Shadowsocks Account      \E[0m" | tee -a /etc/log-create-user.log
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
+echo -e "Remarks        : ${user}" | tee -a /etc/log-create-user.log
+echo -e "Domain         : ${domain}" | tee -a /etc/log-create-user.log
+echo -e "Wildcard       : (bug.com).${domain}" | tee -a /etc/log-create-user.log
+echo -e "Port TLS       : ${tls}" | tee -a /etc/log-create-user.log
+echo -e "Port none TLS  : ${ntls}" | tee -a /etc/log-create-user.log
+echo -e "Port gRPC      : ${tls}" | tee -a /etc/log-create-user.log
+echo -e "Password       : ${uuid}" | tee -a /etc/log-create-user.log
+echo -e "Ciphers        : ${cipher}" | tee -a /etc/log-create-user.log
+echo -e "Network        : ws/grpc" | tee -a /etc/log-create-user.log
+echo -e "Path           : /ss-ws" | tee -a /etc/log-create-user.log
+echo -e "ServiceName    : ss-grpc" | tee -a /etc/log-create-user.log
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
+echo -e "Link TLS       : ${shadowsockslink}" | tee -a /etc/log-create-user.log
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
+echo -e "Link none TLS  : ${shadowsockslink1}" | tee -a /etc/log-create-user.log
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
+echo -e "Link gRPC      : ${shadowsockslink2}" | tee -a /etc/log-create-user.log
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
+echo -e "Expired On     : $exp" | tee -a /etc/log-create-user.log
+echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m" | tee -a /etc/log-create-user.log
 echo "" | tee -a /etc/log-create-user.log
 read -n 1 -s -r -p "Press any key to back on menu"
 
