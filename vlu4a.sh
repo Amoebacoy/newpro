@@ -119,16 +119,20 @@ cp -r /root/domain /etc/vray/scdomain
 clear
 clear && clear && clear
 clear;clear;clear
-read -p "Input Your NS-Domain : " nsdomain
-if [[ $NS_DOMAIN == "" ]]; then
 clear
-echo -e "${EROR} No Input Detected !"
-exit 1
-fi
-rm -rf /root/nsdomain
-mkdir -p /root/nsdomain
-touch /root/nsdomain
+red "Tambah Domain Untuk XRAY"
+echo " "
+read -rp "Input nsdomain kamu : " -e nsdomain
+    if [ -z $NS_DOMAIN ]; then
+        echo -e "
+        Nothing input for domain!
+        Then a random domain will be created"
+    else
+        rm -rf /root/nsdomain
+        mkdir -p /root/nsdomain
+        touch /root/nsdomain
 echo "$NS_DOMAIN" > /root/nsdomain
+fi
 clear
 sleep 2
 #install websocket
