@@ -223,8 +223,6 @@ echo "   - Nginx                    : 81" | tee -a log-install.txt
 echo "   - Trojan WS                : 443" | tee -a log-install.txt
 echo "   - Vmess WS TLS             : 443" | tee -a log-install.txt
 echo "   - Vless WS TLS             : 443" | tee -a log-install.txt
-echo "   - Trojan WS TLS            : 443" | tee -a log-install.txt
-echo "   - Trojan WS none TLS       : 80" | tee -a log-install.txt
 echo "   - Shadowsocks WS TLS       : 443" | tee -a log-install.txt
 echo "   - Vmess WS none TLS        : 80" | tee -a log-install.txt
 echo "   - Vless WS none TLS        : 80" | tee -a log-install.txt
