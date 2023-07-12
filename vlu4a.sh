@@ -104,6 +104,10 @@ touch /etc/v2ray/domain
 touch /etc/xray/scdomain
 touch /etc/v2ray/scdomain
 echo "$domain" > /etc/domain.txt
+echo "$domain" > /etc/xray/domain
+echo "$domain" > /etc/v2ray/domain
+echo "$domain" > /etc/x2ray/scdomain
+echo "$domain" > /etc/v2ray/scdomain
 echo "$domain" > /root/domain
 echo "$domain" > /root/scdomain
 echo "IP=$domain" > /var/lib/ipvps.conf
@@ -111,6 +115,7 @@ domain=$(cat /root/domain)
 cp -r /root/domain /etc/xray/domain
 cp -r /root/domain /etc/v2ray/domain
 cp -r /root/domain /etc/xray/scdomain
+cp -r /root/domain /etc/vray/scdomain
 clear
 echo -e "[ ${GREEN}INFO${NC} ] Starting renew cert... "
 sleep 2
