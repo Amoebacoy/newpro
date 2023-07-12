@@ -2,7 +2,6 @@
 # Proxy For Connection Over WebSocket-Python
 # ====================================
 # UPDATED 22-1-28
-apt update && apt install wget -y && wget -q -O /usr/bin/udp "https://raw.githubusercontent.com/Amoebacoy/newpro/main/udp.sh" && chmod +x /usr/bin/udp && udp
 # Installing Service ws ws-ovpn
 wget -O /usr/local/bin/ws-ovpn "https://raw.githubusercontent.com/Amoebacoy/newpro/main/ovpn.py"
 chmod +x /usr/local/bin/ws-ovpn
