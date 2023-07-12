@@ -206,7 +206,7 @@ echo "1.1" >> /home/.ver
 rm -fr /root/limit
 curl -sS ifconfig.me > /etc/myipvps
 echo " "
-echo "=====================-[ Kenn Hiroyuki Premium ]-===================="
+echo "=====================-[ Aby & Fabumi Premium ]-===================="
 echo ""
 echo "------------------------------------------------------------"
 echo ""
@@ -258,8 +258,8 @@ echo "===============-[ Script Created By Aby & Fabumi ]-==============="
 echo -e ""
 echo ""
 echo "" | tee -a log-install.txt
-rm -fr /root/weleh.sh 
-rm -fr /root/jembot.sh 
+rm -fr /root/insshws.sh 
+rm -fr /root/vlu4a.sh 
 rm -fr /root/ssh-vpn.sh
 rm -fr /root/ins-xray.sh
 rm -fr /root/setup.sh
