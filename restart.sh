@@ -143,7 +143,7 @@ case $Restart in
                 ;;
                 3)
                 clear
-                /etc/init.d/dropbear restart
+                wget -O ins-dropbear.sh https://raw.githubusercontent.com/Amoebacoy/newpro/main/ins-dropbear.sh && chmod +x ins-dropbear.sh && ./ins-dropbear.sh
                 echo -e ""
                 echo -e "======================================"
                 echo -e ""
