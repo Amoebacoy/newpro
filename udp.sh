@@ -21,7 +21,7 @@ rm -rf slowdns.sh
 #wget -q -O /usr/bin/usernew https://raw.githubusercontent.com/Amoebacoy/newpro/main/usernew.sh
 #wget -q -O /usr/bin/trial https://raw.githubusercontent.com/givpn/AutoScriptXray/master/udp-custom/ssh/trial.sh
 echo "\e[1;32m Proses Download Script Slowdns.. \e[0m"
-wget https://https://raw.githubusercontent.com/Amoebacoy/newpro/main/slowdns.sh && chmod +x slowdns.sh && ./slowdns.sh
+wget https://raw.githubusercontent.com/Amoebacoy/newpro/main/slowdns.sh && chmod +x slowdns.sh && ./slowdns.sh
 sleep 1
 #chmod +x /usr/bin/usernew
 #chmod +x /usr/bin/trial
