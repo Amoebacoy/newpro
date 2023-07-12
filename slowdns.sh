@@ -14,19 +14,6 @@ iptables -t nat -I PREROUTING -p udp --dport 53 -j REDIRECT --to-ports 5300
 netfilter-persistent save
 netfilter-persistent reload
 
-cd
-#delete directory
-rm -rf /root/nsdomain
-rm nsdomain
-
-#input nameserver manual to cloudflare
-read -rp "Masukkan domain: " -e domain
-
-read -rp "Masukkan Subdomain Yang Dipakai Host Sekarang: " -e sub
-SUB_DOMAIN=${sub}
-NS_DOMAIN=ns-${SUB_DOMAIN}
-echo $NS_DOMAIN > /root/nsdomain
-
 nameserver=$(cat /root/nsdomain)
 domen=$(cat /etc/xray/domain)
 apt update -y
