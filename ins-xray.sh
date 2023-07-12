@@ -37,7 +37,7 @@ export UNDERLINE="\e[4m"
 mkdir /user/curent > /dev/null 2>&1
 touch /user/current
 clear
-echo "IP=$domain" > /var/lib/scrz-prem/ipvps.conf
+echo "IP=$domain" > /var/lib/ipvps.conf
 if [[ "$IP" = "" ]]; then
 domain=$(cat /etc/xray/domain)
 else
@@ -170,6 +170,22 @@ chmod +x /usr/local/bin/ssl_renew.sh
 if ! grep -q 'ssl_renew.sh' /var/spool/cron/crontabs/root;then (crontab -l;echo "15 03 */3 * * /usr/local/bin/ssl_renew.sh") | crontab;fi
 
 mkdir -p /home/vps/public_html
+
+trojanws=$((RANDOM + 10000))
+ssws=$((RANDOM + 10000))
+ssgrpc=$((RANDOM + 10000))
+vless=$((RANDOM + 10000))
+vlessgrpc=$((RANDOM + 10000))
+vmess=$((RANDOM + 10000))
+vmessgrpc=$((RANDOM + 10000))
+trojangrpc=$((RANDOM + 10000))
+# xray config
+# seting ulang json
+#mv -f /etc/xray/config.json /etc/xray/config.json.bak
+#pw sodosok
+openssl rand -base64 16 > /etc/xray/passwd
+bijikk=$(openssl rand -base64 16 )
+pelerr=$(cat /etc/xray/passwd)
 
 # set uuid
 uuid=$(cat /proc/sys/kernel/random/uuid)
