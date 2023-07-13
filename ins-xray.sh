@@ -67,64 +67,6 @@ make install
 cd
 rm -fr /root/wondershaper
 echo > /home/limit
-
-install_ssl(){
-    if [ -f "/usr/bin/apt-get" ];then
-            isDebian=`cat /etc/issue|grep Debian`
-            if [ "$isDebian" != "" ];then
-                    apt-get install -y nginx certbot
-                    apt install -y nginx certbot
-                    sleep 3s
-            else
-                    apt-get install -y nginx certbot
-                    apt install -y nginx certbot
-                    sleep 3s
-            fi
-    else
-        yum install -y nginx certbot
-        sleep 3s
-    fi
-
-    systemctl stop nginx.service
-
-    if [ -f "/usr/bin/apt-get" ];then
-            isDebian=`cat /etc/issue|grep Debian`
-            if [ "$isDebian" != "" ];then
-                    echo "A" | certbot certonly --renew-by-default --register-unsafely-without-email --standalone -d $domain
-                    sleep 3s
-            else
-                    echo "A" | certbot certonly --renew-by-default --register-unsafely-without-email --standalone -d $domain
-                    sleep 3s
-            fi
-    else
-        echo "Y" | certbot certonly --renew-by-default --register-unsafely-without-email --standalone -d $domain
-        sleep 3s
-    fi
-}
-clear
-clear && clear && clear
-clear;clear;clear
-echo -e "${GREEN}install nginx${NC}"
-# install nginx
-apt install -y nginx
-cd
-rm -fr /etc/nginx/sites-enabled/default
-rm -fr /etc/nginx/sites-available/default
-wget -q -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Agunxzzz/XrayCol/main/nginx.conf.txt" 
-mkdir -p /home/vps/public_html
-wget -q -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Agunxzzz/XrayCol/main/vps.conf.txt"
-sleep 1 
-wget -q -O xray.conf https://raw.githubusercontent.com/Agunxzzz/XrayCol/main/xray.conf.txt && chmod +x xray.conf && ./xray.conf
-sleep 1 
-
-
-# creating page download Openvpn config file
-mkdir /home/vps
-mkdir /home/vps/public_html
-wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/givpn/AutoScriptXray/master/ssh/index"
-wget -O /home/vps/public_html/.htaccess "https://raw.githubusercontent.com/givpn/AutoScriptXray/master/ssh/.htaccess"
-mkdir /home/vps/public_html/ss-ws
-mkdir /home/vps/public_html/clash-ws
 clear
 
 # install xray
@@ -143,6 +85,16 @@ touch /var/log/xray/access2.log
 touch /var/log/xray/error2.log
 # / / Ambil Xray Core Version Terbaru
 bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version 1.6.1
+
+# nginx renew ssl
+echo -n '#!/bin/bash
+/etc/init.d/nginx stop
+"/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" &> /root/renew_ssl.log
+/etc/init.d/nginx start
+/etc/init.d/nginx status
+' > /usr/local/bin/ssl_renew.sh
+chmod +x /usr/local/bin/ssl_renew.sh
+if ! grep -q 'ssl_renew.sh' /var/spool/cron/crontabs/root;then (crontab -l;echo "15 03 */3 * * /usr/local/bin/ssl_renew.sh") | crontab;fi
 
 #pw sodosok
 openssl rand -base64 16 > /etc/xray/passwd
