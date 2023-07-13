@@ -104,22 +104,19 @@ install_ssl(){
 clear
 clear && clear && clear
 clear;clear;clear
-echo -e "${GREEN}install webserver${NC}"
-# install webserver
-apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
+echo -e "${GREEN}install nginx${NC}"
+# install nginx
+apt install -y nginx
 cd
-rm /etc/nginx/sites-enabled/default
-rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/nginx.conf"
-rm /etc/nginx/conf.d/vps.conf
-wget -q -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/vps.conf"
-/etc/init.d/nginx restart
+rm -fr /etc/nginx/sites-enabled/default
+rm -fr /etc/nginx/sites-available/default
+wget -q -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Agunxzzz/XrayCol/main/nginx.conf.txt" 
+mkdir -p /home/vps/public_html
+wget -q -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Agunxzzz/XrayCol/main/vps.conf.txt"
+sleep 1 
+wget -q -O xray.conf https://raw.githubusercontent.com/Agunxzzz/XrayCol/main/xray.conf.txt && chmod +x xray.conf && ./xray.conf
+sleep 1 
 
-mkdir /etc/systemd/system/nginx.service.d
-printf "[Service]\nExecStartPost=/bin/sleep 0.1\n" > /etc/systemd/system/nginx.service.d/override.conf
-rm /etc/nginx/conf.d/default.conf
-systemctl daemon-reload
-service nginx restart
 
 # creating page download Openvpn config file
 mkdir /home/vps
