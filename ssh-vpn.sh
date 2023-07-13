@@ -225,9 +225,11 @@ systemctl restart sslh
 
 echo "=== install stunnel5 ==="
 # install stunnel5
-cd
-cd /root/
-wget -q -O stunnel5.zip "https://raw.githubusercontent.com/Amoebacoy/Mantap/main/stunnel5/stunnel5.zip"
+apt update -y
+apt upgarde -y
+apt-get install certbot -y
+apt-get install gcc g++ build-essential libreadline-dev zlib1g-dev linux-headers-generic libssl-dev unzip
+wget -q -O stunnel5.zip "https://github.com/hidessh22/tunnel/raw/main/stunnnel5/stunnel5.zip"
 unzip -o stunnel5.zip
 cd /root/stunnel
 chmod +x configure
