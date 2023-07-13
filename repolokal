@@ -3,9 +3,9 @@
 # ==================================================
 cd
 cat > /etc/apt/sources.list <<-END
-deb http://kambing.ui.ac.id/debian/ jessie main contrib non-free
-deb http://kambing.ui.ac.id/debian/ jessie-updates main contrib non-free
-deb http://kambing.ui.ac.id/debian-security/ jessie/updates main contrib non-free
+deb http://kambing.ui.ac.id/debian/ buster main contrib non-free
+deb http://kambing.ui.ac.id/debian/ buster-updates main contrib non-free
+deb http://kambing.ui.ac.id/debian-security/ buster/updates main contrib non-free
 END
 cd
 sudo apt update
