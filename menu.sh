@@ -4,16 +4,10 @@
 # Auther  : 
 # (C) Copyright 2021-2022
 # =========================================
-vlx=$(grep -c -E "^#& " "/etc/xray/config.json")
-let vla=$vless/2
 vmc=$(grep -c -E "^### " "/etc/xray/config.json")
 let vma=$vmess/2
 ssh1="$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
 
-trx=$(grep -c -E "^#! " "/etc/xray/config.json")
-let tra=$trojan/2
-ssx=$(grep -c -E "^## " "/etc/xray/config.json")
-let ssa=$ssx/2
 COLOR1='\033[0;35m'
 COLOR2='\033[0;39m'
 clear
@@ -181,12 +175,8 @@ read -n 1 -s -r -p "Press any key to back on menu"
 menu
 }
 export sem=$( curl -s https://raw.githubusercontent.com/wunuit/test/main/versions)
-export pak=$( cat /home/.ver)
 IPVPS=$(curl -s ipinfo.io/ip )
 ISPVPS=$( curl -s ipinfo.io/org )
-export Server_URL="raw.githubusercontent.com/wunuit/test/main"
-License_Key=$(cat /etc/${Auther}/license.key)
-export Nama_Issued_License=$( curl -s https://${Server_URL}/validated-registered-license-key.txt | grep -w $License_Key | cut -d ' ' -f 7-100 | tr -d '\r' | tr -d '\r\n')
 clear
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "\033[0;34m│                  ${BIWhite}${UWhite}Server Informations${NC}"
