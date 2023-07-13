@@ -128,7 +128,7 @@ install_ssl(){
         sleep 3s
     fi
 }
-
+echo -e "${GREEN}install webserver${NC}"
 # install webserver
 apt -y install nginx
 cd
@@ -140,7 +140,9 @@ sed -i 's/listen = \/var\/run\/php-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/
 # creating page download Openvpn config file
 mkdir -p /home/vps/public_html
 wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/syapik96/aws/main/lain2/index.html"
+echo -e "${GREEN}nginx restart${NC}"
 /etc/init.d/nginx restart
+sleep 3s
 
 # install badvpn
 cd
@@ -186,9 +188,44 @@ echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/ssh restart
 /etc/init.d/dropbear restart
+echo "=== Install SSLH ==="
+# Install SSLH
+apt -y install sslh
+rm -f /etc/default/sslh
 
+# Settings SSLH
+cat > /etc/default/sslh <<-END
+# Default options for sslh initscript
+# sourced by /etc/init.d/sslh
+
+# Disabled by default, to force yourself
+# to read the configuration:
+# - /usr/share/doc/sslh/README.Debian (quick start)
+# - /usr/share/doc/sslh/README, at "Configuration" section
+# - sslh(8) via "man sslh" for more configuration details.
+# Once configuration ready, you *must* set RUN to yes here
+# and try to start sslh (standalone mode only)
+
+RUN=yes
+
+# binary to use: forked (sslh) or single-thread (sslh-select) version
+# systemd users: don't forget to modify /lib/systemd/system/sslh.service
+DAEMON=/usr/sbin/sslh
+
+DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:777 --ssh 127.0.0.1:109 --openvpn 127.0.0.1:1194 --http 127.0.0.1:8880 --pidfile /var/run/sslh/sslh.pid -n"
+
+END
+
+# Restart Service SSLH
+service sslh restart
+systemctl restart sslh
+/etc/init.d/sslh restart
+/etc/init.d/sslh status
+/etc/init.d/sslh restart
+
+echo "=== install stunnel5 ==="
+# install stunnel5
 cd
-# install stunnel
 cd /root/
 wget -q -O stunnel5.zip "https://raw.githubusercontent.com/Amoebacoy/Mantap/main/stunnel5/stunnel5.zip"
 unzip -o stunnel5.zip
@@ -202,7 +239,7 @@ rm -r -f stunnel
 rm -f stunnel5.zip
 mkdir -p /etc/stunnel5
 chmod 644 /etc/stunnel5
-
+echo "=== Download Config Stunnel5 ==="
 # Download Config Stunnel5
 cd
 rm /etc/stunnel5/stunnel5.conf
@@ -232,7 +269,7 @@ rm -f /usr/local/bin/stunnel
 rm -f /usr/local/bin/stunnel3
 rm -f /usr/local/bin/stunnel4
 #rm -f /usr/local/bin/stunnel5
-
+echo "=== Restart Stunnel5 ==="
 # Restart Stunnel 5
 systemctl stop stunnel5
 systemctl enable stunnel5
