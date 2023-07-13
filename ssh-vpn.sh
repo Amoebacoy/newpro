@@ -130,7 +130,7 @@ install_ssl(){
 }
 echo -e "${GREEN}install webserver${NC}"
 # install webserver
-apt -y install nginx
+apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
