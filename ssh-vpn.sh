@@ -189,13 +189,28 @@ DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:777 --ssh 127.0.0.
 END
 
 # Restart Service SSLH
-systemctl stop stunnel5
-systemctl enable stunnel5
-systemctl start stunnel5
-systemctl restart stunnel5
-/etc/init.d/stunnel5 restart
-/etc/init.d/stunnel5 status
-/etc/init.d/stunnel5 restart
+service sslh restart
+systemctl restart sslh
+/etc/init.d/sslh restart
+/etc/init.d/sslh status
+/etc/init.d/sslh restart
+
+# setting vnstat
+apt -y install vnstat
+/etc/init.d/vnstat restart
+apt -y install libsqlite3-dev
+wget https://humdi.net/vnstat/vnstat-2.6.tar.gz
+tar zxvf vnstat-2.6.tar.gz
+cd vnstat-2.6
+./configure --prefix=/usr --sysconfdir=/etc && make && make install
+cd
+vnstat -u -i $NET
+sed -i 's/Interface "'""eth0""'"/Interface "'""$NET""'"/g' /etc/vnstat.conf
+chown vnstat:vnstat /var/lib/vnstat -R
+systemctl enable vnstat
+/etc/init.d/vnstat restart
+rm -f /root/vnstat-2.6.tar.gz
+rm -rf /root/vnstat-2.6
 
 echo "=== install stunnel5 ==="
 # install stunnel5
@@ -234,10 +249,9 @@ wget -O /etc/systemd/system/stunnel5.service "https://raw.githubusercontent.com/
 wget -q -O /etc/init.d/stunnel5 "https://raw.githubusercontent.com/Amoebacoy/Mantap/main/stunnel5/stunnel5.init"
 
 # Ubah Izin Akses
-touch /etc/xray/xray.crt
-chmod 600 /etc/xray/xray.crt
+chmod 600 /etc/stunnel5/stunnel5.pem
 chmod +x /etc/init.d/stunnel5
-cp /usr/local/bin/ws-stunnel /usr/local/bin/stunnel5
+cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
 
 # Remove File
 rm -r -f /usr/local/share/doc/stunnel/
