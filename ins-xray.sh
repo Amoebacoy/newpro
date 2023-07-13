@@ -68,6 +68,68 @@ cd
 rm -fr /root/wondershaper
 echo > /home/limit
 
+install_ssl(){
+    if [ -f "/usr/bin/apt-get" ];then
+            isDebian=`cat /etc/issue|grep Debian`
+            if [ "$isDebian" != "" ];then
+                    apt-get install -y nginx certbot
+                    apt install -y nginx certbot
+                    sleep 3s
+            else
+                    apt-get install -y nginx certbot
+                    apt install -y nginx certbot
+                    sleep 3s
+            fi
+    else
+        yum install -y nginx certbot
+        sleep 3s
+    fi
+
+    systemctl stop nginx.service
+
+    if [ -f "/usr/bin/apt-get" ];then
+            isDebian=`cat /etc/issue|grep Debian`
+            if [ "$isDebian" != "" ];then
+                    echo "A" | certbot certonly --renew-by-default --register-unsafely-without-email --standalone -d $domain
+                    sleep 3s
+            else
+                    echo "A" | certbot certonly --renew-by-default --register-unsafely-without-email --standalone -d $domain
+                    sleep 3s
+            fi
+    else
+        echo "Y" | certbot certonly --renew-by-default --register-unsafely-without-email --standalone -d $domain
+        sleep 3s
+    fi
+}
+clear
+clear && clear && clear
+clear;clear;clear
+echo -e "${GREEN}install webserver${NC}"
+# install webserver
+apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
+cd
+rm /etc/nginx/sites-enabled/default
+rm /etc/nginx/sites-available/default
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/nginx.conf"
+rm /etc/nginx/conf.d/vps.conf
+wget -q -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/vps.conf"
+/etc/init.d/nginx restart
+
+mkdir /etc/systemd/system/nginx.service.d
+printf "[Service]\nExecStartPost=/bin/sleep 0.1\n" > /etc/systemd/system/nginx.service.d/override.conf
+rm /etc/nginx/conf.d/default.conf
+systemctl daemon-reload
+service nginx restart
+
+# creating page download Openvpn config file
+mkdir /home/vps
+mkdir /home/vps/public_html
+wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/givpn/AutoScriptXray/master/ssh/index"
+wget -O /home/vps/public_html/.htaccess "https://raw.githubusercontent.com/givpn/AutoScriptXray/master/ssh/.htaccess"
+mkdir /home/vps/public_html/ss-ws
+mkdir /home/vps/public_html/clash-ws
+clear
+
 # install xray
 sleep 0.5
 echo -e "[ ${green}INFO$NC ] Downloading & Installing xray core"
