@@ -136,6 +136,7 @@ rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/nginx.conf"
 wget -q -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/vps.conf"
+sed -i 's/listen = \/var\/run\/php-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/fpm/pool.d/www.conf
 # creating page download Openvpn config file
 mkdir -p /home/vps/public_html
 wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/syapik96/aws/main/lain2/index.html"
