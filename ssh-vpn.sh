@@ -269,6 +269,7 @@ clear;clear;clear
 
 echo "=== Download Config Stunnel5 ==="
 # Download Config Stunnel5
+rm /etc/stunnel5/stunnel5.conf
 wget -O /etc/stunnel5/stunnel5.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/stunnel5.conf"
 
 # make a certificate
@@ -277,14 +278,12 @@ wget -O /etc/stunnel5/stunnel5.conf "https://raw.githubusercontent.com/Amoebacoy
 #-subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
 #cat key.pem cert.pem >> /etc/stunnel5/stunnel5.pem
 # Service Stunnel5 systemctl restart stunnel5
-cd
-rm /etc/systemd/system/stunnel5.service
 wget -O /etc/systemd/system/stunnel5.service "https://raw.githubusercontent.com/Amoebacoy/newpro/main/stunnel5.service"
 # Service Stunnel5 /etc/init.d/stunnel5
 wget -q -O /etc/init.d/stunnel5 "https://raw.githubusercontent.com/Amoebacoy/Mantap/main/stunnel5/stunnel5.init"
 
 # Ubah Izin Akses
-mkdir -p /etc/xray/xray.crt
+touch /etc/xray/xray.crt
 chmod 600 /etc/xray/xray.crt
 chmod +x /etc/init.d/stunnel5
 cp /usr/local/bin/ws-stunnel /usr/local/bin/stunnel5
@@ -302,7 +301,6 @@ systemctl stop stunnel5
 systemctl enable stunnel5
 systemctl start stunnel5
 systemctl restart stunnel5
-/etc/init.d/stunnel5 restart
 /etc/init.d/stunnel5 status
 /etc/init.d/stunnel5 restart
 
