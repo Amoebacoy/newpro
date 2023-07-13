@@ -1,3 +1,6 @@
+#!/bin/bash
+#
+# ==================================================
 cd
 cat > /etc/apt/sources.list <<-END
 deb http://kartolo.sby.datautama.net.id/debian/ bullseye main contrib non-free
