@@ -1,8 +1,21 @@
 #!/bin/bash
 #
 # ==================================================
+cd /root/
+cat > /root/.profile << END
+if [ "$BASH" ]; then
+  if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+  fi
+fi
 
+mesg n 2> /dev/null || true
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+END
 # etc
+cd
 apt dist-upgrade -y
 apt install netfilter-persistent -y
 apt-get remove --purge ufw firewalld -y
