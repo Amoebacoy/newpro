@@ -128,8 +128,10 @@ install_ssl(){
         sleep 3s
     fi
 }
+clear
+clear && clear && clear
+clear;clear;clear
 echo -e "${GREEN}install webserver${NC}"
-sleep 1s
 # install webserver
 apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
 cd
@@ -190,10 +192,11 @@ sed -i '/Port 22/a Port 6666' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 200' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 22' /etc/ssh/sshd_config
 /etc/init.d/ssh restart
-sleep 3s
+clear
+clear && clear && clear
+clear;clear;clear
 
 echo "=== Install Dropbear ==="
-sleep 1s
 # install dropbear
 apt -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
@@ -203,10 +206,11 @@ echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/ssh restart
 /etc/init.d/dropbear restart
-sleep 3s
+clear
+clear && clear && clear
+clear;clear;clear
 
 echo "=== Install SSLH ==="
-sleep 1s
 # Install SSLH
 apt -y install sslh
 rm -f /etc/default/sslh
@@ -247,7 +251,7 @@ apt update -y
 apt upgarde -y
 apt-get install certbot -y
 apt-get install gcc g++ build-essential libreadline-dev zlib1g-dev linux-headers-generic libssl-dev unzip
-wget -q -O stunnel5.zip "https://github.com/hidessh22/tunnel/raw/main/stunnnel5/stunnel5.zip"
+wget -q -O stunnel5.zip "https://raw.githubusercontent.com/Amoebacoy/newpro/main/stunnel5.zip"
 unzip -o stunnel5.zip
 cd /root/stunnel
 chmod +x configure
@@ -259,8 +263,11 @@ rm -r -f stunnel
 rm -f stunnel5.zip
 mkdir -p /etc/stunnel5
 chmod 644 /etc/stunnel5
-echo "=== Download Config Stunnel5 ==="
+clear
+clear && clear && clear
+clear;clear;clear
 
+echo "=== Download Config Stunnel5 ==="
 # Download Config Stunnel5
 wget -O /etc/stunnel5/stunnel5.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/stunnel5.conf"
 
@@ -277,6 +284,7 @@ wget -O /etc/systemd/system/stunnel5.service "https://raw.githubusercontent.com/
 wget -q -O /etc/init.d/stunnel5 "https://raw.githubusercontent.com/Amoebacoy/Mantap/main/stunnel5/stunnel5.init"
 
 # Ubah Izin Akses
+mkdir -p /etc/xray/xray.crt
 chmod 600 /etc/xray/xray.crt
 chmod +x /etc/init.d/stunnel5
 cp /usr/local/bin/ws-stunnel /usr/local/bin/stunnel5
