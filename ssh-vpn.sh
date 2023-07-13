@@ -282,7 +282,6 @@ clear;clear;clear
 
 echo "=== Download Config Stunnel5 ==="
 # Download Config Stunnel5
-rm /etc/stunnel5/stunnel5.conf
 wget -O /etc/stunnel5/stunnel5.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/stunnel5.conf"
 
 # make a certificate
