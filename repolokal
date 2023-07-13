@@ -3,12 +3,13 @@
 # ==================================================
 cd
 cat > /etc/apt/sources.list <<-END
-deb http://kartolo.sby.datautama.net.id/debian/ bullseye main contrib non-free
-deb http://kartolo.sby.datautama.net.id/debian/ bullseye-updates main contrib non-free
-deb http://kartolo.sby.datautama.net.id/debian-security/ bullseye/updates main contrib non-free
-
+deb http://kambing.ui.ac.id/debian/ jessie main contrib non-free
+deb http://kambing.ui.ac.id/debian/ jessie-updates main contrib non-free
+deb http://kambing.ui.ac.id/debian-security/ jessie/updates main contrib non-free
 END
-
-apt update
-apt list --upgradeable
-apt upgrade
+cd
+sudo apt update
+sleep 1
+sudo apt list --upgradeable
+sleep 1
+sudo apt-get upgrade -y
