@@ -129,19 +129,30 @@ install_ssl(){
     fi
 }
 echo -e "${GREEN}install webserver${NC}"
+sleep 1s
 # install webserver
 apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
 wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/nginx.conf"
+rm /etc/nginx/conf.d/vps.conf
 wget -q -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/vps.conf"
-sed -i 's/listen = \/var\/run\/php-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php/fpm/pool.d/www.conf
-# creating page download Openvpn config file
-mkdir -p /home/vps/public_html
-wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/syapik96/aws/main/lain2/index.html"
-echo -e "${GREEN}nginx restart${NC}"
 /etc/init.d/nginx restart
+
+mkdir /etc/systemd/system/nginx.service.d
+printf "[Service]\nExecStartPost=/bin/sleep 0.1\n" > /etc/systemd/system/nginx.service.d/override.conf
+rm /etc/nginx/conf.d/default.conf
+systemctl daemon-reload
+service nginx restart
+
+# creating page download Openvpn config file
+mkdir /home/vps
+mkdir /home/vps/public_html
+wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/givpn/AutoScriptXray/master/ssh/index"
+wget -O /home/vps/public_html/.htaccess "https://raw.githubusercontent.com/givpn/AutoScriptXray/master/ssh/.htaccess"
+mkdir /home/vps/public_html/ss-ws
+mkdir /home/vps/public_html/clash-ws
 sleep 3s
 
 # install badvpn
@@ -172,13 +183,17 @@ cd
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 500' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 40000' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port 81' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 51443' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 58080' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port 6666' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 200' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 22' /etc/ssh/sshd_config
 /etc/init.d/ssh restart
+sleep 3s
 
 echo "=== Install Dropbear ==="
+sleep 1s
 # install dropbear
 apt -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
@@ -188,7 +203,10 @@ echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/ssh restart
 /etc/init.d/dropbear restart
+sleep 3s
+
 echo "=== Install SSLH ==="
+sleep 1s
 # Install SSLH
 apt -y install sslh
 rm -f /etc/default/sslh
@@ -242,9 +260,8 @@ rm -f stunnel5.zip
 mkdir -p /etc/stunnel5
 chmod 644 /etc/stunnel5
 echo "=== Download Config Stunnel5 ==="
+
 # Download Config Stunnel5
-cd
-rm /etc/stunnel5/stunnel5.conf
 wget -O /etc/stunnel5/stunnel5.conf "https://raw.githubusercontent.com/Amoebacoy/newpro/main/stunnel5.conf"
 
 # make a certificate
@@ -260,9 +277,9 @@ wget -O /etc/systemd/system/stunnel5.service "https://raw.githubusercontent.com/
 wget -q -O /etc/init.d/stunnel5 "https://raw.githubusercontent.com/Amoebacoy/Mantap/main/stunnel5/stunnel5.init"
 
 # Ubah Izin Akses
-chmod 600 /etc/stunnel5/stunnel5.pem
+chmod 600 /etc/xray/xray.crt
 chmod +x /etc/init.d/stunnel5
-cp /usr/local/bin/stunnel /usr/local/bin/stunnel5
+cp /usr/local/bin/ws-stunnel /usr/local/bin/stunnel5
 
 # Remove File
 rm -r -f /usr/local/share/doc/stunnel/
@@ -461,7 +478,7 @@ echo -e "[ ${green}ok${NC} ] Restarting dropbear "
 /etc/init.d/fail2ban restart >/dev/null 2>&1
 sleep 0.5
 echo -e "[ ${green}ok${NC} ] Restarting fail2ban "
-/etc/init.d/stunnel4 restart >/dev/null 2>&1
+/etc/init.d/stunnel5 restart >/dev/null 2>&1
 sleep 0.5
 echo -e "[ ${green}ok${NC} ] Restarting stunnel5 "
 /etc/init.d/vnstat restart >/dev/null 2>&1
