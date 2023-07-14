@@ -30,7 +30,7 @@ export UNDERLINE="\e[4m"
 mkdir /user/curent > /dev/null 2>&1
 touch /user/current
 clear
-echo "IP=$domain" > /var/lib/scrz-prem/ipvps.conf
+echo "IP=$domain" > /var/lib/ipvps.conf
 if [[ "$IP" = "" ]]; then
 domain=$(cat /etc/xray/domain)
 else
