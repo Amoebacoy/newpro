@@ -163,8 +163,8 @@ IP=$(echo $SSH_CLIENT | awk '{print $1}')
 TMPFILE='/tmp/ipinfo-$DATE_EXEC.txt'
 curl http://ipinfo.io/$IP -s -o $TMPFILE
 ORG=$(cat $TMPFILE | jq '.org' | sed 's/"//g')
-$domain=$(cat /etc/xray/domain)
-LocalVersion=$(cat /root/versi)
+#$domain=$(cat /etc/xray/domain)
+#LocalVersion=$(cat /root/versi)
 IPVPS=$(curl -s ipinfo.io/ip )
 ISPVPS=$( curl -s ipinfo.io/org )
 token=5922026926:AAE5t2CXnOOT57zWdua2wfHKKG9URGEQdP0
