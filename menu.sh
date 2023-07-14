@@ -5,7 +5,6 @@
 # (C) Copyright 2021-2022
 # =========================================
 vmc=$(grep -c -E "^### " "/etc/xray/config.json")
-let vma=$vmess/2
 ssh1="$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)"
 
 COLOR1='\033[0;35m'
