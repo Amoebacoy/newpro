@@ -12,7 +12,7 @@ echo -e "jangan karakter singkat seperti: sg, id, hk,"
 echo -e "kalau bisa 1 kata yang unik dengan dikombinasikan dengan angka"
 echo -e "contoh: resa11"
 echo -e ""
-echo -e "\e[32msubdomain\e[0m.fabumi.my.id"
+echo -e "\e[32msubdomain\e[0m.jawa.software"
 read -p "Mau subdomain apa?( 1kata ) : " sub
 if [[ $sub == "" ]]; then
 clear
