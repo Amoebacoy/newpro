@@ -145,8 +145,7 @@ sleep 1
 chown -R www-data:www-data /home/vps/public_html
 # Enable & Restart & Xray & Trojan & Nginx
 sleep 1
-systemctl enable runn
-systemctl restart runn
+
 
 cd /usr/bin/
 # vmess
