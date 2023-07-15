@@ -22,7 +22,7 @@ fi
 DOMAIN=fabumi.my.id
 SUB_DOMAIN=${sub}.fabumi.my.id
 CF_ID=Amoeba.coy@gmail.com
-CF_KEY=NTkGrIzKl14-BzRwNtgIldr-nwgY-z6u89tX9cq-
+CF_KEY=mc3n0XHtqfFRTBOAC4riGKYWrG0WNsDVKdArRz90
 set -euo pipefail
 IP=$(curl -sS ifconfig.me);
 echo "Updating DNS for ${SUB_DOMAIN}..."
