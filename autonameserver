@@ -79,7 +79,8 @@ echo "Host : $NS_DOMAIN"
 sleep 1
 yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
 yellow "Domain added.."
-sleep 3
+clear
+sleep 1
 echo -e ""
 echo -e "subdomainmu telah jadi yaitu: $SUB_DOMAIN"
 echo -e "NSdomainmu telah jadi yaitu: $NS_DOMAIN"
