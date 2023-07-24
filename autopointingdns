@@ -50,6 +50,8 @@ if [[ "${#RECORD}" -le 10 ]]; then
 		-H "X-Auth-Key: ${CF_KEY}" \
 		-H "Content-Type: application/json" \
 		--data '{"type":"NS","name":"'${NS_DOMAIN}'","content":"'${SUB_DOMAIN}'","proxied":false}')
+
+echo "Updating SUBDOMAIN for ${SUB_DOMAIN}..."
 ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
@@ -79,10 +81,10 @@ echo "Host : $NS_DOMAIN"
 sleep 1
 yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
 yellow "Domain added.."
-clear
 sleep 1
+clear
 echo -e ""
-echo -e "subdomainmu telah jadi yaitu: $SUB_DOMAIN"
-echo -e "NSdomainmu telah jadi yaitu: $NS_DOMAIN"
+yellow "subdomainmu telah jadi yaitu: $SUB_DOMAIN"
+yellow "NSdomainmu telah jadi yaitu: $NS_DOMAIN"
 echo -e "Pakai itu untuk install nanti"
 cd
