@@ -1,9 +1,24 @@
-#!/bin/sh
-REPOS="https://github.com/JurigVPN/scupdate/raw/jurig/"
+MYIP=$(wget -qO- ipinfo.io/ip);
+clear
+apt install update && apt upgrade -y
+apt install jq curl -y
+#sub=$(</dev/urandom tr -dc a-z | head -c4)
+clear
+echo -e ""
+echo -e "jangan karakter singkat seperti: sg, id, hk,"
+echo -e "kalau bisa 1 kata yang unik dengan dikombinasikan dengan angka"
+echo -e "contoh: resa11"
+echo -e ""
+echo -e "\e[32msubdomain\e[0m.fabumi.my.id"
+read -p "Mau subdomain apa?( 1kata ) : " sub
+if [[ $sub == "" ]]; then
+clear
+echo -e "${EROR} No Input Detected !"
+exit 1
+fi
 ns_domain_cloudflare() {
 	DOMAIN="fabumi.my.id"
 	DOMAIN_PATH=$(cat /etc/xray/domain)
-	SUB=$(tr </dev/urandom -dc a-z0-9 | head -c7)
 	SUB_DOMAIN=${SUB}."fabumi.my.id"
 	NS_DOMAIN=dns.${SUB_DOMAIN}
 	CF_ID=Amoeba.coy@gmail.com
@@ -41,25 +56,13 @@ ns_domain_cloudflare() {
 		-H "X-Auth-Key: ${CF_KEY}" \
 		-H "Content-Type: application/json" \
 		--data '{"type":"NS","name":"'${NS_DOMAIN}'","content":"'${DOMAIN_PATH}'","proxied":false}'
-	)
-	echo $NS_DOMAIN >/etc/xray/dns
-}
 
-setup_dnstt() {
-	cd
-	rm -rf *
-	mkdir -p /etc/slowdns
-	wget -O dnstt-server "${REPOS}slowdns/dnstt-server" >/dev/null 2>&1
-	chmod +x dnstt-server >/dev/null 2>&1
-	wget -O dnstt-client "${REPOS}slowdns/dnstt-client" >/dev/null 2>&1
-	chmod +x dnstt-client >/dev/null 2>&1
-	./dnstt-server -gen-key -privkey-file server.key -pubkey-file server.pub
-	chmod +x *
-	mv * /etc/slowdns
-	wget -O /etc/systemd/system/client.service "${REPOS}slowdns/client" >/dev/null 2>&1
-	wget -O /etc/systemd/system/server.service "${REPOS}slowdns/server" >/dev/null 2>&1
-	sed -i "s/xxxx/$NS_DOMAIN/g" /etc/systemd/system/client.service 
-	sed -i "s/xxxx/$NS_DOMAIN/g" /etc/systemd/system/server.service 
-}
-ns_domain_cloudflare
-setup_dnstt
+echo "Host : $NS_DOMAIN"
+sleep 1
+yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
+yellow "Domain added.."
+sleep 3
+echo -e ""
+echo -e "subdomainmu telah jadi yaitu: $NS_DOMAIN"
+echo -e "Pakai itu untuk install nanti"
+cd
