@@ -19,7 +19,7 @@ clear
 echo -e "${EROR} No Input Detected !"
 exit 1
 fi
-	DOMAIN="fabumi.my.id"
+	DOMAIN=fabumi.my.id
 	DOMAIN_PATH=$(cat /etc/xray/domain)
 	SUB_DOMAIN=${SUB}.fabumi.my.id
 	NS_DOMAIN=dns.${SUB_DOMAIN}
