@@ -16,7 +16,6 @@ clear
 echo -e "${EROR} No Input Detected !"
 exit 1
 fi
-ns_domain_cloudflare() {
 	DOMAIN="fabumi.my.id"
 	DOMAIN_PATH=$(cat /etc/xray/domain)
 	SUB_DOMAIN=${SUB}."fabumi.my.id"
@@ -31,23 +30,20 @@ ns_domain_cloudflare() {
    		-H "X-Auth-Key: ${CF_KEY}" \
      		-H "Content-Type: application/json" | jq -r .result[0].id)
 
-	RECORD=$(
-		curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=${NS_DOMAIN}" \
+	RECORD=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records?name=${NS_DOMAIN}" \
 		-H "X-Auth-Email: ${CF_ID}" \
 		-H "X-Auth-Key: ${CF_KEY}" \
 		-H "Content-Type: application/json" | jq -r .result[0].id
 
 	if [[ "${#RECORD}" -le 10 ]]; then
-		RECORD=$(
-			curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records" \
+	RECORD=$(curl -sLX POST "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records" \
 			-H "X-Auth-Email: ${CF_ID}" \
 			-H "X-Auth-Key: ${CF_KEY}" \
 			-H "Content-Type: application/json" \
 			--data '{"type":"NS","name":"'${NS_DOMAIN}'","content":"'${DOMAIN_PATH}'","proxied":false}' | jq -r .result.id
 	fi
 
-	RESULT=$(
-		curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
+	RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
 		-H "X-Auth-Email: ${CF_ID}" \
 		-H "X-Auth-Key: ${CF_KEY}" \
 		-H "Content-Type: application/json" \
