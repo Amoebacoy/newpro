@@ -18,7 +18,7 @@ exit 1
 fi
 	DOMAIN="fabumi.my.id"
 	DOMAIN_PATH=$(cat /etc/xray/domain)
-	SUB_DOMAIN=${SUB}."fabumi.my.id"
+	SUB_DOMAIN=${SUB}.fabumi.my.id
 	NS_DOMAIN=dns.${SUB_DOMAIN}
 	CF_ID=Amoeba.coy@gmail.com
         CF_KEY=28ca95c3378e1bb7cc64173b3435a13adac34
