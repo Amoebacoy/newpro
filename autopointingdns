@@ -59,7 +59,7 @@ CF_ID=Amoeba.coy@gmail.com
 CF_KEY=28ca95c3378e1bb7cc64173b3435a13adac34
 set -euo pipefail
 IP=$(wget -qO- ipinfo.io/ip)
-echo "Updating DNS NS for ${NS_DOMAIN}..."
+echo -e "[ ${GREEN}INFO${NC} ] Updating DNS NS for ${NS_DOMAIN}... "
 ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
     		-H "X-Auth-Email: ${CF_ID}" \
    		-H "X-Auth-Key: ${CF_KEY}" \
@@ -84,7 +84,7 @@ if [[ "${#RECORD}" -le 10 ]]; then
 		-H "Content-Type: application/json" \
 		--data '{"type":"NS","name":"'${NS_DOMAIN}'","content":"'${SUB_DOMAIN}'","proxied":false}')
 
-echo "Updating SUBDOMAIN for ${SUB_DOMAIN}..."
+echo -e "[ ${GREEN}INFO${NC} ] Updating SUBDOMAIN for ${SUB_DOMAIN}... "
 ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
@@ -114,10 +114,11 @@ echo "Host : $NS_DOMAIN"
 sleep 1
 yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
 yellow "Domain added.."
-sleep 1
+sleep 3
 clear
 echo -e ""
 echo -e "subdomainmu telah jadi yaitu	: ${GREEN}$SUB_DOMAIN${NC}"
+sleep 1
 echo -e " NSdomainmu telah jadi yaitu	: ${GREEN}$NS_DOMAIN${NC}"
 echo -e "Pakai itu untuk install nanti"
 cd
