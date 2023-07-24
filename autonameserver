@@ -20,7 +20,7 @@ echo -e "${EROR} No Input Detected !"
 exit 1
 fi
 DOMAIN=fabumi.my.id
-DOMAIN_PATH=$(cat /etc/xray/domain)
+SUB_DOMAIN=$(cat /etc/xray/domain)
 SUB_DOMAIN=${SUB}.fabumi.my.id
 NS_DOMAIN=dns.${SUB_DOMAIN}
 CF_ID=Amoeba.coy@gmail.com
@@ -43,14 +43,14 @@ if [[ "${#RECORD}" -le 10 ]]; then
 			-H "X-Auth-Email: ${CF_ID}" \
 			-H "X-Auth-Key: ${CF_KEY}" \
 			-H "Content-Type: application/json" \
-			--data '{"type":"NS","name":"'${NS_DOMAIN}'","content":"'${DOMAIN_PATH}'","proxied":false}' | jq -r .result.id)
+			--data '{"type":"NS","name":"'${NS_DOMAIN}'","content":"'${SUB_DOMAIN}'","proxied":false}' | jq -r .result.id)
 	fi
 
 	RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_records/${RECORD}" \
 		-H "X-Auth-Email: ${CF_ID}" \
 		-H "X-Auth-Key: ${CF_KEY}" \
 		-H "Content-Type: application/json" \
-		--data '{"type":"NS","name":"'${NS_DOMAIN}'","content":"'${DOMAIN_PATH}'","proxied":false}')
+		--data '{"type":"NS","name":"'${NS_DOMAIN}'","content":"'${SUB_DOMAIN}'","proxied":false}')
 
 echo "Host : $NS_DOMAIN"
 sleep 1
