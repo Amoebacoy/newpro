@@ -1,6 +1,39 @@
 #!/bin/bash
 # // String / Request Data
 # Getting
+COLOR1='\033[0;35m'
+COLOR2='\033[0;39m'
+clear
+BIBlack='\033[1;90m'      # Black
+BIRed='\033[1;91m'        # Red
+BIGREEN='\033[1;92m'      # GREEN
+BIYellow='\033[1;93m'     # Yellow
+BIBlue='\033[1;94m'       # Blue
+BIPurple='\033[1;95m'     # Purple
+BICdyan='\033[1;96m'       # Cyan
+BIWhite='\033[1;97m'      # White
+UWhite='\033[4;37m'       # White
+On_IPurple='\033[0;105m'  #
+On_IRed='\033[0;101m'
+IBlack='\033[0;90m'       # Black
+IRed='\033[0;91m'         # Red
+IGREEN='\033[0;92m'       # GREEN
+IYellow='\033[0;93m'      # Yellow
+IBlue='\033[0;94m'        # Blue
+IPurple='\033[0;95m'      # Purple
+ICyan='\033[0;96m'        # Cyan
+IWhite='\033[0;97m'       # White
+NC='\e[0m'
+
+# // Export Color & Information
+export RED='\033[0;31m'
+export GREEN='\033[0;32m'
+export YELLOW='\033[0;33m'
+export BLUE='\033[0;34m'
+export PURPLE='\033[0;35m'
+export CYAN='\033[0;36m'
+export LIGHT='\033[0;37m'
+export NC='\033[0m'
 MYIP=$(wget -qO- ipinfo.io/ip);
 clear
 apt install update && apt upgrade -y
@@ -84,7 +117,7 @@ yellow "Domain added.."
 sleep 1
 clear
 echo -e ""
-yellow "subdomainmu telah jadi yaitu: $SUB_DOMAIN"
-yellow "NSdomainmu telah jadi yaitu: $NS_DOMAIN"
+echo -e "subdomainmu telah jadi yaitu	: ${GREEN}$SUB_DOMAIN${NC}"
+echo -e " NSdomainmu telah jadi yaitu	: ${GREEN}$NS_DOMAIN${NC}"
 echo -e "Pakai itu untuk install nanti"
 cd
