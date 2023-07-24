@@ -1,7 +1,7 @@
 ### DAFTAR KE SAYA UNTUK MENDAPATKAN LISENCE KEY
 ### HUBUNGI KAMI https://t.me/sampiiiiu (Telgram)
 ♦️ + Pointing Domain ke clouflare
-<pre><code>wget -q -O auto.sh https://raw.githubusercontent.com/Amoebacoy/newpro/main/auto%20pionting && chmod +x auto.sh && ./auto.sh</code></pre>
+<pre><code>wget -q -O auto.sh https://raw.githubusercontent.com/Amoebacoy/newpro/main/autopointingdns && chmod +x auto.sh && ./auto.sh</code></pre>
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/76937659/153705486-44e6c1b2-74fa-4d44-be1c-36c8fdb83331.gif"/>
