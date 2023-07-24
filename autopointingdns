@@ -121,4 +121,5 @@ echo -e "subdomainmu telah jadi yaitu	: ${GREEN}$SUB_DOMAIN${NC}"
 sleep 1
 echo -e " NSdomainmu telah jadi yaitu	: ${GREEN}$NS_DOMAIN${NC}"
 echo -e "Pakai itu untuk install nanti"
+rm -fr /root/auto.sh
 cd
