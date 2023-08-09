@@ -82,9 +82,9 @@ chmod +x /usr/bin/reboot
 fi
 
 echo -e ""
-echo -e "------------------------------------" | lolcat
+echo -e "======================================"
 echo -e "             AUTO REBOOT"
-echo -e "------------------------------------" | lolcat
+echo -e "======================================"
 echo -e ""
 echo -e "    1)  Auto Reboot 30 Minutes"
 echo -e "    2)  Auto Reboot 1 Hours"
@@ -94,9 +94,9 @@ echo -e "    5)  Auto Reboot 1 Weeks"
 echo -e "    6)  Auto Reboot 1 Mount"
 echo -e "    7)  Turn Off Auto Reboot"
 echo -e ""
-echo -e "------------------------------------" | lolcat
+echo -e "======================================"
 echo -e "    x)   MENU"
-echo -e "------------------------------------" | lolcat
+echo -e "======================================"
 echo -e ""
 read -p "     Please Input Number  [1-7 or x] :  "  autoreboot
 echo -e ""
